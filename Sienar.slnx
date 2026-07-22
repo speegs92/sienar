@@ -1,2 +1,5 @@
 <Solution>
+	<Folder Name="/src/">
+		<Project Path="src/Sienar.Utils/Sienar.Utils.csproj" />
+	</Folder>
 </Solution>
