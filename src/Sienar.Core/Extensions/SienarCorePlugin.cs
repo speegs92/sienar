@@ -25,17 +25,7 @@ public static class SienarCorePlugin
 
 			self.Properties[SienarUtilsConstants.ServiceCollection] = new ServiceCollection();
 
-			self.Services
-				.AddScoped(typeof(IStatusActor<>), typeof(DefaultStatusActor<>))
-				.AddScoped(typeof(IGeneralActor<,>), typeof(DefaultGeneralActor<,>))
-				.AddScoped(typeof(IResultActor<>), typeof(DefaultResultActor<>))
-				.AddScoped(typeof(IAccessValidationRunner<>), typeof(DefaultAccessValidationRunner<>))
-				.AddScoped(typeof(IStateValidationRunner<>), typeof(DefaultStateValidationRunner<>))
-				.AddScoped(typeof(IBeforeActionRunner<,>), typeof(DefaultBeforeActionRunner<,>))
-				.AddScoped(typeof(IAfterActionRunner<,>), typeof(DefaultAfterActionRunner<,>))
-				.AddScoped<IBotDetector, DefaultBotDetector>()
-				.AddScoped(typeof(IMapper<,>), typeof(DefaultMapper<,>))
-				.AddScoped<IOperationResultNotifier, DefaultOperationResultNotifier>();
+			self.Services.AddSienarCore();
 
 			_initialized = true;
 
