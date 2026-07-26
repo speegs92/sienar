@@ -1,7 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Sienar.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder
+	.AddSienar();
 
 // Add services to the container.
 builder.Services.AddRazorPages();
