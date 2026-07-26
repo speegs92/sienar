@@ -1,12 +1,11 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Hosting;
 
 namespace Sienar.Extensions;
 
 /// <summary>
-/// Contains <see cref="IHostApplicationBuilder"/> extension methods used by <c>Sienar.Utils</c>
+/// Contains <see cref="IHostApplicationBuilder"/> extension methods used by <c>Sienar.Core</c>
 /// </summary>
-public static class SienarUtilsPlugin
+public static class SienarCorePlugin
 {
 	private static bool _initialized;
 

@@ -3,6 +3,6 @@
 		<Project Path="playground/Template.RazorPages/Template.RazorPages.csproj" />
 	</Folder>
 	<Folder Name="/src/">
-		<Project Path="src/Sienar.Utils/Sienar.Utils.csproj" />
+		<Project Path="src/Sienar.Core/Sienar.Core.csproj" />
 	</Folder>
 </Solution>

@@ -6,7 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="../../src/Sienar.Utils/Sienar.Utils.csproj" />
+		<ProjectReference Include="..\..\src\Sienar.Core\Sienar.Core.csproj" />
 	</ItemGroup>
 
 </Project>

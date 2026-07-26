@@ -5,7 +5,7 @@ namespace Sienar.Extensions;
 /// <summary>
 /// Contains utilities that work on <see cref="IEntity"/> instances or <c>typeof(TEntity)</c> instances
 /// </summary>
-public static class SienarUtilsEntityExtensions
+public static class SienarCoreEntityExtensions
 {
 	/// <summary>
 	/// Returns the human-friendly singular name of the entity

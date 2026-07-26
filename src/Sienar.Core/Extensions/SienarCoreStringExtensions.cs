@@ -1,9 +1,9 @@
 ﻿namespace Sienar.Extensions;
 
 /// <summary>
-/// Contains <see cref="string"/> extension methods for the <c>Sienar.Utils</c> assembly
+/// Contains <see cref="string"/> extension methods for the <c>Sienar.Core</c> assembly
 /// </summary>
-public static class SienarUtilsStringExtensions
+public static class SienarCoreStringExtensions
 {
 	/// <summary>
 	/// Converts a string to all caps. For use in searching and filtering

@@ -3,7 +3,7 @@
 namespace Sienar;
 
 /// <summary>
-/// Contains constants used by <c>Sienar.Utils</c>
+/// Contains constants used by <c>Sienar.Core</c>
 /// </summary>
 public static class SienarUtilsConstants
 {

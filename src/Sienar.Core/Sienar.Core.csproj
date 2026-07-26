@@ -6,7 +6,7 @@
 		<RootNamespace>Sienar</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<PackageId>Sienar.Utils</PackageId>
+		<PackageId>Sienar.Core</PackageId>
 		<Title>Sienar.Utils</Title>
 		<PackageVersion>0.2.0</PackageVersion>
 		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
