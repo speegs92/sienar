@@ -1,4 +1,7 @@
 <Solution>
+	<Folder Name="/playground/">
+		<Project Path="playground/Template.RazorPages/Template.RazorPages.csproj" />
+	</Folder>
 	<Folder Name="/src/">
 		<Project Path="src/Sienar.Utils/Sienar.Utils.csproj" />
 	</Folder>
