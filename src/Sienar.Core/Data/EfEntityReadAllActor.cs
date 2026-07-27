@@ -4,14 +4,12 @@
 /// An implementation of <see cref="IEntityReadAllActor{T}"/> which reads entities from an EntityFramework <see cref="DbContext"/>
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to read</typeparam>
-/// <typeparam name="TContext">The type of the database context</typeparam>
-public class EfEntityReadAllActor<TEntity, TContext> : IEntityReadAllActor<TEntity>
+public class EfEntityReadAllActor<TEntity> : IEntityReadAllActor<TEntity>
 	where TEntity : class, IEntity
-	where TContext : DbContext
 {
-	private readonly TContext _context;
+	private readonly IDbContext _context;
 	private readonly IEfFilterProcessor<TEntity> _filterProcessor;
-	private readonly ILogger<EfEntityReadAllActor<TEntity, TContext>> _logger;
+	private readonly ILogger<EfEntityReadAllActor<TEntity>> _logger;
 	private readonly IAfterActionRunner<IAfterReadAllAction<TEntity>, TEntity> _afterActionRunner;
 	private readonly IOperationResultNotifier _notifier;
 
@@ -24,9 +22,9 @@ public class EfEntityReadAllActor<TEntity, TContext> : IEntityReadAllActor<TEnti
 	/// <param name="afterActionRunner">The after-hook action runner</param>
 	/// <param name="notifier">The operation result notifier</param>
 	public EfEntityReadAllActor(
-		TContext context,
+		IDbContext context,
 		IEfFilterProcessor<TEntity> filterProcessor,
-		ILogger<EfEntityReadAllActor<TEntity, TContext>> logger,
+		ILogger<EfEntityReadAllActor<TEntity>> logger,
 		IAfterActionRunner<IAfterReadAllAction<TEntity>, TEntity> afterActionRunner,
 		IOperationResultNotifier notifier)
 	{

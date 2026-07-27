@@ -4,13 +4,11 @@
 /// An implementation of <see cref="IEntityDeleteActor{T}"/> which deletes entities from an EntityFramework <see cref="DbContext"/>
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to delete</typeparam>
-/// <typeparam name="TContext">The type of the database context</typeparam>
-public class EfEntityDeleteActor<TEntity, TContext> : IEntityDeleteActor<TEntity>
+public class EfEntityDeleteActor<TEntity> : IEntityDeleteActor<TEntity>
 	where TEntity : class, IEntity
-	where TContext : DbContext
 {
-	private readonly TContext _context;
-	private readonly ILogger<EfEntityDeleteActor<TEntity, TContext>> _logger;
+	private readonly IDbContext _context;
+	private readonly ILogger<EfEntityDeleteActor<TEntity>> _logger;
 	private readonly IAccessValidationRunner<TEntity> _accessValidationRunner;
 	private readonly IStateValidationRunner<TEntity> _stateValidationRunner;
 	private readonly IBeforeActionRunner<IBeforeDeleteAction<TEntity>, TEntity> _beforeActionRunner;
@@ -28,8 +26,8 @@ public class EfEntityDeleteActor<TEntity, TContext> : IEntityDeleteActor<TEntity
 	/// <param name="afterActionRunner">The after-hook action runner</param>
 	/// <param name="notifier">The operation result notifier</param>
 	public EfEntityDeleteActor(
-		TContext context,
-		ILogger<EfEntityDeleteActor<TEntity, TContext>> logger,
+		IDbContext context,
+		ILogger<EfEntityDeleteActor<TEntity>> logger,
 		IAccessValidationRunner<TEntity> accessValidationRunner,
 		IStateValidationRunner<TEntity> stateValidationRunner,
 		IBeforeActionRunner<IBeforeDeleteAction<TEntity>, TEntity> beforeActionRunner,

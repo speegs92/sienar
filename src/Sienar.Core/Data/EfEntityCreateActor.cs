@@ -4,13 +4,11 @@
 /// An implementation of <see cref="IEntityCreateActor{T}"/> which creates entities in an EntityFramework <see cref="DbContext"/>
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to create</typeparam>
-/// <typeparam name="TContext">The type of the database context</typeparam>
-public class EfEntityCreateActor<TEntity, TContext> : IEntityCreateActor<TEntity>
+public class EfEntityCreateActor<TEntity> : IEntityCreateActor<TEntity>
 	where TEntity : class, IEntity
-	where TContext : DbContext
 {
-	private readonly TContext _context;
-	private readonly ILogger<EfEntityCreateActor<TEntity, TContext>> _logger;
+	private readonly IDbContext _context;
+	private readonly ILogger<EfEntityCreateActor<TEntity>> _logger;
 	private readonly IAccessValidationRunner<TEntity> _accessValidationRunner;
 	private readonly IStateValidationRunner<TEntity> _stateValidationRunner;
 	private readonly IBeforeActionRunner<IBeforeCreateAction<TEntity>, TEntity> _beforeActionRunner;
@@ -28,8 +26,8 @@ public class EfEntityCreateActor<TEntity, TContext> : IEntityCreateActor<TEntity
 	/// <param name="afterActionRunner">The after-hook action runner</param>
 	/// <param name="notifier">The operation result notifier</param>
 	public EfEntityCreateActor(
-		TContext context,
-		ILogger<EfEntityCreateActor<TEntity, TContext>> logger,
+		IDbContext context,
+		ILogger<EfEntityCreateActor<TEntity>> logger,
 		IAccessValidationRunner<TEntity> accessValidationRunner,
 		IStateValidationRunner<TEntity> stateValidationRunner,
 		IBeforeActionRunner<IBeforeCreateAction<TEntity>, TEntity> beforeActionRunner,

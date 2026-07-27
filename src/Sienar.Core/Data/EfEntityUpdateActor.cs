@@ -4,13 +4,11 @@
 /// An implementation of <see cref="IEntityUpdateActor{T}"/> which updates entities in an EntityFramework <see cref="DbContext"/>
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to update</typeparam>
-/// <typeparam name="TContext">The type of the database context</typeparam>
-public class EfEntityUpdateActor<TEntity, TContext> : IEntityUpdateActor<TEntity>
+public class EfEntityUpdateActor<TEntity> : IEntityUpdateActor<TEntity>
 	where TEntity : class, IEntity
-	where TContext : DbContext
 {
-	private readonly TContext _context;
-	private readonly ILogger<EfEntityUpdateActor<TEntity, TContext>> _logger;
+	private readonly IDbContext _context;
+	private readonly ILogger<EfEntityUpdateActor<TEntity>> _logger;
 	private readonly IAccessValidationRunner<TEntity> _accessValidationRunner;
 	private readonly IStateValidationRunner<TEntity> _stateValidationRunner;
 	private readonly IBeforeActionRunner<IBeforeUpdateAction<TEntity>, TEntity> _beforeActionRunner;
@@ -28,8 +26,8 @@ public class EfEntityUpdateActor<TEntity, TContext> : IEntityUpdateActor<TEntity
 	/// <param name="afterActionRunner">The after-hook action runner</param>
 	/// <param name="notifier">The operation result notifier</param>
 	public EfEntityUpdateActor(
-		TContext context,
-		ILogger<EfEntityUpdateActor<TEntity, TContext>> logger,
+		IDbContext context,
+		ILogger<EfEntityUpdateActor<TEntity>> logger,
 		IAccessValidationRunner<TEntity> accessValidationRunner,
 		IStateValidationRunner<TEntity> stateValidationRunner,
 		IBeforeActionRunner<IBeforeUpdateAction<TEntity>, TEntity> beforeActionRunner,

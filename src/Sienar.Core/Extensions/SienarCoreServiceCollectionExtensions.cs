@@ -35,7 +35,12 @@ public static class SienarCoreServiceCollectionExtensions
 				.AddScoped(typeof(IDeleteActionOrchestrator<>), typeof(DefaultDeleteActionOrchestrator<>))
 				.AddScoped(typeof(IGeneralActionOrchestrator<,>), typeof(DefaultGeneralActionOrchestrator<,>))
 				.AddScoped(typeof(IStatusActionOrchestrator<>), typeof(DefaultStatusActionOrchestrator<>))
-				.AddScoped(typeof(IResultActionOrchestrator<>), typeof(DefaultResultActionOrchestrator<>));
+				.AddScoped(typeof(IResultActionOrchestrator<>), typeof(DefaultResultActionOrchestrator<>))
+				.AddScoped(typeof(IEntityReadActor<>), typeof(EfEntityReadActor<>))
+				.AddScoped(typeof(IEntityReadAllActor<>), typeof(EfEntityReadAllActor<>))
+				.AddScoped(typeof(IEntityCreateActor<>), typeof(EfEntityCreateActor<>))
+				.AddScoped(typeof(IEntityUpdateActor<>), typeof(EfEntityUpdateActor<>))
+				.AddScoped(typeof(IEntityDeleteActor<>), typeof(EfEntityDeleteActor<>));
 		}
 
 		/// <summary>
@@ -311,7 +316,6 @@ public static class SienarCoreServiceCollectionExtensions
 		/// <typeparam name="TEntityToDtoMapper">The type of the entity-to-DTO mapper</typeparam>
 		/// <typeparam name="TEntity">The type of the entity</typeparam>
 		/// <typeparam name="TFilterProcessor">The type of the filter processor</typeparam>
-		/// <typeparam name="TContext">The type of the database context</typeparam>
 		/// <returns>the service collection</returns>
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddEfEntity<
@@ -319,15 +323,13 @@ public static class SienarCoreServiceCollectionExtensions
 			TDtoToEntityMapper,
 			TEntityToDtoMapper,
 			TEntity,
-			TFilterProcessor,
-			TContext>()
+			TFilterProcessor>()
 			where TDto : class, new()
 			where TDtoToEntityMapper : class, IMapper<TDto, TEntity>
 			where TEntityToDtoMapper : class, IMapper<TEntity, TDto>
 			where TEntity : class, IEntity, new()
 			where TFilterProcessor : class, IEfFilterProcessor<TEntity>
-			where TContext : DbContext
-			=> self.AddEfEntity<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity, TFilterProcessor, TContext>();
+			=> self.AddEfEntity<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity, TFilterProcessor>();
 
 		/// <summary>
 		/// Adds the necessary services to use an entity via Entity Framework
@@ -340,7 +342,6 @@ public static class SienarCoreServiceCollectionExtensions
 		/// <typeparam name="TEditDtoToEntityMapper">The type of the edit-DTO-to-entity mapper</typeparam>
 		/// <typeparam name="TEntity">The type of the entity</typeparam>
 		/// <typeparam name="TFilterProcessor">The type of the filter processor</typeparam>
-		/// <typeparam name="TContext">The type of the database context</typeparam>
 		/// <returns>the service collection</returns>
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddEfEntity<
@@ -351,8 +352,7 @@ public static class SienarCoreServiceCollectionExtensions
 			TEditDto,
 			TEditDtoToEntityMapper,
 			TEntity,
-			TFilterProcessor,
-			TContext>()
+			TFilterProcessor>()
 			where TViewDto : class, new()
 			where TEntityToViewDtoMapper : class, IMapper<TEntity, TViewDto>
 			where TAddDto : class, new()
@@ -361,7 +361,6 @@ public static class SienarCoreServiceCollectionExtensions
 			where TEditDtoToEntityMapper : class, IMapper<TEditDto, TEntity>
 			where TEntity : class, IEntity, new()
 			where TFilterProcessor : class, IEfFilterProcessor<TEntity>
-			where TContext : DbContext
 		{
 			self
 				.AddScoped<IMapper<TEntity, TViewDto>, TEntityToViewDtoMapper>()
@@ -375,13 +374,8 @@ public static class SienarCoreServiceCollectionExtensions
 			self
 				.AddBeforeCreateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
 				.AddBeforeUpdateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
-				.AddScoped<IStateValidator<TEntity>, ConcurrencyStampValidator<TEntity, TContext>>()
-				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>()
-				.AddScoped<IEntityReadActor<TEntity>, EfEntityReadActor<TEntity, TContext>>()
-				.AddScoped<IEntityReadAllActor<TEntity>, EfEntityReadAllActor<TEntity, TContext>>()
-				.AddScoped<IEntityCreateActor<TEntity>, EfEntityCreateActor<TEntity, TContext>>()
-				.AddScoped<IEntityUpdateActor<TEntity>, EfEntityUpdateActor<TEntity, TContext>>()
-				.AddScoped<IEntityDeleteActor<TEntity>, EfEntityDeleteActor<TEntity, TContext>>();
+				.AddScoped<IStateValidator<TEntity>, ConcurrencyStampValidator<TEntity>>()
+				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>();
 
 			return self;
 		}

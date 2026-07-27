@@ -4,14 +4,12 @@
 /// An implementation of <see cref="IEntityReadActor{T}"/> which reads entities from an EntityFramework <see cref="DbContext"/>
 /// </summary>
 /// <typeparam name="TEntity">The type of the entity to read</typeparam>
-/// <typeparam name="TContext">The type of the database context</typeparam>
-public class EfEntityReadActor<TEntity, TContext> : IEntityReadActor<TEntity>
+public class EfEntityReadActor<TEntity> : IEntityReadActor<TEntity>
 	where TEntity : class, IEntity
-	where TContext : DbContext
 {
-	private readonly TContext _context;
+	private readonly IDbContext _context;
 	private readonly IEfFilterProcessor<TEntity> _filterProcessor;
-	private readonly ILogger<EfEntityReadActor<TEntity, TContext>> _logger;
+	private readonly ILogger<EfEntityReadActor<TEntity>> _logger;
 	private readonly IAccessValidationRunner<TEntity> _accessValidationRunner;
 	private readonly IAfterActionRunner<IAfterReadAction<TEntity>, TEntity> _afterActionRunner;
 	private readonly IOperationResultNotifier _notifier;
@@ -26,9 +24,9 @@ public class EfEntityReadActor<TEntity, TContext> : IEntityReadActor<TEntity>
 	/// <param name="afterActionRunner">The after-hook action runner</param>
 	/// <param name="notifier">The operation result notifier</param>
 	public EfEntityReadActor(
-		TContext context,
+		IDbContext context,
 		IEfFilterProcessor<TEntity> filterProcessor,
-		ILogger<EfEntityReadActor<TEntity, TContext>> logger,
+		ILogger<EfEntityReadActor<TEntity>> logger,
 		IAccessValidationRunner<TEntity> accessValidationRunner,
 		IAfterActionRunner<IAfterReadAction<TEntity>, TEntity> afterActionRunner,
 		IOperationResultNotifier notifier)
