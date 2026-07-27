@@ -9,55 +9,6 @@ public static class SienarCoreServiceCollectionExtensions
 	extension(IServiceCollection self)
 	{
 		/// <summary>
-		/// Registers a <see cref="DbContext"/> as an <see cref="IDbContext"/>
-		/// </summary>
-		/// <param name="optionsAction">The options configuration, if any</param>
-		/// <typeparam name="TContext">The type of the context</typeparam>
-		/// <returns>The service collection</returns>
-		public IServiceCollection AddDbContextForSienar<TContext>(
-			Action<DbContextOptionsBuilder>? optionsAction = null)
-			where TContext : DbContext, IDbContext
-			=> self.AddDbContextForSienar<IDbContext, TContext>(optionsAction);
-
-		/// <summary>
-		/// Registers a <see cref="DbContext"/> as an <see cref="IDbContext"/> and as a <c>TContext</c>
-		/// </summary>
-		/// <param name="optionsAction">The options configuration, if any</param>
-		/// <typeparam name="TContext">The type of the context</typeparam>
-		/// <typeparam name="TContextImplementation">The implementation type of the context</typeparam>
-		/// <returns>The service collection</returns>
-		public IServiceCollection AddDbContextForSienar<TContext, TContextImplementation>(
-			Action<DbContextOptionsBuilder>? optionsAction = null)
-			where TContext : IDbContext
-			where TContextImplementation : DbContext, TContext
-		{
-			self.AddDbContext<TContext, TContextImplementation>(optionsAction);
-
-			if (typeof(TContext) != typeof(IDbContext))
-			{
-				self.AddScoped<IDbContext>(sp => sp.GetRequiredService<TContext>());
-			}
-
-			// Add the TContextImplementation to DI as all its interfaces
-			// but skip any Microsoft-provided interfaces
-			// Because IDbContext is in the Microsoft.EntityFrameworkCore namespace,
-			// it will also be skipped here
-			var interfaces = typeof(TContextImplementation)
-				.GetInterfaces()
-				.Where(
-					i => i.Namespace is not null &&
-					!i.Namespace.StartsWith("Microsoft") &&
-					!i.Namespace.StartsWith("System"));
-
-			foreach (var i in interfaces)
-			{
-				self.AddScoped(i, sp => sp.GetRequiredService<TContext>());
-			}
-
-			return self;
-		}
-
-		/// <summary>
 		/// Adds universal Sienar utilities to the DI container
 		/// </summary>
 		/// <returns>the service collection</returns>
@@ -65,6 +16,8 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddSienarCore()
 		{
 			return self
+				.AddScoped<INotifier, DefaultNotifier>()
+				.AddScoped<IOperationResultMapper, DefaultOperationResultMapper>()
 				.AddScoped(typeof(IStatusActor<>), typeof(DefaultStatusActor<>))
 				.AddScoped(typeof(IGeneralActor<,>), typeof(DefaultGeneralActor<,>))
 				.AddScoped(typeof(IResultActor<>), typeof(DefaultResultActor<>))
@@ -74,7 +27,15 @@ public static class SienarCoreServiceCollectionExtensions
 				.AddScoped(typeof(IAfterActionRunner<,>), typeof(DefaultAfterActionRunner<,>))
 				.AddScoped<IBotDetector, DefaultBotDetector>()
 				.AddScoped(typeof(IMapper<,>), typeof(DefaultMapper<,>))
-				.AddScoped<IOperationResultNotifier, DefaultOperationResultNotifier>();
+				.AddScoped<IOperationResultNotifier, DefaultOperationResultNotifier>()
+				.AddScoped(typeof(IReadActionOrchestrator<,>), typeof(DefaultReadActionOrchestrator<,>))
+				.AddScoped(typeof(IReadAllActionOrchestrator<,>), typeof(DefaultReadAllActionOrchestrator<,>))
+				.AddScoped(typeof(ICreateActionOrchestrator<,>), typeof(DefaultCreateActionOrchestrator<,>))
+				.AddScoped(typeof(IUpdateActionOrchestrator<,>), typeof(DefaultUpdateActionOrchestrator<,>))
+				.AddScoped(typeof(IDeleteActionOrchestrator<>), typeof(DefaultDeleteActionOrchestrator<>))
+				.AddScoped(typeof(IGeneralActionOrchestrator<,>), typeof(DefaultGeneralActionOrchestrator<,>))
+				.AddScoped(typeof(IStatusActionOrchestrator<>), typeof(DefaultStatusActionOrchestrator<>))
+				.AddScoped(typeof(IResultActionOrchestrator<>), typeof(DefaultResultActionOrchestrator<>));
 		}
 
 		/// <summary>
@@ -292,6 +253,55 @@ public static class SienarCoreServiceCollectionExtensions
 			where TProcessor : class, IResultProcessor<TResult>
 			where TResult : IResult
 			=> self.AddScoped<IResultProcessor<TResult>, TProcessor>();
+
+		/// <summary>
+		/// Registers a <see cref="DbContext"/> as an <see cref="IDbContext"/>
+		/// </summary>
+		/// <param name="optionsAction">The options configuration, if any</param>
+		/// <typeparam name="TContext">The type of the context</typeparam>
+		/// <returns>The service collection</returns>
+		public IServiceCollection AddDbContextForSienar<TContext>(
+			Action<DbContextOptionsBuilder>? optionsAction = null)
+			where TContext : DbContext, IDbContext
+			=> self.AddDbContextForSienar<IDbContext, TContext>(optionsAction);
+
+		/// <summary>
+		/// Registers a <see cref="DbContext"/> as an <see cref="IDbContext"/> and as a <c>TContext</c>
+		/// </summary>
+		/// <param name="optionsAction">The options configuration, if any</param>
+		/// <typeparam name="TContext">The type of the context</typeparam>
+		/// <typeparam name="TContextImplementation">The implementation type of the context</typeparam>
+		/// <returns>The service collection</returns>
+		public IServiceCollection AddDbContextForSienar<TContext, TContextImplementation>(
+			Action<DbContextOptionsBuilder>? optionsAction = null)
+			where TContext : IDbContext
+			where TContextImplementation : DbContext, TContext
+		{
+			self.AddDbContext<TContext, TContextImplementation>(optionsAction);
+
+			if (typeof(TContext) != typeof(IDbContext))
+			{
+				self.AddScoped<IDbContext>(sp => sp.GetRequiredService<TContext>());
+			}
+
+			// Add the TContextImplementation to DI as all its interfaces
+			// but skip any Microsoft-provided interfaces
+			// Because IDbContext is in the Microsoft.EntityFrameworkCore namespace,
+			// it will also be skipped here
+			var interfaces = typeof(TContextImplementation)
+				.GetInterfaces()
+				.Where(
+					i => i.Namespace is not null &&
+						!i.Namespace.StartsWith("Microsoft") &&
+						!i.Namespace.StartsWith("System"));
+
+			foreach (var i in interfaces)
+			{
+				self.AddScoped(i, sp => sp.GetRequiredService<TContext>());
+			}
+
+			return self;
+		}
 
 		/// <summary>
 		/// Adds the necessary services to use an entity via Entity Framework

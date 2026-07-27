@@ -6,6 +6,11 @@
 public interface INotifier
 {
 	/// <summary>
+	/// The list of notifications registered in the notification service
+	/// </summary>
+	List<Notification> Notifications { get; }
+
+	/// <summary>
 	/// Used to display a success message to the user
 	/// </summary>
 	/// <param name="message">The message to display</param>
