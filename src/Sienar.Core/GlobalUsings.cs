@@ -10,6 +10,7 @@ global using System.Linq.Expressions;
 global using System.Threading;
 global using System.Threading.Tasks;
 global using Sienar.Data;
+global using Sienar.Email;
 global using Sienar.Extensions;
 global using Sienar.Hooks;
 global using Sienar.Infrastructure;

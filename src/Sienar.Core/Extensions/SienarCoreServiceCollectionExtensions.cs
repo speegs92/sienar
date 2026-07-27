@@ -17,6 +17,7 @@ public static class SienarCoreServiceCollectionExtensions
 		{
 			return self
 				.AddScoped<INotifier, DefaultNotifier>()
+				.AddScoped<IEmailSender, DefaultEmailSender>()
 				.AddScoped<IOperationResultMapper, DefaultOperationResultMapper>()
 				.AddScoped(typeof(IStatusActor<>), typeof(DefaultStatusActor<>))
 				.AddScoped(typeof(IGeneralActor<,>), typeof(DefaultGeneralActor<,>))
