@@ -16,6 +16,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddSienarCore()
 		{
 			return self
+				.AddHttpContextAccessor()
 				.AddScoped<INotifier, DefaultNotifier>()
 				.AddScoped<IEmailSender, DefaultEmailSender>()
 				.AddScoped<IOperationResultMapper, DefaultOperationResultMapper>()
