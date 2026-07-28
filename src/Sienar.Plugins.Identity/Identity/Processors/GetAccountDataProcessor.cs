@@ -1,0 +1,37 @@
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+using System.Security.Claims;
+
+namespace Sienar.Identity.Processors;
+
+/// <exclude />
+public class GetAccountDataProcessor : IResultProcessor<AccountDataResult>
+{
+	private readonly IUserAccessor _userAccessor;
+
+	public GetAccountDataProcessor(IUserAccessor userAccessor)
+	{
+		_userAccessor = userAccessor;
+	}
+
+	public async Task<OperationResult<AccountDataResult>> Process()
+	{
+		if (!await _userAccessor.IsSignedIn())
+		{
+			return new(OperationStatus.Unauthorized);
+		}
+
+		var roles = (await _userAccessor.GetUserClaimsPrincipal()).Claims
+			.Where(c => c.Type == ClaimTypes.Role)
+			.Select(c => c.Value)
+			.ToList();
+
+		var result = new AccountDataResult
+		{
+			Username = (await _userAccessor.GetUsername())!,
+			Roles = roles
+		};
+
+		return new(result: result);
+	}
+}

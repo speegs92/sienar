@@ -1,0 +1,9 @@
+﻿namespace Sienar.Identity.Requests;
+
+[RestEndpoint("users/lock", HttpMethods.Patch)]
+public class LockUserAccountRequest : IRequest
+{
+	public int UserId { get; set; }
+	public List<int> Reasons { get; set; } = [];
+	public DateTime? EndDate { get; set; }
+}

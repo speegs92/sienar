@@ -4,5 +4,6 @@
 	</Folder>
 	<Folder Name="/src/">
 		<Project Path="src/Sienar.Core/Sienar.Core.csproj" />
+		<Project Path="src/Sienar.Plugins.Identity/Sienar.Plugins.Identity.csproj" />
 	</Folder>
 </Solution>
