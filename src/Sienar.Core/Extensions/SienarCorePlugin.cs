@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Hosting;
 
 namespace Sienar.Extensions;
 
@@ -7,23 +8,22 @@ namespace Sienar.Extensions;
 /// </summary>
 public static class SienarCorePlugin
 {
+	private static readonly IServiceCollection _startupServices = new ServiceCollection();
 	private static bool _initialized;
 
 	/// <param name="self">The host application builder</param>
-	extension(IHostApplicationBuilder self)
+	extension(WebApplicationBuilder self)
 	{
 		/// <summary>
 		/// Configures the <see cref="IHostApplicationBuilder">host application builder</see> to work with Sienar
 		/// </summary>
 		/// <returns>the host application builder</returns>
-		public IHostApplicationBuilder AddSienar()
+		public WebApplicationBuilder AddSienar()
 		{
 			if (_initialized)
 			{
 				return self;
 			}
-
-			self.Properties[SienarUtilsConstants.ServiceCollection] = new ServiceCollection();
 
 			self.Services.AddSienarCore();
 
@@ -37,9 +37,9 @@ public static class SienarCorePlugin
 		/// </summary>
 		/// <param name="configurer">The action which adds services</param>
 		/// <returns>the host application builder</returns>
-		public IHostApplicationBuilder AddStartupServices(Action<IServiceCollection> configurer)
+		public WebApplicationBuilder AddStartupServices(Action<IServiceCollection> configurer)
 		{
-			configurer((self.Properties[SienarUtilsConstants.ServiceCollection] as IServiceCollection)!);
+			configurer(_startupServices);
 			return self;
 		}
 	}
