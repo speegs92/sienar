@@ -8,7 +8,6 @@ namespace Sienar.Extensions;
 /// </summary>
 public static class SienarCorePlugin
 {
-	private static readonly IServiceCollection _startupServices = new ServiceCollection();
 	private static bool _initialized;
 
 	/// <param name="self">The host application builder</param>
@@ -29,17 +28,6 @@ public static class SienarCorePlugin
 
 			_initialized = true;
 
-			return self;
-		}
-
-		/// <summary>
-		/// Adds services to the startup service collection
-		/// </summary>
-		/// <param name="configurer">The action which adds services</param>
-		/// <returns>the host application builder</returns>
-		public WebApplicationBuilder AddStartupServices(Action<IServiceCollection> configurer)
-		{
-			configurer(_startupServices);
 			return self;
 		}
 	}
