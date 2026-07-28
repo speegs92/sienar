@@ -36,12 +36,14 @@ public static class SienarPluginsIdentityServiceCollectionExtensions
 
 		// CRUD
 		self
-			.AddEfEntity<ViewUserDto, ViewUserMapper<TUser>, UpsertUserDto, UpsertUserMapper<TUser>, UpsertUserDto, UpsertUserMapper<TUser>, TUser, SienarUserFilterProcessor<TUser>>()
+			.AddEfEntity<TUser, SienarUserFilterProcessor<TUser>>()
+			.AddEntityApiMapping<ViewUserDto, ViewUserMapper<TUser>, UpsertUserDto, UpsertUserMapper<TUser>, TUser>()
 			.AddAccessValidator<UserIsAdminAccessValidator<TUser>, TUser>()
 			.AddBeforeDeleteActionHook<RemoveIdentityRelationsOnUserDeleted<TUser>, TUser>()
 			.AddStateValidator<EnsureUsernameUniqueOnUpsert<TUser>, TUser>()
 			.AddStateValidator<EnsureEmailUniqueOnUpsert<TUser>, TUser>()
-			.AddEfEntity<LockoutReasonDto, LockoutReasonToEntityMapper<TUser>, LockoutReasonToDtoMapper<TUser>, LockoutReason<TUser>, LockoutReasonFilterProcessor<TUser>>();
+			.AddEfEntity<LockoutReason<TUser>, LockoutReasonFilterProcessor<TUser>>()
+			.AddEntityApiMapping<LockoutReasonDto, LockoutReasonToEntityMapper<TUser>, LockoutReasonToDtoMapper<TUser>, LockoutReason<TUser>>();
 
 		// Security
 		self

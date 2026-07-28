@@ -1,4 +1,6 @@
-﻿namespace Sienar.Extensions;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+
+namespace Sienar.Extensions;
 
 /// <summary>
 /// Contains <see cref="IServiceCollection"/> extension methods used by Sienar applications
@@ -314,28 +316,86 @@ public static class SienarCoreServiceCollectionExtensions
 		/// <summary>
 		/// Adds the necessary services to use an entity via Entity Framework
 		/// </summary>
-		/// <typeparam name="TDto">The type of the DTO</typeparam>
-		/// <typeparam name="TDtoToEntityMapper">The type of the DTO-to-entity mapper</typeparam>
-		/// <typeparam name="TEntityToDtoMapper">The type of the entity-to-DTO mapper</typeparam>
 		/// <typeparam name="TEntity">The type of the entity</typeparam>
 		/// <typeparam name="TFilterProcessor">The type of the filter processor</typeparam>
 		/// <returns>the service collection</returns>
 		[ExcludeFromCodeCoverage]
-		public IServiceCollection AddEfEntity<
+		public IServiceCollection AddEfEntity<TEntity, TFilterProcessor>()
+			where TEntity : class, IEntity, new()
+			where TFilterProcessor : class, IEfFilterProcessor<TEntity>
+		{
+			self
+				.AddBeforeCreateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
+				.AddBeforeUpdateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
+				.AddScoped<IStateValidator<TEntity>, ConcurrencyStampValidator<TEntity>>()
+				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>();
+
+			return self;
+		}
+
+		/// <summary>
+		/// Adds the necessary services to use an entity with default API-layter entity-to-DTO and DTO-to-entity mapping
+		/// </summary>
+		/// <remarks>
+		/// This overload adds the default, reflection-based mapper to map between entities and DTOs. This mapper will map properties with the same name between the entity and DTO, so if there is a type mismatch between properties, you must supply your own mapping implementations using one of the other overloads.
+		/// </remarks>
+		/// <typeparam name="TDto">The type of the DTO</typeparam>
+		/// <typeparam name="TEntity">The type of the entity</typeparam>
+		/// <returns>the service collection</returns>
+		[ExcludeFromCodeCoverage]
+		public IServiceCollection AddEntityApiMapping<TDto, TEntity>()
+			where TDto : class, new()
+			where TEntity : class, IEntity, new()
+			=> self.AddEntityApiMapping<TDto, DefaultMapper<TDto, TEntity>, DefaultMapper<TEntity, TDto>, TEntity>();
+
+		/// <summary>
+		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
+		/// </summary>
+		/// <remarks>
+		/// This overload adds mapping for DTOs which are the same for viewing, adding, and editing.
+		/// </remarks>
+		/// <typeparam name="TDto">The type of the DTO</typeparam>
+		/// <typeparam name="TDtoToEntityMapper">The type of the DTO-to-entity mapper</typeparam>
+		/// <typeparam name="TEntityToDtoMapper">The type of the entity-to-DTO mapper</typeparam>
+		/// <typeparam name="TEntity">The type of the entity</typeparam>
+		/// <returns>the service collection</returns>
+		[ExcludeFromCodeCoverage]
+		public IServiceCollection AddEntityApiMapping<
 			TDto,
 			TDtoToEntityMapper,
 			TEntityToDtoMapper,
-			TEntity,
-			TFilterProcessor>()
+			TEntity>()
 			where TDto : class, new()
 			where TDtoToEntityMapper : class, IMapper<TDto, TEntity>
 			where TEntityToDtoMapper : class, IMapper<TEntity, TDto>
 			where TEntity : class, IEntity, new()
-			where TFilterProcessor : class, IEfFilterProcessor<TEntity>
-			=> self.AddEfEntity<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity, TFilterProcessor>();
+			=> self.AddEntityApiMapping<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity>();
 
 		/// <summary>
-		/// Adds the necessary services to use an entity via Entity Framework
+		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
+		/// </summary>
+		/// <typeparam name="TViewDto">The type of the view DTO</typeparam>
+		/// <typeparam name="TEntityToViewDtoMapper">The type of the entity-to-view-DTO mapper</typeparam>
+		/// <typeparam name="TUpsertDto">The type of the upsert DTO</typeparam>
+		/// <typeparam name="TUpsertDtoToEntityMapper">The type of the upsert-DTO-to-entity mapper</typeparam>
+		/// <typeparam name="TEntity">The type of the entity</typeparam>
+		/// <returns>the service collection</returns>
+		[ExcludeFromCodeCoverage]
+		public IServiceCollection AddEntityApiMapping<
+			TViewDto,
+			TEntityToViewDtoMapper,
+			TUpsertDto,
+			TUpsertDtoToEntityMapper,
+			TEntity>()
+			where TViewDto : class, new()
+			where TEntityToViewDtoMapper : class, IMapper<TEntity, TViewDto>
+			where TUpsertDto : class, new()
+			where TUpsertDtoToEntityMapper : class, IMapper<TUpsertDto, TEntity>
+			where TEntity : class, IEntity, new()
+			=> self.AddEntityApiMapping<TViewDto, TEntityToViewDtoMapper, TUpsertDto, TUpsertDtoToEntityMapper, TUpsertDto, TUpsertDtoToEntityMapper, TEntity>();
+
+		/// <summary>
+		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
 		/// </summary>
 		/// <typeparam name="TViewDto">The type of the view DTO</typeparam>
 		/// <typeparam name="TEntityToViewDtoMapper">The type of the entity-to-view-DTO mapper</typeparam>
@@ -344,26 +404,22 @@ public static class SienarCoreServiceCollectionExtensions
 		/// <typeparam name="TEditDto">The type of the edit DTO</typeparam>
 		/// <typeparam name="TEditDtoToEntityMapper">The type of the edit-DTO-to-entity mapper</typeparam>
 		/// <typeparam name="TEntity">The type of the entity</typeparam>
-		/// <typeparam name="TFilterProcessor">The type of the filter processor</typeparam>
 		/// <returns>the service collection</returns>
 		[ExcludeFromCodeCoverage]
-		public IServiceCollection AddEfEntity<
+		public IServiceCollection AddEntityApiMapping<
 			TViewDto,
 			TEntityToViewDtoMapper,
 			TAddDto,
 			TAddDtoToEntityMapper,
 			TEditDto,
 			TEditDtoToEntityMapper,
-			TEntity,
-			TFilterProcessor>()
+			TEntity>()
 			where TViewDto : class, new()
 			where TEntityToViewDtoMapper : class, IMapper<TEntity, TViewDto>
 			where TAddDto : class, new()
 			where TAddDtoToEntityMapper : class, IMapper<TAddDto, TEntity>
 			where TEditDto : class, new()
 			where TEditDtoToEntityMapper : class, IMapper<TEditDto, TEntity>
-			where TEntity : class, IEntity, new()
-			where TFilterProcessor : class, IEfFilterProcessor<TEntity>
 		{
 			self
 				.AddScoped<IMapper<TEntity, TViewDto>, TEntityToViewDtoMapper>()
@@ -373,13 +429,7 @@ public static class SienarCoreServiceCollectionExtensions
 			{
 				self.AddScoped<IMapper<TEditDto, TEntity>, TEditDtoToEntityMapper>();
 			}
-
-			self
-				.AddBeforeCreateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
-				.AddBeforeUpdateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
-				.AddScoped<IStateValidator<TEntity>, ConcurrencyStampValidator<TEntity>>()
-				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>();
-
+				
 			return self;
 		}
 	}
