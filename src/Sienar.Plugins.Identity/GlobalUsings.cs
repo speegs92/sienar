@@ -22,6 +22,7 @@ global using Sienar.Hooks;
 global using Sienar.Identity;
 global using Sienar.Identity.Data;
 global using Sienar.Identity.Hooks;
+global using Sienar.Identity.Processors;
 global using Sienar.Identity.Requests;
 global using Sienar.Identity.Results;
 global using Sienar.Infrastructure;
