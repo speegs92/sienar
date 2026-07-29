@@ -3,11 +3,15 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Sienar;
 using Sienar.Extensions;
+using Template.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddDbContextForSienar<AppDbContext>();
+
 builder
-	.AddSienar();
+	.AddSienar()
+	.AddSienarIdentity<AppUser>();
 
 // Add services to the container.
 builder.Services
@@ -27,7 +31,7 @@ builder.Services
 
 builder.Services.AddAuthorization();
 
-builder.Services.AddRazorPages();
+builder.Services.AddMvc();
 
 var app = builder.Build();
 
@@ -37,7 +41,7 @@ app.UseAuthorization();
 
 app.MapStaticAssets();
 app
-	.MapRazorPages()
+	.MapControllers()
 	.WithStaticAssets();
 
 await app.RunAsync();

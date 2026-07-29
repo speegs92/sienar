@@ -1,5 +1,6 @@
 <Solution>
 	<Folder Name="/playground/">
+		<Project Path="playground/Template.Data/Template.Data.csproj" />
 		<Project Path="playground/Template.RazorPages/Template.RazorPages.csproj" />
 	</Folder>
 	<Folder Name="/src/">
