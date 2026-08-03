@@ -18,6 +18,7 @@ _ReSharper.*
 
 **/coverage.xml
 **/coveragereport
+**/SienarFiles
 
 # Docker
 .env
