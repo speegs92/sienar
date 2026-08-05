@@ -13,6 +13,8 @@ public class SienarMvcPlugin : IPlugin
 			.AddPlugin<SienarAuthorizationPlugin>()
 			.AddPlugin<SienarRoutingPlugin>()
 			.AddPlugin<SienarStaticAssetsPlugin>();
+
+		builder.Services.AddSienarMvc();
 	}
 
 	/// <inheritdoc />

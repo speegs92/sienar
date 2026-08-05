@@ -15,6 +15,8 @@ public class SienarRazorPagesPlugin : IPlugin
 			.AddPlugin<SienarAuthorizationPlugin>()
 			.AddPlugin<SienarRoutingPlugin>()
 			.AddPlugin<SienarStaticAssetsPlugin>();
+
+		builder.Services.AddSienarMvc();
 	}
 
 	/// <inheritdoc />

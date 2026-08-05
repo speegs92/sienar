@@ -7,6 +7,8 @@ namespace Sienar.Extensions;
 /// </summary>
 public static class SienarEntityFrameworkServiceCollectionExtensions
 {
+	private static bool _initialized;
+
 	/// <param name="self">The service collection</param>
 	extension(IServiceCollection self)
 	{
@@ -16,6 +18,13 @@ public static class SienarEntityFrameworkServiceCollectionExtensions
 		/// <returns>the service collection</returns>
 		public IServiceCollection AddSienarEf()
 		{
+			if (_initialized)
+			{
+				return self;
+			}
+
+			_initialized = true;
+
 			return self
 				.AddScoped(typeof(IEntityReadActor<>), typeof(EfEntityReadActor<>))
 				.AddScoped(typeof(IEntityReadAllActor<>), typeof(EfEntityReadAllActor<>))

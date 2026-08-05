@@ -1,13 +1,28 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿namespace Sienar.Extensions;
 
-namespace Sienar.Extensions;
-
+/// <summary>
+/// Contains <see cref="IServiceCollection"/> extension methods used by Sienar applications
+/// </summary>
 public static class SienarPluginsMvcServiceCollectionExtensions
 {
+	private static bool _initialized;
+
+	/// <param name="self">The service collection</param>
 	extension(IServiceCollection self)
 	{
+		/// <summary>
+		/// Adds services necessary to use Sienar with MVC apps
+		/// </summary>
+		/// <returns></returns>
 		public IServiceCollection AddSienarMvc()
 		{
+			if (_initialized)
+			{
+				return self;
+			}
+
+			_initialized = true;
+
 			return self
 				.AddHttpContextAccessor()
 				.AddScoped<IUserAccessor, HttpContextUserAccessor>()
