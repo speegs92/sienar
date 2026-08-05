@@ -5,6 +5,8 @@
 /// </summary>
 public static class SienarCoreServiceCollectionExtensions
 {
+	private static bool _initialized;
+
 	/// <param name="self">The service collection</param>
 	extension(IServiceCollection self)
 	{
@@ -15,6 +17,13 @@ public static class SienarCoreServiceCollectionExtensions
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddSienarCore()
 		{
+			if (_initialized)
+			{
+				return self;
+			}
+
+			_initialized = true;
+
 			return self
 				.AddScoped<INotifier, DefaultNotifier>()
 				.AddScoped(typeof(IStatusActor<>), typeof(DefaultStatusActor<>))

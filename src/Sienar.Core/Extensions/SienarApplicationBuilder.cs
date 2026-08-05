@@ -18,16 +18,6 @@ public static class SienarApplicationBuilder
 	extension(IHostApplicationBuilder builder)
 	{
 		/// <summary>
-		/// Configures the <see cref="IHostApplicationBuilder">host application builder</see> to work with Sienar
-		/// </summary>
-		/// <returns>the host application builder</returns>
-		public IHostApplicationBuilder AddSienar()
-		{
-			builder.Services.AddSienarCore();
-			return builder;
-		}
-
-		/// <summary>
 		/// Adds services to the startup DI container
 		/// </summary>
 		/// <param name="action">The action used to add services</param>

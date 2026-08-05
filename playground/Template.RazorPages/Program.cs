@@ -1,7 +1,4 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Sienar;
 using Sienar.Extensions;
 using Sienar.Plugins;
 using Template.Data;
@@ -11,10 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSienarDbContext<AppDbContext>();
 
 builder
-	.AddSienar()
-	.AddSienarIdentity<AppUser>()
 	.AddPlugin<SienarMvcPlugin>()
 	.AddPlugin<SienarRazorPagesPlugin>()
+	.AddPlugin<SienarIdentityPlugin<AppUser>>()
 	.ConfigureSienar();
 
 // Add services to the container.
