@@ -39,6 +39,17 @@ public static class SienarCoreServiceCollectionExtensions
 		}
 
 		/// <summary>
+		/// Adds a configurer to the service collection
+		/// </summary>
+		/// <typeparam name="TConfigurer">The type of the configurer to add</typeparam>
+		/// <typeparam name="TOptions">The type of the options the configurer configures</typeparam>
+		/// <returns>the service collection</returns>
+		public IServiceCollection AddConfigurer<TConfigurer, TOptions>()
+			where TConfigurer : class, IConfigurer<TOptions>
+			where TOptions : class
+			=> self.AddScoped<IConfigurer<TOptions>, TConfigurer>();
+
+		/// <summary>
 		/// Adds an access validator for the given <c>TRequest</c>
 		/// </summary>
 		/// <typeparam name="TValidator">the validator implementation</typeparam>
