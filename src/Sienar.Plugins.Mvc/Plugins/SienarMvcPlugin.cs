@@ -19,7 +19,9 @@ public class SienarMvcPlugin : IPlugin
 
 		builder.Services
 			.AddSienarCore()
-			.AddSienarMvc();
+			.AddSienarMvc()
+			.AddConfigurer<MvcBuilderConfigurer, IMvcBuilder>()
+			.AddConfigurer<MvcConfigurer, MvcOptions>();
 	}
 
 	/// <inheritdoc />
