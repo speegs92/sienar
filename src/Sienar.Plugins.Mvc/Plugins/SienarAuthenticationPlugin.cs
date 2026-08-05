@@ -9,7 +9,12 @@ namespace Sienar.Plugins;
 public class SienarAuthenticationPlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder) {}
+	public void ConfigureBuilder(IHostApplicationBuilder builder)
+	{
+		builder.Services
+			.AddConfigurer<AuthenticationBuilderConfigurer, AuthenticationBuilder>()
+			.AddConfigurer<AuthenticationConfigurer, AuthenticationOptions>();
+	}
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(

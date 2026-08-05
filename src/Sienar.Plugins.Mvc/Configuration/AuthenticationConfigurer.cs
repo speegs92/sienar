@@ -1,13 +1,14 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-using Microsoft.AspNetCore.Authentication;
+﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace Sienar.Infrastructure;
+namespace Sienar.Configuration;
 
-/// <exclude />
-public class DefaultAuthenticationConfigurer : IConfigurer<AuthenticationOptions>
+/// <summary>
+/// Configures the authentication options to use cookie authentication
+/// </summary>
+public class AuthenticationConfigurer : IConfigurer<AuthenticationOptions>
 {
+	/// <inheritdoc />
 	public void Configure(AuthenticationOptions options)
 	{
 		options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
