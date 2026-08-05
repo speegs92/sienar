@@ -8,8 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSienarDbContext<AppDbContext>();
 
 builder
-	.AddPlugin<SienarMvcPlugin>()
-	.AddPlugin<SienarRazorPagesPlugin>()
 	.AddPlugin<SienarIdentityPlugin<AppUser>>()
 	.ConfigureSienar();
 
@@ -28,10 +26,6 @@ builder
 // 			o.LoginPath = DashboardUrls.Account.Login;
 // 			o.AccessDeniedPath = DashboardUrls.Account.Forbidden;
 // 		});
-
-// builder.Services.AddAuthorization();
-
-// builder.Services.AddMvc(o => {});
 
 var app = builder.Build();
 app.UseSienar();

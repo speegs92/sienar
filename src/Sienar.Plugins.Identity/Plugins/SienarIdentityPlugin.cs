@@ -12,10 +12,7 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 	/// <inheritdoc />
 	public void ConfigureBuilder(IHostApplicationBuilder builder)
 	{
-		if (!builder.PluginIsRegistered<SienarMvcPlugin>() && !builder.PluginIsRegistered<SienarRazorPagesPlugin>())
-		{
-			throw new InvalidOperationException($"The {nameof(SienarIdentityPlugin<>)} requires you to register either the {nameof(SienarMvcPlugin)} or the {nameof(SienarRazorPagesPlugin)} prior to registering the {nameof(SienarIdentityPlugin<>)}.");
-		}
+		builder.AddPlugin<SienarMvcPlugin>();
 
 		builder.Services.AddSienarIdentity<TUser>(builder.Configuration);
 	}
