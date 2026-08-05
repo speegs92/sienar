@@ -6,12 +6,12 @@
 		<RootNamespace>Sienar</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<PackageId>Sienar.Core</PackageId>
-		<Title>Sienar.Core</Title>
+		<PackageId>Sienar.Plugins.Mvc</PackageId>
+		<Title>Sienar.Plugins.Mvc</Title>
 		<PackageVersion>0.1.0</PackageVersion>
 		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
 		<Authors>Christian LeVesque</Authors>
-		<Description>Contains the Sienar framework utilities.</Description>
+		<Description>Contains server-side MVC plugins for Sienar applications</Description>
 		<Copyright>Copyright 2024 Christian LeVesque</Copyright>
 		<PackageProjectUrl>https://sienar.levesque.dev</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
@@ -22,12 +22,22 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="./README.md" Pack="true" PackagePath="/"/>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="10.0.10" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.10" />
+		<ProjectReference
+			Condition=" '$(Configuration)' != 'Release' "
+			Include="..\Sienar.Core\Sienar.Core.csproj" />
+		<PackageReference
+			Condition=" '$(Configuration)' == 'Release' "
+			Include="Sienar.Core" Version="0.1.0"/>
+		<ProjectReference
+			Condition=" '$(Configuration)' != 'Release' "
+			Include="..\Sienar.EntityFramework\Sienar.EntityFramework.csproj" />
+		<PackageReference
+			Condition=" '$(Configuration)' == 'Release' "
+			Include="Sienar.EntityFramework" Version="0.1.0"/>
 	</ItemGroup>
 
 </Project>

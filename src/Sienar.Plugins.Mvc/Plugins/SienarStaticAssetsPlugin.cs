@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-
-namespace Sienar.Plugins;
+﻿namespace Sienar.Plugins;
 
 /// <summary>
 /// Configures the Sienar application to use ASP.NET static asset mapping middleware

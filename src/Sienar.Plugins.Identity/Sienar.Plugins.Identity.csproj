@@ -36,7 +36,19 @@
 			Include="..\Sienar.Core\Sienar.Core.csproj" />
 		<PackageReference
 			Condition=" '$(Configuration)' == 'Release' "
-			Include="Sienar.Core" Version="0.1.0"/>
+			Include="Sienar.Core" Version="0.1.0" />
+		<ProjectReference
+			Condition=" '$(Configuration)' != 'Release' "
+			Include="..\Sienar.EntityFramework\Sienar.EntityFramework.csproj" />
+		<PackageReference
+			Condition=" '$(Configuration)' == 'Release' "
+			Include="Sienar.EntityFramework" Version="0.1.0" />
+		<ProjectReference
+			Condition=" '$(Configuration)' != 'Release' "
+			Include="..\Sienar.Plugins.Mvc\Sienar.Plugins.Mvc.csproj" />
+		<PackageReference
+			Condition=" '$(Configuration)' == 'Release' "
+			Include="Sienar.Plugins.Mvc" Version="0.1.0" />
 	</ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
 
 namespace Sienar.Plugins;
 

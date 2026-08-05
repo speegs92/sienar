@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Hosting;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Sienar.Plugins;
 

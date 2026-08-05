@@ -8,7 +8,7 @@ using Template.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContextForSienar<AppDbContext>();
+builder.Services.AddSienarDbContext<AppDbContext>();
 
 builder
 	.AddSienar()
