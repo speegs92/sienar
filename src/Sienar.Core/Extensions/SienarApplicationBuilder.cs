@@ -4,9 +4,9 @@ using Microsoft.Extensions.Hosting;
 namespace Sienar.Extensions;
 
 /// <summary>
-/// Contains <see cref="IHostApplicationBuilder"/> extension methods used by <c>Sienar.Core</c>
+/// Contains <see cref="IHostApplicationBuilder"/>  and <see cref="IHost"/> extension methods used by <c>Sienar.Core</c>
 /// </summary>
-public static class SienarCorePlugin
+public static class SienarApplicationBuilder
 {
 	private static readonly HashSet<Type> _pluginTypes = [];
 	private static readonly List<IPlugin> _plugins = [];
