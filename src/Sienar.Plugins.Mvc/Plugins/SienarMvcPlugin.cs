@@ -14,7 +14,8 @@ public class SienarMvcPlugin : IPlugin
 		builder
 			.AddPlugin<SienarAuthorizationPlugin>()
 			.AddPlugin<SienarRoutingPlugin>()
-			.AddPlugin<SienarStaticAssetsPlugin>();
+			.AddPlugin<SienarStaticAssetsPlugin>()
+			.AddPlugin<SienarAntiforgeryPlugin>();
 
 		builder.Services
 			.AddSienarCore()
