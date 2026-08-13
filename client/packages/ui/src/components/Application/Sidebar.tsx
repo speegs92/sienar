@@ -1,4 +1,6 @@
-﻿import { classNames } from '@sienar/utils';
+﻿import { useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import { classNames } from '@sienar/utils';
 import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
 import { Backdrop } from '../Backdrop.tsx';
@@ -42,6 +44,12 @@ export function Sidebar(props: SidebarProps) {
 		className,
 		...rest
 	} = props;
+
+	const location = useLocation();
+
+	useEffect(() => {
+		setOpen?.(false);
+	}, [location]);
 
 	const classes = classNames(
 		className,
