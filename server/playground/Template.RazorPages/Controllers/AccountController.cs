@@ -54,9 +54,8 @@ public class AccountController : ControllerBase
 
 	[HttpDelete("login")]
 	public Task<IActionResult> Logout(
-		LogoutRequest data,
 		[FromServices] IStatusActionOrchestrator<LogoutRequest> orchestrator)
-		=> orchestrator.Execute(data);
+		=> orchestrator.Execute(new LogoutRequest());
 
 	[HttpDelete("password")]
 	[AllowAnonymous]
