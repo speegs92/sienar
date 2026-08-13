@@ -20,10 +20,7 @@ export async function sendRequest<T>(
 	const init: RequestInit = Object.assign({ method, body }, requestOptions);
 
 	const safeMethods: HttpMethod[] = ['GET', 'HEAD', 'OPTIONS', 'CONNECT'];
-	let shouldRefreshToken = false;
-
 	if (!safeMethods.includes(method)) {
-		shouldRefreshToken = true;
 		init.headers = Object.assign({
 			'X-XSRF-TOKEN': getCookie('XSRF-TOKEN')
 		}, init.headers);
@@ -83,12 +80,6 @@ export async function sendRequest<T>(
 
 	requestResult.wasSuccessful = response.ok;
 	requestResult.result = result.result;
-
-	if (shouldRefreshToken) {
-		try {
-			await fetch('/api/csrf');
-		} catch {}
-	}
 
 	return requestResult;
 }
