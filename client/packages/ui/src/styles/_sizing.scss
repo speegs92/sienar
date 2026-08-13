@@ -1,0 +1,25 @@
+﻿@use 'mixins';
+@use 'variables';
+
+@include mixins.make-responsive() using ($infix) {
+	@each $size, $value in variables.$width-height-percentages {
+		.h#{$infix}-#{$size} {
+			height: #{$value};
+		}
+
+		.w#{$infix}-#{$size} {
+			width: #{$value};
+		}
+	}
+
+	@for $level from 1 through 10 {
+		$realLevel: $level * 10;
+		.min-vh#{$infix}-#{$realLevel} {
+			min-height: #{$realLevel}vh;
+		}
+
+		.min-vw#{$infix}-#{$realLevel} {
+			min-width: #{$realLevel}vw;
+		}
+	}
+}

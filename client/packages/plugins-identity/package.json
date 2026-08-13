@@ -1,0 +1,43 @@
+{
+	"name": "@sienar/plugins-identity",
+	"version": "0.1.0",
+	"description": "The React client for the Sienar Identity Plugin",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"preview": "vite preview"
+	},
+	"peerDependencies": {
+		"@sienar/plugins-core": "^0.1.0",
+		"@sienar/ui": "^0.1.0",
+		"@sienar/utils": "^0.1.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"react-router": "^7.12.0",
+		"react-router-dom": "^7.12.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.10.1",
+		"@types/react": "^19.2.5",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^5.1.1",
+		"typescript": "~5.9.3",
+		"vite": "^7.2.4"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/speegs92/sienar-client.git"
+	},
+	"keywords": [
+		"sienar",
+		"react",
+		"identity"
+	],
+	"author": "Christian LeVesque <christian@levesque.dev> (https://levesque.dev)",
+	"license": "Apache-2.0",
+	"bugs": {
+		"url": "https://github.com/speegs92/sienar-client/issues"
+	},
+	"homepage": "https://sienar.io"
+}

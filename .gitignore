@@ -1,0 +1,32 @@
+# IDE
+**/.idea/
+*.iml
+*.sln.ide
+_ReSharper.*
+*.user
+*.suo
+.vs/
+.vscode/
+*.DotSettings
+
+# .NET
+[Oo]bj/
+[Bb]in/
+[Bb]uild/
+.nuget/
+*.log
+
+**/coverage.xml
+**/coveragereport
+**/SienarFiles
+
+# Client
+*.js
+*.css
+*.map
+
+node_modules/
+package-lock.json
+
+# Docker
+.env

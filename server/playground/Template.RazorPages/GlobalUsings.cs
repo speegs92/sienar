@@ -1,0 +1,9 @@
+﻿global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using System;
+global using System.Threading.Tasks;
+global using Sienar;
+global using Sienar.Data;
+global using Sienar.Identity;
+global using Sienar.Identity.Requests;
+global using Sienar.Infrastructure;

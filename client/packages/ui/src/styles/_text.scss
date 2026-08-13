@@ -1,0 +1,7 @@
+﻿$text-align-utilities: left, start, right, end, center, justify, justify-all, match-parent;
+
+@each $u in $text-align-utilities {
+	.text-align-#{$u} {
+		text-align: $u;
+	}
+}

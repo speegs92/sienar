@@ -1,0 +1,78 @@
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+using System.Text.Json;
+
+namespace Sienar.Identity.Processors;
+
+/// <exclude />
+public class PersonalDataProcessor<T> : IResultProcessor<PersonalDataResult>
+	where T : class, ISienarIdentityUser<T>
+{
+	private readonly ISienarDbContext<T> _context;
+	private readonly IUserAccessor _userAccessor;
+	private readonly IEnumerable<IUserPersonalDataRetriever<T>> _personalDataRetrievers;
+
+	public PersonalDataProcessor(
+		ISienarDbContext<T> context,
+		IUserAccessor userAccessor,
+		IEnumerable<IUserPersonalDataRetriever<T>> personalDataRetrievers)
+	{
+		_context = context;
+		_userAccessor = userAccessor;
+		_personalDataRetrievers = personalDataRetrievers;
+	}
+
+	public async Task<OperationResult<PersonalDataResult>> Process()
+	{
+		var userId = await _userAccessor.GetUserId();
+		if (!userId.HasValue)
+		{
+			return new(
+				OperationStatus.Unauthorized,
+				message: CoreErrors.Account.LoginRequired);
+		}
+
+		var user = await _context.Users.FindAsync(userId.Value);
+		if (user is null)
+		{
+			return new(
+				OperationStatus.Unauthorized,
+				message: CoreErrors.Account.LoginRequired);
+		}
+
+		var file = new DownloadFile
+		{
+			Name = "PersonalData.json"
+		};
+		file.Mime = MimeMapping.MimeUtility.GetMimeMapping(file.Name);
+
+		// Only include personal data for download
+		var personalData = new Dictionary<string, string>();
+		var personalDataProps = user
+			.GetType()
+			.GetProperties()
+			.Where(prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
+
+		foreach (var p in personalDataProps)
+		{
+			var value = p.GetValue(user)
+				?.ToString();
+			personalData.Add(p.Name, value ?? "null");
+		}
+
+		foreach (var retriever in _personalDataRetrievers)
+		{
+			var newData = await retriever.GetUserData(user);
+			personalData = personalData
+				.Union(newData)
+				.ToDictionary(d => d.Key, d => d.Value);
+		}
+
+		file.Contents = JsonSerializer.SerializeToUtf8Bytes(personalData);
+
+		return new(
+			OperationStatus.Success,
+			new(file),
+			"Personal data downloaded successfully");
+	}
+}
