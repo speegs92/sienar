@@ -1,41 +1,42 @@
-﻿namespace Template.RazorPages.Controllers;
+﻿using Template.Data;
+
+namespace Template.RazorPages.Controllers;
 
 /// <exclude />
 [ApiController]
 [Route("/api/users")]
 [Authorize(Roles = Roles.Admin)]
-public class UsersController<T>
-	where T : class, ISienarIdentityUser<T>, new()
+public class UsersController
 {
 	[HttpGet]
 	public Task<IActionResult> Read(
 		[FromQuery] Filter? filter,
-		[FromServices] IReadAllActionOrchestrator<ViewUserDto, T> orchestrator)
+		[FromServices] IReadAllActionOrchestrator<ViewUserDto, AppUser> orchestrator)
 		=> orchestrator.Execute(filter);
 
 	[HttpGet("{id:int}")]
 	public Task<IActionResult> Read(
 		int id,
 		[FromQuery] Filter? filter,
-		[FromServices] IReadActionOrchestrator<ViewUserDto, T> orchestrator)
+		[FromServices] IReadActionOrchestrator<ViewUserDto, AppUser> orchestrator)
 		=> orchestrator.Execute(id, filter);
 
 	[HttpPost]
 	public Task<IActionResult> Create(
 		UpsertUserDto user,
-		[FromServices] ICreateActionOrchestrator<UpsertUserDto, T> orchestrator)
+		[FromServices] ICreateActionOrchestrator<UpsertUserDto, AppUser> orchestrator)
 		=> orchestrator.Execute(user);
 
 	[HttpPut]
 	public Task<IActionResult> Update(
 		UpsertUserDto user,
-		[FromServices] IUpdateActionOrchestrator<UpsertUserDto, T> orchestrator)
+		[FromServices] IUpdateActionOrchestrator<UpsertUserDto, AppUser> orchestrator)
 		=> orchestrator.Execute(user);
 
 	[HttpDelete("{id:int}")]
 	public Task<IActionResult> Delete(
 		int id,
-		[FromServices] IDeleteActionOrchestrator<T> orchestrator)
+		[FromServices] IDeleteActionOrchestrator<AppUser> orchestrator)
 		=> orchestrator.Execute(id);
 
 	[HttpPost("roles")]
