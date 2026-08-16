@@ -1,9 +1,7 @@
-﻿// import { useParams } from 'react-router-dom';
-// import { Form, Textbox } from '@sienar/ui';
-// import { AuthorizeRoute, isEmail, required, useDocumentTitle } from '@sienar/utils';
-// import { USERS_URL } from '@plugins-identity/urls.ts';
-// import { USERS_SERVICE } from '@plugins-identity/services.ts';
-// import { roles } from '@plugins-identity/constants.ts';
+﻿import { useParams } from 'react-router-dom';
+import { Button, Content, Form, Textbox } from '@sienar/ui';
+import { AuthorizeRoute, isEmail, required, tryParseInt, useDocumentTitle } from '@sienar/utils';
+import { roles } from '@plugins-identity/constants.ts';
 import { USERS_ADD_URL, USERS_EDIT_URL } from '@plugins-identity/urls.ts';
 import { USERS_ADD_LAYOUT, USERS_EDIT_LAYOUT } from '@plugins-identity/layouts.ts';
 
@@ -22,52 +20,61 @@ export const USERS_ADD_VIEW = Symbol() as InjectionKey<ReactNode>;
 export const USERS_EDIT_VIEW = Symbol() as InjectionKey<ReactNode>;
 
 function Upsert() {
-	return <></>;
-	// const params = useParams();
-	// const id = params['id'];
-	//
-	// useDocumentTitle(id ? 'Update user' : 'Create user');
-	//
-	// return (
-	// 	<AuthorizeRoute roles={roles.admin}>
-	// 		<Form
-	// 			serviceKey={USERS_SERVICE}
-	// 			createTitle='Create user'
-	// 			createSubmitText='Add user'
-	// 			updateTitle='Update user'
-	// 			updateSubmitText='Update user'
-	// 			upsert
-	// 			successRedirectRoute={USERS_URL}
-	// 		>
-	// 			<Textbox
-	// 				name='username'
-	// 				displayName='Username'
-	// 				validators={[required()]}
-	// 			/>
-	// 			<Textbox
-	// 				name='email'
-	// 				displayName='Email'
-	// 				type='email'
-	// 				validators={[
-	// 					required(),
-	// 					isEmail()
-	// 				]}
-	// 			/>
-	// 			<Textbox
-	// 				name='password'
-	// 				displayName='Password'
-	// 				type='password'
-	// 				validators={[required()]}
-	// 			/>
-	// 			<Textbox
-	// 				name='confirmPassword'
-	// 				displayName='Confirm password'
-	// 				type='password'
-	// 				validators={[required()]}
-	// 			/>
-	// 		</Form>
-	// 	</AuthorizeRoute>
-	// );
+	const params = useParams();
+	const id = tryParseInt(params['id']);
+	const title = id ? 'Update user ': 'Create user';
+
+	useDocumentTitle(title);
+
+	return (
+		<AuthorizeRoute roles={roles.admin}>
+			<Content title={title}>
+				<Form
+					endpoint='/api/users'
+					method={id ? 'PUT' : 'POST'}
+					entityId={id}
+					onSuccess='/dashboard/users'
+				>
+					<Textbox
+						name='username'
+						displayName='Username'
+						validators={[required()]}
+						autoComplete='off'
+					/>
+					<Textbox
+						name='email'
+						displayName='Email'
+						type='email'
+						validators={[
+							required(),
+							isEmail()
+						]}
+						autoComplete='off'
+					/>
+					<Textbox
+						name='password'
+						displayName='Password'
+						type='password'
+						validators={[required()]}
+						autoComplete='new-password'
+					/>
+					<Textbox
+						name='confirmPassword'
+						displayName='Confirm password'
+						type='password'
+						validators={[required()]}
+					/>
+
+					<Button
+						type='submit'
+						color='primary'
+					>
+						{title}
+					</Button>
+				</Form>
+			</Content>
+		</AuthorizeRoute>
+	);
 }
 
 export const addModule: ViewModule = {
