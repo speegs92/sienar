@@ -39,7 +39,6 @@ function Upsert() {
 						name='username'
 						displayName='Username'
 						validators={[required()]}
-						autoComplete='off'
 					/>
 					<Textbox
 						name='email'
@@ -49,7 +48,6 @@ function Upsert() {
 							required(),
 							isEmail()
 						]}
-						autoComplete='off'
 					/>
 					<Textbox
 						name='password'
