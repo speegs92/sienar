@@ -165,3 +165,39 @@ export function classNames(
 
 	return classes.length === 0 ? undefined : classes.join(' ');
 }
+
+/**
+ * Parses a value using {@link parseInt} if it's a number, else returns `undefined`
+ * 
+ * @param input The value to parse
+ */
+export function tryParseInt(input: string|undefined): number|undefined {
+	if (!input) {
+		return undefined;
+	}
+
+	const parsed = parseInt(input);
+	if (isNaN(parsed)) {
+		return undefined;
+	}
+
+	return parsed;
+}
+
+/**
+ * Parses a value using {@link parseFloat} if it's a number, else returns `undefined`
+ *
+ * @param input The value to parse
+ */
+export function tryParseFloat(input: string|undefined): number|undefined {
+	if (!input) {
+		return undefined;
+	}
+
+	const parsed = parseFloat(input);
+	if (isNaN(parsed)) {
+		return undefined;
+	}
+
+	return parsed;
+}
