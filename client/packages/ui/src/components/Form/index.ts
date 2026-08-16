@@ -3,6 +3,7 @@ export * from './CheckboxGroup.tsx';
 export * from './DatePicker.tsx';
 export * from './Form.tsx';
 export * from './HiddenInput.tsx';
+export * from './Input.tsx';
 export * from './Radio.tsx';
 export * from './RadioGroup.tsx';
 export * from './Select.tsx';
