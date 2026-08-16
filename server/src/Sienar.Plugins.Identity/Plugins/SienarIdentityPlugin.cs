@@ -17,6 +17,8 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 		builder.Services
 			.AddSienarEf()
 			.AddSienarIdentity<TUser>(builder.Configuration);
+
+		builder.StartupServices.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
 	}
 
 	/// <inheritdoc />
