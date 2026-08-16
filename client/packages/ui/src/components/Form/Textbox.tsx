@@ -2,6 +2,7 @@
 import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
 import { Icon } from '@ui/components';
 import { FormField } from './FormField.tsx';
+import { Input } from './Input.tsx';
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes, PropsWithChildren, ReactNode } from 'react';
 import { type Color } from '@ui/theme.ts';
@@ -136,7 +137,7 @@ export function Textbox<T extends string | number>(props: TextboxProps<T>) {
 			validations={validations}
 			validationListProps={validationListProps}
 		>
-			<input
+			<Input
 				id={id ?? inputId}
 				className='form-field__input'
 				name={name}

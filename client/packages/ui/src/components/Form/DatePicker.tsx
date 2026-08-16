@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
 import { Icon } from '@ui/components';
 import { FormField } from './FormField.tsx';
+import { Input } from './Input.tsx';
 
 import type { ChangeEvent, FocusEvent, InputHTMLAttributes, PropsWithChildren } from 'react';
 import type { Dayjs } from 'dayjs';
@@ -117,7 +118,7 @@ export function DatePicker(props: DatePickerProps) {
 			validations={validations}
 			validationListProps={validationListProps}
 		>
-			<input
+			<Input
 				ref={input}
 				id={id ?? inputId}
 				className='form-field__input'
