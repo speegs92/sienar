@@ -14,3 +14,4 @@ export * from './Modal/index.ts';
 export * from './Notification/index.ts';
 export * from './Stack.tsx';
 export * from './Tab/index.ts';
+export * from './Table/index.ts';
