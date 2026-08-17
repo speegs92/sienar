@@ -23,7 +23,7 @@ export function appendSearchParams(baseUrl: string, query: object|undefined|null
 			for (let item of v) {
 				params.append(k, item);
 			}
-		} else {
+		} else if (v !== undefined) {
 			params.append(k, v);
 		}
 	}
