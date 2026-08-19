@@ -1,4 +1,3 @@
-import { Column, Icon, Row, Stack } from '@sienar/ui';
 import { ABOUT_URL } from '@plugins-identity/urls.ts';
 
 import type { ReactNode } from 'react';
@@ -18,7 +17,7 @@ type Technology = {
 }
 
 const iconDimensions = { width: 48, height: 48 };
-const UnknownIcon = () => <Icon icon='info'/>;
+const UnknownIcon = () => <i className='bi bi-info-circle'/>;
 
 const technologies: Technology[] = [
 	{
@@ -122,17 +121,13 @@ function About() {
 				Sienar leverages several open source libraries. It's not possible to list <em>all</em> the libraries Sienar uses because of how intertwined open source software is, but the following is a list of libraries that Sienar <em>directly</em> relies on:
 			</p>
 
-			<Row className='justify-stretch'>
+			<div className='justify-stretch'>
 				{technologies.map(t => (
-					<Column
+					<div
 						key={t.name}
-						col={12}
-						md={6}
-						lg={4}
-						xl={3}
+						className='col-12 col-sm-6 col-lg-4 col-xl-3'
 					>
-						<Stack
-							align='center'
+						<div
 							className='p-2'
 							style={{ height: '100%' }}
 						>
@@ -148,10 +143,10 @@ function About() {
 							<p>
 								{t.reason}
 							</p>
-						</Stack>
-					</Column>
+						</div>
+					</div>
 				))}
-			</Row>
+			</div>
 		</>
 	);
 }

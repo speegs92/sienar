@@ -1,4 +1,4 @@
-﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
+﻿import { Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useDocumentTitle } from '@sienar/utils';
 import { FORGOT_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -36,12 +36,12 @@ function Index() {
 						Username or email address
 					</Textbox>
 
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						Request password reset
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

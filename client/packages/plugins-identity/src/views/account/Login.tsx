@@ -1,5 +1,5 @@
-﻿import { useSearchParams } from 'react-router-dom';
-import { Button, Content, Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
+﻿import { Link, useSearchParams } from 'react-router-dom';
+import { Content, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
@@ -51,7 +51,7 @@ function Login() {
 					<Textbox
 						name='accountName'
 						displayName='Username or email address'
-						leftIcon={<Icon icon='account'/>}
+						leftIcon={<i className='bi bi-account'/>}
 						validators={[required()]}
 						validationListProps={{
 							hideNonErrors: true
@@ -61,7 +61,7 @@ function Login() {
 						name='password'
 						displayName='Password'
 						type='password'
-						leftIcon={<Icon icon='lock'/>}
+						leftIcon={<i className='bi bi-lock'/>}
 						validators={[required()]}
 						validationListProps={{
 							hideNonErrors: true
@@ -71,20 +71,19 @@ function Login() {
 						Remember me
 					</StandaloneCheckbox>
 
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						Log in
-					</Button>
+					</button>
 
-					<LinkButton
-						href={urls.account.forgotPassword.index}
-						color='secondary'
-						variant='outlined'
+					<Link
+						to={urls.account.forgotPassword.index}
+						className='btn btn-outline-secondary'
 					>
 						I forgot my password
-					</LinkButton>
+					</Link>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

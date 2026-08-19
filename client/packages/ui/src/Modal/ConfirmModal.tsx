@@ -1,5 +1,4 @@
 ﻿import { useModalContext } from '@sienar/utils';
-import { Button, CardContent, CardActions } from '@ui/components';
 
 import type { ConfirmConfiguration } from '@sienar/utils';
 
@@ -18,25 +17,25 @@ export function ConfirmModal(props: ConfirmConfiguration) {
 
 	return (
 		<>
-			<CardContent>
+			<p>
 				{question}
-			</CardContent>
-			<CardActions className='d-flex justify-content-end'>
-				<Button
+			</p>
+			<div className='d-flex justify-content-end'>
+				<button
 					color={rejectedColor}
 					variant={rejectedVariant}
 					onClick={() => modal.close('rejected')}
 				>
 					{rejectedText}
-				</Button>
-				<Button
+				</button>
+				<button
 					color={acceptedColor}
 					variant={acceptedVariant}
 					onClick={() => modal.close('accepted')}
 				>
 					{acceptedText}
-				</Button>
-			</CardActions>
+				</button>
+			</div>
 		</>
 	)
 }

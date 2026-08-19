@@ -1,7 +1,6 @@
 ﻿import { classNames } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useNotificationContext } from './utils.ts';
-import { DismissButton } from '@ui/components';
 
 import type { HTMLAttributes } from 'react';
 import type { NotificationInstance } from '@sienar/utils';
@@ -50,7 +49,7 @@ export function Notification(props: NotificationProps) {
 
 			<div className='notifications__notification-close-button-wrapper'>
 				{data.configuration.dismissButton || (
-					<DismissButton
+					<button
 						color={color}
 						onClick={data.close}
 					/>

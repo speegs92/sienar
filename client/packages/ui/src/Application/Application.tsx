@@ -1,13 +1,11 @@
 ﻿import { useMemo, useState } from 'react';
 import { aggregateLinks, classNames, DRAWER_HEADER_PARTIAL, DRAWER_FOOTER_PARTIAL, filterLinks, inject, useAuthContext, useActiveMenu } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
 import { Menu, MenuItem } from '@ui/Menu';
 import { ModalContainer } from '@ui/Modal';
 import { Notifications } from '@ui/Notification';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
-import { MainContent } from './MainContent.tsx';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -42,7 +40,6 @@ export interface ApplicationProps extends Omit<HTMLAttributes<HTMLElement>, 'col
 export function Application(props: ApplicationProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'bold',
 		className,
 		appbarProps,
 		sidebarProps,
@@ -62,11 +59,7 @@ export function Application(props: ApplicationProps) {
 
 	const appClasses = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'app'),
-		'd-flex flex-row',
-		{
-			'app--open': open
-		}
+		'd-flex flex-row'
 	);
 
 	return (
@@ -80,7 +73,7 @@ export function Application(props: ApplicationProps) {
 					<div className='flex-grow-1'>
 						{inject(DRAWER_HEADER_PARTIAL, true)}
 
-						<Menu color={color}>
+						<Menu>
 							{menuItems.map(item => (
 								<MenuItem
 									key={item.text}
@@ -105,14 +98,11 @@ export function Application(props: ApplicationProps) {
 						</button>
 					</Appbar>
 
-					<MainContent
-						sidebarOpen={open}
-						className='flex-grow-1'
-					>
-						<div className='container p-r'>
+					<main className='flex-grow-1'>
+						<div className='container-fluid p-4'>
 							{children}
 						</div>
-					</MainContent>
+					</main>
 				</div>
 			</Tag>
 			<Notifications/>

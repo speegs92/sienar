@@ -1,6 +1,5 @@
 import { addLinks, addLinksWithPriority, DASHBOARD_MENU, DASHBOARD_UTILS_MENU, DASHBOARD_UTILS_SETTINGS_MENU } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
-import { Icon } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 import * as URLS from '@plugins-identity/urls.ts';
 import { roles, urls } from '@plugins-identity/constants.ts';
@@ -12,7 +11,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'Dashboard',
 			href: MAIN_URL,
-			icon: <Icon icon='dashboard'/>,
+			icon: <i className='bi bi-dashboard'/>,
 			requireLoggedIn: false
 		}
 	);
@@ -23,7 +22,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'About',
 			href: URLS.ABOUT_URL,
-			icon: <Icon icon='info'/>
+			icon: <i className='bi bi-info-fill'/>
 		}
 	);
 
@@ -32,7 +31,7 @@ export function setupIdentityMenus() {
 		{
 			text: 'Settings',
 			roles: roles.admin,
-			icon: <Icon icon='settings'/>,
+			icon: <i className='bi bi-gear-fill'/>,
 			childMenu: DASHBOARD_UTILS_SETTINGS_MENU
 		}
 	);
@@ -42,12 +41,12 @@ export function setupIdentityMenus() {
 		{
 			text: 'Users',
 			href: URLS.USERS_URL,
-			icon: <Icon icon='users'/>
+			icon: <i className='bi bi-users'/>
 		},
 		{
 			text: 'Lockout reasons',
 			href: URLS.LOCKOUT_REASONS_URL,
-			icon: <Icon icon='lock'/>
+			icon: <i className='bi bi-lock'/>
 		}
 	);
 
@@ -56,25 +55,25 @@ export function setupIdentityMenus() {
 		{
 			text: 'Change email address',
 			href: urls.account.changeEmail.index,
-			icon: <Icon icon='email'/>,
+			icon: <i className='bi bi-email'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Change password',
 			href: urls.account.changePassword.index,
-			icon: <Icon icon='lock'/>,
+			icon: <i className='bi bi-lock'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Personal data',
 			href: urls.account.personalData,
-			icon: <Icon icon='key'/>,
+			icon: <i className='bi bi-key'/>,
 			requireLoggedIn: true
 		},
 		{
 			text: 'Delete account',
 			href: urls.account.delete,
-			icon: <Icon icon='delete'/>,
+			icon: <i className='bi bi-delete'/>,
 			requireLoggedIn: true
 		}
 	);

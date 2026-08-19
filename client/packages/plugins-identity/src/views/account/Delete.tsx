@@ -1,4 +1,4 @@
-﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
+﻿import { Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useAuthContext, useDocumentTitle, useNavigate } from '@sienar/utils';
 import { DELETE_ACCOUNT_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -44,12 +44,12 @@ function Delete() {
 						validationListProps={{ hideNonErrors: true }}
 					/>
 
-					<Button
+					<button
 						type='submit'
-						color='error'
+						className='btn btn-error'
 					>
 						Delete account forever!
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

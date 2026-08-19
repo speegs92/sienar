@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { Icon } from '@ui/components';
 
 import type { HTMLAttributes } from 'react';
 import type { ValidationResult } from '@sienar/utils';
@@ -41,7 +40,7 @@ export function ValidationListItem(props: ValidationListItemProps) {
 			{...rest}
 		>
 			<span className='validation-list__result-icon'>
-				<Icon icon={validationIcon}/>
+				<i className={`bi bi-${validationIcon}`}/>
 			</span>
 
 			<span className='validation-list__result-message'>

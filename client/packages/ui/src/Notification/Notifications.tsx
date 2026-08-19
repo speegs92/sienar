@@ -1,5 +1,4 @@
 ﻿import { useNotifications } from '@sienar/utils';
-import { Icon } from '@ui/components';
 import { Notification } from './Notification.tsx';
 import { notificationContext } from './utils.ts';
 
@@ -18,10 +17,10 @@ export interface NotificationsProps {
 
 export function Notifications(props: NotificationsProps) {
 	const icons: Record<NotificationType, ReactNode> = Object.assign({
-		success: <Icon icon='checkbox-marked-circle-outline'/>,
-		info: <Icon icon='information'/>,
-		warning: <Icon icon='alert-outline'/>,
-		error: <Icon icon='alert-circle'/>
+		success: <i className='checkbox-marked-circle-outline'/>,
+		info: <i className='information'/>,
+		warning: <i className='alert-outline'/>,
+		error: <i className='alert-circle'/>
 	}, props.icons);
 
 	const notifications = useNotifications();

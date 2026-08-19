@@ -1,4 +1,4 @@
-﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
+﻿import { Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, isEmail, matches, required, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_EMAIL_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -44,15 +44,18 @@ function Index() {
 						type='password'
 						validators={[required()]}
 					/>
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						Change email
-					</Button>
-					<Button type='reset'>
+					</button>
+					<button 
+						type='reset'
+						className='btn btn-outline-secondary'
+					>
 						Reset
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

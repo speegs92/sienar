@@ -1,5 +1,5 @@
-﻿import { Authorize } from '@sienar/utils';
-import { LinkButton } from '@sienar/ui';
+﻿import { Link } from 'react-router-dom';
+import { Authorize } from '@sienar/utils';
 import UserBadge from '@plugins-identity/components/UserBadge.tsx';
 import { urls } from '@plugins-identity/constants.ts';
 
@@ -9,21 +9,20 @@ export default function DrawerFooter(props: UserBadgeProps) {
 	return (
 		<Authorize unauthorized={(
 			<>
-				<LinkButton
+				<Link
 					className='d-block mb-2'
-					variant='outlined'
 					color='secondary'
-					href={urls.account.register.index}
+					to={urls.account.register.index}
 				>
 					Register
-				</LinkButton>
-				<LinkButton
+				</Link>
+				<Link
 					className='d-block'
 					color='primary'
-					href={urls.account.login}
+					to={urls.account.login}
 				>
 					Log in
-				</LinkButton>
+				</Link>
 			</>
 		)}>
 			<UserBadge {...props}/>

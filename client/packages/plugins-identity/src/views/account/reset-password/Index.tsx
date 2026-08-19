@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Button, Content, Form, HiddenInput, Textbox } from '@sienar/ui';
+import { Content, Form, HiddenInput, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, matches, maxLength, minLength, useDocumentTitle } from '@sienar/utils';
 import { RESET_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -62,12 +62,12 @@ function Index() {
 						]}
 					/>
 
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						Reset password
-					</Button>
+					</button>
 				</Form>
 			</Content>
 

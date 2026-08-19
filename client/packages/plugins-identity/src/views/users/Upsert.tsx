@@ -1,5 +1,5 @@
 ﻿import { useParams } from 'react-router-dom';
-import { Button, Content, Form, Textbox } from '@sienar/ui';
+import { Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, isEmail, required, tryParseInt, useDocumentTitle } from '@sienar/utils';
 import { roles } from '@plugins-identity/constants.ts';
 import { USERS_ADD_URL, USERS_EDIT_URL } from '@plugins-identity/urls.ts';
@@ -63,12 +63,12 @@ function Upsert() {
 						validators={[required()]}
 					/>
 
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						{title}
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

@@ -1,11 +1,3 @@
-﻿@use 'global';
-@use 'variables';
-@use 'css-variables';
-@use 'components';
-@use 'colors';
-@use 'display';
-@use 'flex';
-@use 'grid';
-@use 'sizing';
-@use 'spacing';
-@use 'text';
+﻿$bootstrap-icons-font-dir: "../../../node_modules/bootstrap-icons/font/fonts";
+@import 'bootstrap';
+@import "bootstrap-icons/font/bootstrap-icons";

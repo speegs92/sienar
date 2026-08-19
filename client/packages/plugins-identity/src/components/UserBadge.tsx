@@ -1,6 +1,6 @@
 ﻿import { useMemo } from 'react';
 import { aggregateLinks, createApiCall, filterLinks, useAuthContext } from '@sienar/utils';
-import { Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
+import { Dropdown, Menu, MenuDivider, MenuItem } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
 
 import type { ReactNode } from 'react';
@@ -63,7 +63,7 @@ export default function UserBadge(props: UserBadgeProps) {
 	});
 
 	return (
-		<Stack
+		<div
 			direction='horizontal'
 			align='center'
 			className='pt-2 mx-n2 px-2'
@@ -86,19 +86,19 @@ export default function UserBadge(props: UserBadgeProps) {
 			</div>
 			<Dropdown
 				buttonVariant='text'
-				icon={<Icon icon='cog'/>}
+				icon={<i className='bi bi-gear-solid'/>}
 				direction='up'
 			>
 				<Menu>
 					{settingsMenuContent}
 					<MenuItem
-						icon={<Icon icon='logout'/>}
+						icon={<i className='bi bi-box-arrow-right'/>}
 						onClick={logoutCall}
 					>
 						Log out
 					</MenuItem>
 				</Menu>
 			</Dropdown>
-		</Stack>
+		</div>
 	)
 }

@@ -1,6 +1,5 @@
 ﻿import { useState } from 'react';
 import { classNames } from '@sienar/utils';
-import { Button } from '@ui/components/Button/Button.tsx';
 import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
 
@@ -107,7 +106,7 @@ export function Dropdown(props: DropdownProps) {
 
 	return (
 		<div className={dropdownClasses} {...rest}>
-			<Button
+			<button
 				color={buttonColor ?? color}
 				variant={buttonVariant}
 				icon={icon}
@@ -117,7 +116,7 @@ export function Dropdown(props: DropdownProps) {
 				{leftIcon}
 				{label}
 				{rightIcon}
-			</Button>
+			</button>
 
 			<CloseableContext.Provider value={{
 				isOpen,

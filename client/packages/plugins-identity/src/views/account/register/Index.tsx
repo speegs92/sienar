@@ -1,5 +1,6 @@
 ﻿import { useState } from 'react';
-import { Content, Button, Form, HiddenInput, Link, Textbox, StandaloneCheckbox } from '@sienar/ui';
+import { Link } from 'react-router-dom';
+import { Content, Form, HiddenInput, Textbox, StandaloneCheckbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, inject, isEmail, matches, maxLength, minLength, required, useDocumentTitle } from '@sienar/utils';
 import { PRIVACY_POLICY_URL, TOS_URL } from '@plugins-identity/urls.ts';
 import { REGISTER_LAYOUT } from '@plugins-identity/layouts.ts';
@@ -91,16 +92,16 @@ function Index() {
 								required()
 							]}
 						>
-							I accept the {tosRoute && <Link href={tosRoute} target='_blank'>Terms of Service</Link>} {useBothAcceptLinks && 'and'} {privacyPolicyRoute && <Link href={privacyPolicyRoute} target='_blank'>Privacy Policy</Link>}
+							I accept the {tosRoute && <Link to={tosRoute} target='_blank'>Terms of Service</Link>} {useBothAcceptLinks && 'and'} {privacyPolicyRoute && <Link to={privacyPolicyRoute} target='_blank'>Privacy Policy</Link>}
 						</StandaloneCheckbox>
 					)}
 
-					<Button
+					<button
 						type='submit'
-						color='primary'
+						className='btn btn-primary'
 					>
 						Register
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

@@ -1,6 +1,5 @@
 ﻿import { useEffect, useId, useRef, useState } from 'react';
 import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
-import { Icon } from '@ui/components';
 import { FormField } from './FormField.tsx';
 import { Input } from './Input.tsx';
 
@@ -113,8 +112,8 @@ export function Textbox<T extends string | number>(props: TextboxProps<T>) {
 		computedRightIcon = rightIcon;
 	} else if (type === 'password') {
 		computedRightIcon = (
-			<Icon
-				icon={actualType === 'password' ? 'eye' : 'eye-off'}
+			<i
+				className={`bi bi-${actualType === 'password' ? 'eye' : 'eye-off'}`}
 				onClick={() => {
 					if (actualType === 'password') {
 						setActualType('text');

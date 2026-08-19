@@ -1,4 +1,4 @@
-﻿import { Link } from '@sienar/ui';
+﻿import { Link } from 'react-router-dom';
 import { useDocumentTitle } from '@sienar/utils';
 import { DELETED_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -19,7 +19,7 @@ function Deleted() {
 		<>
 			<h1>Account deleted successfully</h1>
 			<p>
-				Your account has been deleted. You can no longer log in or access your account data, but you can <Link href={urls.account.register.index}>register again</Link>.
+				Your account has been deleted. You can no longer log in or access your account data, but you can <Link to={urls.account.register.index}>register again</Link>.
 			</p>
 		</>
 	);

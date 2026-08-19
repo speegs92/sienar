@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { classNames, useModals } from '@sienar/utils';
-import { Backdrop } from '@ui/components';
 import { Modal } from './Modal.tsx';
 import { modalDefaultValuesContext } from './utils.ts';
 
@@ -49,7 +48,7 @@ export function ModalContainer(props: ModalContainerProps) {
 	return (
 		<modalDefaultValuesContext.Provider value={{ maxWidth }}>
 			<div className='modal-container'>
-				<Backdrop
+				<div
 					visible={modalVisible}
 					onClick={() => modals[0]?.close('canceled')}
 				/>

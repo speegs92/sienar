@@ -1,5 +1,4 @@
 ﻿import { classNames, modalContext } from '@sienar/utils';
-import { Card, CardHeader, Container, DismissButton } from '@ui/components';
 import { useModalDefaultValuesContext } from './utils.ts';
 
 import type { ModalInstance, CloseModalFunction } from '@sienar/utils';
@@ -28,27 +27,25 @@ export function Modal<T>(props: ModalProps<T>) {
 
 	return (
 		<modalContext.Provider value={{ close }}>
-			<Container
+			<div className='container-fluid'
 				fluid
 				maxWidth={data.configuration.maxWidth ?? defaultValues.maxWidth}
 			>
 				<div className='modal'>
-					<Card>
-						<CardHeader className={headerClasses}>
-							<h2 className='modal__title'>
-								{data.configuration.title}
-							</h2>
-							<DismissButton
-								className='ml-4'
-								color='bold'
-								onClick={() => close('canceled')}
-							/>
-						</CardHeader>
+					<div className={headerClasses}>
+						<h2 className='modal__title'>
+							{data.configuration.title}
+						</h2>
+						<button
+							className='ml-4'
+							color='bold'
+							onClick={() => close('canceled')}
+						/>
+					</div>
 
-						{data.modal}
-					</Card>
+					{data.modal}
 				</div>
-			</Container>
+			</div>
 		</modalContext.Provider>
 	)
 }

@@ -1,5 +1,5 @@
 ﻿import { CONFIRM_MODAL, provide } from '@sienar/utils';
-import { ConfirmModal } from '@ui/components';
+import { ConfirmModal } from '@ui/Modal';
 
 export function plugin() {
 	provide(CONFIRM_MODAL, ConfirmModal);

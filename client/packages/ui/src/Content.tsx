@@ -1,9 +1,7 @@
 ﻿import { classNames } from '@sienar/utils';
-import { Container } from './Container.tsx';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
-import type { ContainerProps } from './Container.tsx';
 
 export interface ContentProps extends HTMLAttributes<HTMLElement> {
 	/**
@@ -29,7 +27,7 @@ export interface ContentProps extends HTMLAttributes<HTMLElement> {
 	/**
 	 * The max width of the content
 	 */
-	maxWidth?: ContainerProps['maxWidth'];
+	maxWidth?: string;
 
 	/**
 	 * The background color of the content, if any
@@ -101,7 +99,7 @@ export function Content(props: ContentProps) {
 
 	return (
 		<Tag className={classes}>
-			<Container
+			<div
 				maxWidth={maxWidth}
 			>
 				{!insetHeader && headerContent}
@@ -110,7 +108,7 @@ export function Content(props: ContentProps) {
 					{insetHeader && headerContent}
 					{children}
 				</div>
-			</Container>
+			</div>
 		</Tag>
 	)
 }

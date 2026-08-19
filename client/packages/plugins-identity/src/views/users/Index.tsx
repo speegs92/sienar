@@ -1,4 +1,4 @@
-﻿import { Icon, Stack, Table } from '@sienar/ui';
+﻿import { Table } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 
 import type { User } from '@plugins-identity/types.ts';
@@ -82,10 +82,10 @@ function Index() {
 						displayName: 'Account locked',
 						sortable: false,
 						renderer: (user: User) => (
-							<Stack direction='horizontal' justify='center'>
-								{!!user.lockoutEnd && <Icon icon='checkbox-outline'/>}
-								{!user.lockoutEnd && <Icon icon='checkbox-blank-outline'/>}
-							</Stack>
+							<div direction='horizontal' justify='center'>
+								{!!user.lockoutEnd && <i className='bi bi-checkbox-outline'/>}
+								{!user.lockoutEnd && <i className='bi bi-checkbox-blank-outline'/>}
+							</div>
 						)
 					}
 				]}

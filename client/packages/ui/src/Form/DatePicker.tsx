@@ -1,7 +1,6 @@
 ﻿import { useId, useRef, useState } from 'react';
 import dayjs from 'dayjs';
 import { classNames, useFormFieldValidation, useRerender } from '@sienar/utils';
-import { Icon } from '@ui/components';
 import { FormField } from './FormField.tsx';
 import { Input } from './Input.tsx';
 
@@ -108,8 +107,8 @@ export function DatePicker(props: DatePickerProps) {
 			labelContent={children ?? displayName}
 			leftIcon={leftIcon}
 			rightIcon={(
-				<Icon
-					icon='calendar'
+				<i
+					className='bi bi-calendar'
 					onClick={() => input.current!.showPicker()}
 					style={{cursor: 'pointer'}}
 					role='button'

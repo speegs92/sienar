@@ -1,4 +1,4 @@
-﻿import { Button, Content, Form, Textbox } from '@sienar/ui';
+﻿import { Content, Form, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, containsLower, containsNumber, containsSpecialCharacter, containsUpper, matches, maxLength, minLength, required, useDocumentTitle } from '@sienar/utils';
 import { CHANGE_PASSWORD_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -49,11 +49,12 @@ function Index() {
 						validators={[required()]}
 					/>
 
-					<Button
-						color='primary'
+					<button
+						type='submit'
+						className='btn btn-primary'
 					>
 						Change password
-					</Button>
+					</button>
 				</Form>
 			</Content>
 		</AuthorizeRoute>

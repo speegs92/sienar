@@ -1,5 +1,4 @@
 ﻿import { useContext, useEffect, useState } from 'react';
-import { Icon } from '@ui/components';
 import { tableContext as tc } from './shared.ts';
 
 import type { TableColumnDefinition } from './shared.ts';
@@ -60,7 +59,7 @@ export function TableHead(props: TableHeadProps) {
 		>
 			{displayName}
 			{sortable && showSortIcon && (
-				<Icon icon={arrowPointsDown ? 'chevron-down' : 'chevron-up'}/>
+				<i className={`bi bi-${arrowPointsDown ? 'chevron-down' : 'chevron-up'}`}/>
 			)}
 		</th>
 	);

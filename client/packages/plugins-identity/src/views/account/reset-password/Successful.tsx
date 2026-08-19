@@ -1,4 +1,4 @@
-﻿import { Link } from '@sienar/ui';
+﻿import { Link } from 'react-router-dom';
 import { useDocumentTitle } from '@sienar/utils';
 import { RESET_PASSWORD_SUCCESSFUL_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -19,7 +19,7 @@ function Successful() {
 		<>
 			<h1>Password reset successfully</h1>
 			<p>
-				You have reset your password successfully! You can now <Link href={urls.account.login}>log in</Link>.
+				You have reset your password successfully! You can now <Link to={urls.account.login}>log in</Link>.
 			</p>
 		</>
 	)

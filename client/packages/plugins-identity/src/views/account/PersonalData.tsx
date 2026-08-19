@@ -1,4 +1,5 @@
-﻿import { Content, LinkButton } from '@sienar/ui';
+﻿import { Link } from 'react-router-dom';
+import { Content } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 import { PERSONAL_DATA_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -22,12 +23,12 @@ function PersonalData() {
 					By creating an account, you give us personal data that we store. You have the right to know what data we have. You also have the right to request that we delete your personal data.
 				</p>
 
-				<LinkButton
-					href='/api/account/personal-data'
+				<Link
+					to='/api/account/personal-data'
 					target='_blank'
 				>
 					Download personal data
-				</LinkButton>
+				</Link>
 			</Content>
 		</AuthorizeRoute>
 	);
