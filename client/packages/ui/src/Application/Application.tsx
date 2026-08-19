@@ -2,7 +2,9 @@
 import { aggregateLinks, classNames, DRAWER_HEADER_PARTIAL, DRAWER_FOOTER_PARTIAL, filterLinks, inject, useAuthContext, useActiveMenu } from '@sienar/utils';
 import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
-import { Button, Container, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
+import { Menu, MenuItem } from '@ui/Menu';
+import { ModalContainer } from '@ui/Modal';
+import { Notifications } from '@ui/Notification';
 import { Appbar } from './Appbar.tsx';
 import { Sidebar } from './Sidebar.tsx';
 import { MainContent } from './MainContent.tsx';
@@ -95,22 +97,21 @@ export function Application(props: ApplicationProps) {
 
 				<div className='app__window'>
 					<Appbar {...appbarProps}>
-						<Button
-							className='d-lg-none'
-							color={color}
-							variant='text'
-							icon={<Icon icon='menu'/>}
+						<button
+							className='btn btn-outline-primary d-lg-none'
 							onClick={() => setOpen(!open)}
-						/>
+						>
+							<i className='bi bi-list'/>
+						</button>
 					</Appbar>
 
 					<MainContent
 						sidebarOpen={open}
 						className='flex-grow-1'
 					>
-						<Container className='p-4'>
+						<div className='container p-r'>
 							{children}
-						</Container>
+						</div>
 					</MainContent>
 				</div>
 			</Tag>
