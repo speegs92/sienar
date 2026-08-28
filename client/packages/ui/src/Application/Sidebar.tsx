@@ -53,9 +53,9 @@ export function Sidebar(props: SidebarProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'app__sidebar'),
+		'offcanvas-start offcanvas-lg',
 		{
-			'app__sidebar--open': open
+			'show': open
 		}
 	);
 
@@ -65,10 +65,10 @@ export function Sidebar(props: SidebarProps) {
 			close: () => setOpen?.(false)
 		}}>
 			<ThemeContext.Provider value={{ color }}>
-				<Backdrop
-					visible={open}
-					onClick={() => setOpen?.(false)}
-				/>
+				{/*<Backdrop*/}
+				{/*	// visible={open}*/}
+				{/*	onClick={() => setOpen?.(false)}*/}
+				{/*/>*/}
 				<Tag className={classes} {...rest} />
 			</ThemeContext.Provider>
 		</CloseableContext.Provider>

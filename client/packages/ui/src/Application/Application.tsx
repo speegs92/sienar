@@ -59,15 +59,19 @@ export function Application(props: ApplicationProps) {
 
 	const appClasses = classNames(
 		className,
-		'd-flex flex-row'
+		'd-flex flex-row min-vh-100'
 	);
 
 	return (
 		<>
 			<Tag className={appClasses} {...rest}>
-				<Sidebar
-					open={open}
-					setOpen={setOpen}
+				<div
+					className={classNames(
+						'offcanvas-start offcanvas-lg',
+						{
+							'show': open
+						}
+					)}
 					{...sidebarProps}
 				>
 					<div className='flex-grow-1'>
@@ -86,7 +90,7 @@ export function Application(props: ApplicationProps) {
 					</div>
 
 					{inject(DRAWER_FOOTER_PARTIAL, true)}
-				</Sidebar>
+				</div>
 
 				<div className='app__window'>
 					<Appbar {...appbarProps}>

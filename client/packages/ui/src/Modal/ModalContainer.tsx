@@ -49,7 +49,7 @@ export function ModalContainer(props: ModalContainerProps) {
 		<modalDefaultValuesContext.Provider value={{ maxWidth }}>
 			<div className='modal-container'>
 				<div
-					visible={modalVisible}
+					// visible={modalVisible}
 					onClick={() => modals[0]?.close('canceled')}
 				/>
 
