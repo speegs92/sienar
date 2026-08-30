@@ -8,44 +8,47 @@ namespace Sienar.Plugins;
 public class SienarAntiforgeryPlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder)
+	public void ConfigureSienar(SienarApplicationBuilder builder)
 	{
 		builder.StartupServices.AddConfigurer<AntiforgeryConfigurer, AntiforgeryOptions>();
-		builder.Services.AddScoped<ICsrfTokenRefresher, CsrfTokenRefresher>();
 	}
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(
-		IHostApplicationBuilder builder,
+		IBuilderAdapter adapter,
 		IServiceProvider sp)
 	{
-		builder.Services.AddAntiforgery(o =>
-		{
-			var configurers = sp.GetServices<IConfigurer<AntiforgeryOptions>>();
-
-			foreach (var configurer in configurers)
+		adapter.Services
+			.AddScoped<ICsrfTokenRefresher, CsrfTokenRefresher>()
+			.AddAntiforgery(o =>
 			{
-				configurer.Configure(o);
-			}
-		});
+				var configurers = sp.GetServices<IConfigurer<AntiforgeryOptions>>();
+
+				foreach (var configurer in configurers)
+				{
+					configurer.Configure(o);
+				}
+			});
 	}
 
 	/// <inheritdoc />
 	public void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp)
 	{
-		if (app is not WebApplication webapp)
+		if (adapter.Host is not WebApplication webapp)
 		{
 			throw new InvalidOperationException($"The {nameof(SienarAntiforgeryPlugin)} only works with ASP.NET web applications.");
 		}
 
-		app.UseMiddleware(
-			app.BeforeRouting,
+		var middlewareProvider = adapter.Services.GetRequiredService<MiddlewareProvider>();
+
+		middlewareProvider.AddWithPriority(
+			MvcMiddlewarePriorities.BeforeRouting,
 			() => webapp.UseMiddleware<AntiforgeryCookieMiddleware>());
 
-		app.UseMiddleware(
-			app.WithStaticAssets,
+		middlewareProvider.AddWithPriority(
+			MvcMiddlewarePriorities.WithStaticAssets,
 			() => webapp.UseAntiforgery());
 	}
 }

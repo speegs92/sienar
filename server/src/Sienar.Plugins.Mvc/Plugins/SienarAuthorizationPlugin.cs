@@ -8,7 +8,7 @@ namespace Sienar.Plugins;
 public class SienarAuthorizationPlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder)
+	public void ConfigureSienar(SienarApplicationBuilder builder)
 	{
 		// Authorization doesn't work without authentication
 		builder.AddPlugin<SienarAuthenticationPlugin>();
@@ -16,10 +16,10 @@ public class SienarAuthorizationPlugin : IPlugin
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(
-		IHostApplicationBuilder builder,
+		IBuilderAdapter adapter,
 		IServiceProvider sp)
 	{
-		builder.Services.AddAuthorization(o =>
+		adapter.Services.AddAuthorization(o =>
 		{
 			var configurers = sp.GetServices<IConfigurer<AuthorizationOptions>>();
 
@@ -32,16 +32,18 @@ public class SienarAuthorizationPlugin : IPlugin
 
 	/// <inheritdoc />
 	public void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp)
 	{
-		if (app is not WebApplication webapp)
+		if (adapter.Host is not WebApplication webapp)
 		{
 			throw new InvalidOperationException($"The {nameof(SienarAuthorizationPlugin)} only works with ASP.NET web applications.");
 		}
 
-		app.UseMiddleware(
-			app.WithAuthorization,
+		var middlewareProvider = adapter.Services.GetRequiredService<MiddlewareProvider>();
+
+		middlewareProvider.AddWithPriority(
+			MvcMiddlewarePriorities.WithAuthorization,
 			() => webapp.UseAuthorization());
 	}
 }

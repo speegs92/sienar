@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace Sienar.Plugins;
+﻿namespace Sienar.Plugins;
 
 /// <summary>
 /// Represents a distributable plugin for Sienar applications
@@ -8,32 +6,26 @@ namespace Sienar.Plugins;
 public interface IPlugin
 {
 	/// <summary>
-	/// Configures the application builder
+	/// Configures the Sienar application
 	/// </summary>
-	/// <remarks>
-	/// This is the correct place to add dependent plugins and startup services, as the startup DI container hasn't been built yet. By the time the <see cref="ConfigureBuilder(IHostApplicationBuilder, IServiceProvider)"/> method is called, the startup DI container has been built and plugins are being actively enumerated, so further changes to the startup services or plugin hierarchy are no longer possible.
-	/// </remarks>
-	/// <param name="builder">The host application builder</param>
-	void ConfigureBuilder(IHostApplicationBuilder builder);
+	/// <param name="builder">The Sienar application builder</param>
+	void ConfigureSienar(SienarApplicationBuilder builder);
 
 	/// <summary>
-	/// Configures the application builder after the startup service provider has been built
+	/// Configures the underlying application builder
 	/// </summary>
-	/// <remarks>
-	/// This is the correct place to configure runtime services which rely on <see cref="IConfigurer{TOptions}"/> implementations registered in the startup DI container. At this point, it is too late to add dependent plugins or configure startup services because the startup DI container has been built and plugins are being actively enumerated.
-	/// </remarks>
-	/// <param name="builder">The host application builder</param>
+	/// <param name="adapter">The host application builder</param>
 	/// <param name="sp">The startup service provider</param>
 	void ConfigureBuilder(
-		IHostApplicationBuilder builder,
+		IBuilderAdapter adapter,
 		IServiceProvider sp);
 
 	/// <summary>
 	/// Configures the application
 	/// </summary>
-	/// <param name="app">The host application</param>
+	/// <param name="adapter">The host application adapter</param>
 	/// <param name="sp">The startup service provider</param>
 	void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp);
 }

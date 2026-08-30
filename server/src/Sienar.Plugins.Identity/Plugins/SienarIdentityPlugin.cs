@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Hosting;
-
-namespace Sienar.Plugins;
+﻿namespace Sienar.Plugins;
 
 /// <summary>
 /// Configures the Sienar application with user login and account management features
@@ -10,24 +8,26 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 	where TUser : class, ISienarIdentityUser<TUser>, new()
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder)
+	public void ConfigureSienar(SienarApplicationBuilder builder)
 	{
 		builder.AddPlugin<SienarMvcPlugin>();
 
-		builder.Services
-			.AddSienarEf()
-			.AddSienarIdentity<TUser>(builder.Configuration);
-
-		builder.StartupServices.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
+		builder.StartupServices
+			.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
 	}
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(
-		IHostApplicationBuilder builder,
-		IServiceProvider sp) {}
+		IBuilderAdapter adapter,
+		IServiceProvider sp)
+	{
+		adapter.Services
+			.AddSienarEf()
+			.AddSienarIdentity<TUser>(adapter.Configuration);
+	}
 
 	/// <inheritdoc />
 	public void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp) {}
 }

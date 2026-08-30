@@ -6,25 +6,27 @@
 public class SienarRoutingPlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder) {}
+	public void ConfigureSienar(SienarApplicationBuilder builder) {}
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(
-		IHostApplicationBuilder builder,
+		IBuilderAdapter adapter,
 		IServiceProvider sp) {}
 
 	/// <inheritdoc />
 	public void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp)
 	{
-		if (app is not WebApplication webapp)
+		if (adapter.Host is not WebApplication webapp)
 		{
 			throw new InvalidOperationException($"The {nameof(SienarRoutingPlugin)} only works with ASP.NET web applications.");
 		}
 
-		app.UseMiddleware(
-			app.WithRouting,
+		var middlewareProvider = adapter.Services.GetRequiredService<MiddlewareProvider>();
+
+		middlewareProvider.AddWithPriority(
+			MvcMiddlewarePriorities.WithRouting,
 			() => webapp.UseRouting());
 	}
 }

@@ -8,9 +8,10 @@ namespace Sienar.Plugins;
 public class SienarMvcPlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureBuilder(IHostApplicationBuilder builder)
+	public void ConfigureSienar(SienarApplicationBuilder builder)
 	{
 		builder
+			.SetApplicationAdapter(new WebAdapter())
 			.AddPlugin<SienarAuthorizationPlugin>()
 			.AddPlugin<SienarRoutingPlugin>()
 			.AddPlugin<SienarStaticAssetsPlugin>()
@@ -19,18 +20,18 @@ public class SienarMvcPlugin : IPlugin
 		builder.StartupServices
 			.AddConfigurer<MvcBuilderConfigurer, IMvcBuilder>()
 			.AddConfigurer<MvcConfigurer, MvcOptions>();
-
-		builder.Services
-			.AddSienarCore()
-			.AddSienarMvc();
 	}
 
 	/// <inheritdoc />
 	public void ConfigureBuilder(
-		IHostApplicationBuilder builder,
+		IBuilderAdapter adapter,
 		IServiceProvider sp)
 	{
-		var mvcBuilder = builder.Services.AddMvc(o =>
+		adapter.Services
+			.AddSienarCore()
+			.AddSienarMvc();
+
+		var mvcBuilder = adapter.Services.AddMvc(o =>
 		{
 			var configurers = sp.GetServices<IConfigurer<MvcOptions>>();
 
@@ -40,7 +41,7 @@ public class SienarMvcPlugin : IPlugin
 			}
 		});
 
-		builder.Services.Configure<RazorPagesOptions>(o =>
+		adapter.Services.Configure<RazorPagesOptions>(o =>
 		{
 			var configurers = sp.GetServices<IConfigurer<RazorPagesOptions>>();
 
@@ -60,16 +61,18 @@ public class SienarMvcPlugin : IPlugin
 
 	/// <inheritdoc />
 	public void ConfigureApplication(
-		IHost app,
+		HostAdapter adapter,
 		IServiceProvider sp)
 	{
-		if (app is not WebApplication webapp)
+		if (adapter.Host is not WebApplication webapp)
 		{
 			throw new InvalidOperationException($"The {nameof(SienarMvcPlugin)} only works with ASP.NET web applications.");
 		}
 
-		app.UseMiddleware(
-			app.WithControllers,
+		var middlewareProvider = adapter.Services.GetRequiredService<MiddlewareProvider>();
+
+		middlewareProvider.AddWithPriority(
+			MvcMiddlewarePriorities.WithControllers,
 			() =>
 			{
 				ConfigureMvc(webapp, sp);
