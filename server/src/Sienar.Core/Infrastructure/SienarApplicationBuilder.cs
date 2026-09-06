@@ -8,7 +8,6 @@ public class SienarApplicationBuilder
 	private IBuilderAdapter? _adapter;
 	private readonly string[] _startupArgs;
 	private readonly HashSet<Type> _pluginTypes = [];
-	private readonly List<IPlugin> _plugins = [];
 
 	/// <summary>
 	/// The Sienar application's startup services
@@ -58,8 +57,7 @@ public class SienarApplicationBuilder
 
 		if (_pluginTypes.Add(pluginType))
 		{
-			plugin.ConfigureSienar(this);
-			_plugins.Add(plugin);
+			plugin.Configure(this);
 		}
 
 		return this;
@@ -110,16 +108,18 @@ public class SienarApplicationBuilder
 		_adapter.Services
 			.AddSingleton(sp.GetRequiredService<MiddlewareProvider>());
 
-		foreach (var plugin in _plugins)
+		var builderConfigurers = sp.GetServices<IConfigurer<IBuilderAdapter>>();
+		foreach (var configurer in builderConfigurers)
 		{
-			plugin.ConfigureBuilder(_adapter, sp);
+			configurer.Configure(_adapter);
 		}
 
 		var appAdapter = _adapter.Build(sp);
 
-		foreach (var plugin in _plugins)
+		var hostConfigurers = sp.GetServices<IConfigurer<HostAdapter>>();
+		foreach (var configurer in hostConfigurers)
 		{
-			plugin.ConfigureApplication(appAdapter, sp);
+			configurer.Configure(appAdapter);
 		}
 
 		var middlewares = appAdapter.Services.GetRequiredService<MiddlewareProvider>();
