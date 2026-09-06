@@ -22,7 +22,6 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 		IServiceProvider sp)
 	{
 		adapter.Services
-			.AddSienarEf()
 			.AddSienarIdentity<TUser>(adapter.Configuration);
 	}
 

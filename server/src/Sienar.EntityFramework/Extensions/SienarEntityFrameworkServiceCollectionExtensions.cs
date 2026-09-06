@@ -7,32 +7,9 @@ namespace Sienar.Extensions;
 /// </summary>
 public static class SienarEntityFrameworkServiceCollectionExtensions
 {
-	private static bool _initialized;
-
 	/// <param name="self">The service collection</param>
 	extension(IServiceCollection self)
 	{
-		/// <summary>
-		/// Adds the services necessary to use EntityFramework in Sienar apps
-		/// </summary>
-		/// <returns>the service collection</returns>
-		public IServiceCollection AddSienarEf()
-		{
-			if (_initialized)
-			{
-				return self;
-			}
-
-			_initialized = true;
-
-			return self
-				.AddScoped(typeof(IEntityReadActor<>), typeof(EfEntityReadActor<>))
-				.AddScoped(typeof(IEntityReadAllActor<>), typeof(EfEntityReadAllActor<>))
-				.AddScoped(typeof(IEntityCreateActor<>), typeof(EfEntityCreateActor<>))
-				.AddScoped(typeof(IEntityUpdateActor<>), typeof(EfEntityUpdateActor<>))
-				.AddScoped(typeof(IEntityDeleteActor<>), typeof(EfEntityDeleteActor<>));
-		}
-
 		/// <summary>
 		/// Registers a <see cref="DbContext"/> as an <see cref="IDbContext"/>
 		/// </summary>
@@ -97,7 +74,12 @@ public static class SienarEntityFrameworkServiceCollectionExtensions
 				.AddBeforeCreateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
 				.AddBeforeUpdateActionHook<ConcurrencyStampUpdater<TEntity>, TEntity>()
 				.AddScoped<IStateValidator<TEntity>, ConcurrencyStampValidator<TEntity>>()
-				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>();
+				.AddScoped<IEfFilterProcessor<TEntity>, TFilterProcessor>()
+				.AddScoped<IEntityReadActor<TEntity>, EfEntityReadActor<TEntity>>()
+				.AddScoped<IEntityReadAllActor<TEntity>, EfEntityReadAllActor<TEntity>>()
+				.AddScoped<IEntityCreateActor<TEntity>, EfEntityCreateActor<TEntity>>()
+				.AddScoped<IEntityUpdateActor<TEntity>, EfEntityUpdateActor<TEntity>>()
+				.AddScoped<IEntityDeleteActor<TEntity>, EfEntityDeleteActor<TEntity>>();
 
 			return self;
 		}
