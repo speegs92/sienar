@@ -1,14 +1,14 @@
-﻿namespace Sienar.Configuration;
+﻿namespace Sienar.Configuration.Mvc;
 
 /// <summary>
 /// Configures ASP.NET MVC to include an <see cref="AutoValidateAntiforgeryTokenAttribute"/>
 /// </summary>
-public class MvcConfigurer : IConfigurer<MvcOptions>
+public class ServiceConfigurer : IConfigurer<MvcOptions>
 {
 	/// <inheritdoc />
-	public void Configure(MvcOptions options)
+	public void Configure(MvcOptions target)
 	{
-		options.Filters.Add(
+		target.Filters.Add(
 			new AutoValidateAntiforgeryTokenAttribute());
 	}
 }

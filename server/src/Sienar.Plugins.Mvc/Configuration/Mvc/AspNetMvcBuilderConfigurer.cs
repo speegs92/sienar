@@ -2,17 +2,17 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Sienar.Configuration;
+namespace Sienar.Configuration.Mvc;
 
 /// <summary>
 /// Configures the <see cref="IMvcBuilder"/>
 /// </summary>
-public class MvcBuilderConfigurer : IConfigurer<IMvcBuilder>
+public class AspNetMvcBuilderConfigurer : IConfigurer<IMvcBuilder>
 {
 	/// <inheritdoc />
-	public void Configure(IMvcBuilder builder)
+	public void Configure(IMvcBuilder target)
 	{
-		builder
+		target
 			.ConfigureApiBehaviorOptions(o =>
 			{
 				o.InvalidModelStateResponseFactory = context =>
