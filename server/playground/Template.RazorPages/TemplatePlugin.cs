@@ -1,24 +1,14 @@
 ﻿using Sienar.Extensions;
 using Sienar.Plugins;
-using Template.Data;
+using Template.RazorPages.Configuration;
 
 namespace Template.RazorPages;
 
 public class TemplatePlugin : IPlugin
 {
 	/// <inheritdoc />
-	public void ConfigureSienar(SienarApplicationBuilder builder) {}
-
-	/// <inheritdoc />
-	public void ConfigureBuilder(
-		IBuilderAdapter adapter,
-		IServiceProvider sp)
+	public void Configure(SienarApplicationBuilder builder)
 	{
-		adapter.Services.AddSienarDbContext<AppDbContext>(o => o.UseAppDb());
+		builder.StartupServices.AddBuilderConfigurer<BuilderConfigurer>();
 	}
-
-	/// <inheritdoc />
-	public void ConfigureApplication(
-		HostAdapter adapter,
-		IServiceProvider sp) {}
 }
