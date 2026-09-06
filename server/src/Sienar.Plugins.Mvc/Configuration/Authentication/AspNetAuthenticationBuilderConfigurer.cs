@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
-namespace Sienar.Configuration;
+namespace Sienar.Configuration.Authentication;
 
 /// <summary>
 /// Configures the authentication cookie
 /// </summary>
-public class AuthenticationBuilderConfigurer
+public class AspNetAuthenticationBuilderConfigurer
 	: IConfigurer<AuthenticationBuilder>
 {
 	private readonly IEnumerable<IConfigurer<CookieAuthenticationOptions>> _configurers;
@@ -15,14 +15,14 @@ public class AuthenticationBuilderConfigurer
 	/// Creates a new instance of <c>AuthenticationBuilderConfigurer</c>
 	/// </summary>
 	/// <param name="configurers">The cookie authentication options configurers</param>
-	public AuthenticationBuilderConfigurer(
+	public AspNetAuthenticationBuilderConfigurer(
 		IEnumerable<IConfigurer<CookieAuthenticationOptions>> configurers)
 		=> _configurers = configurers;
 
 	/// <inheritdoc />
-	public void Configure(AuthenticationBuilder options)
+	public void Configure(AuthenticationBuilder target)
 	{
-		options.AddCookie(
+		target.AddCookie(
 			CookieAuthenticationDefaults.AuthenticationScheme,
 			o =>
 			{
