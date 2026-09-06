@@ -30,12 +30,12 @@
 		"baseUrl": ".",
 		"paths": {
 			"@plugins-identity/*": ["./src/*"],
-			"@sienar/ui": ["../ui/src/index.ts"],
-			"@ui/*": ["../ui/src/*"],
-			"@sienar/utils": ["../utils/src/index.ts"],
-			"@utils/*": ["../utils/src/*"],
-			"@sienar/plugins-core": ["../plugins-core/src/index.ts"],
-			"@plugins-core/*": ["../plugins-core/src/*"]
+			"@sienar/ui": ["../../Sienar.Plugins.Mvc/wwwsrc/ui/src/index.ts"],
+			"@ui/*": ["../../Sienar.Plugins.Mvc/wwsrc/ui/src/*"],
+			"@sienar/utils": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/index.ts"],
+			"@utils/*": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/*"],
+			"@sienar/plugins-core": ["../../Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/index.ts"],
+			"@plugins-core/*": ["../../Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/*"]
 		}
 	},
 	"include": [

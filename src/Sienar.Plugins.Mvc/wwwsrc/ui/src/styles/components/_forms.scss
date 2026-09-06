@@ -1,5 +1,5 @@
 ﻿@use 'sass:map';
-@use '@ui/styles/variables';
+@use '../variables';
 
 form > .button {
 	margin-right: var(--spacer-4);

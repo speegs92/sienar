@@ -1,7 +1,5 @@
 {
-	"name": "playground",
 	"private": true,
-	"version": "0.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite --host",
@@ -26,9 +24,9 @@
 		"vite": "^7.2.4"
 	},
 	"workspaces": [
-		"packages/utils",
-		"packages/ui",
-		"packages/plugins-core",
-		"packages/plugins-identity"
+		"src/Sienar.Plugins.Mvc/wwwsrc/utils",
+		"src/Sienar.Plugins.Mvc/wwwsrc/ui",
+		"src/Sienar.Plugins.Mvc/wwwsrc/plugins-core",
+		"src/Sienar.Plugins.Identity/wwwsrc"
 	]
 }

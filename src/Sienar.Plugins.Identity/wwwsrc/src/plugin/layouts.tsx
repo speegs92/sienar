@@ -1,6 +1,6 @@
 import { provide } from '@sienar/utils';
 import { MAIN_LAYOUT } from '@sienar/plugins-core';
-import * as LAYOUTS from '@plugins-identity/layouts.ts';
+import * as LAYOUTS from '../layouts.ts';
 
 export function setupIdentityLayouts() {
 	provide(LAYOUTS.USERS_LAYOUT, MAIN_LAYOUT, false);

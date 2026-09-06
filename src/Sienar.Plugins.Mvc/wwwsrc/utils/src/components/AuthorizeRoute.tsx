@@ -1,8 +1,8 @@
-﻿import { AUTH_MISSING_ROLES_PARTIAL, AUTH_MUST_BE_LOGGED_IN_PARTIAL, AUTH_MUST_BE_LOGGED_OUT_PARTIAL, useAuthorized, useAuthContext } from '@utils/auth.ts';
-import { inject } from '@utils/di.ts';
+﻿import { AUTH_MISSING_ROLES_PARTIAL, AUTH_MUST_BE_LOGGED_IN_PARTIAL, AUTH_MUST_BE_LOGGED_OUT_PARTIAL, useAuthorized, useAuthContext } from '../auth.ts';
+import { inject } from '../di.ts';
 
-import type { AuthorizeProps } from '@utils/components/Authorize.tsx';
-import type { InjectionKey } from '@utils/di.ts';
+import type { AuthorizeProps } from './Authorize.tsx';
+import type { InjectionKey } from '../di.ts';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 export type AuthorizeRouteProps = Pick<AuthorizeProps, 'any'|'roles'> & {

@@ -1,6 +1,6 @@
 ﻿@use 'sass:map';
-@use '@ui/styles/variables';
-@use '@ui/styles/functions';
+@use '../variables';
+@use '../functions';
 
 .card {
 	--card-border-width: 1px;

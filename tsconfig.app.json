@@ -29,18 +29,17 @@
 		"noUncheckedSideEffectImports": true,
 		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./src/*"],
-			"@sienar/utils": ["./packages/utils/src/index.ts"],
-			"@utils/*": ["./packages/utils/src/*"],
-			"@sienar/ui": ["./packages/ui/src/index.ts"],
-			"@ui/*": ["./packages/ui/src/*"],
-			"@sienar/plugins-core": ["./packages/plugins-core/src/index.ts"],
-			"@plugins-core/*": ["./packages/plugins-core/src/*"],
-			"@sienar/plugins-identity": ["./packages/plugins-identity/src/index.ts"],
-			"@plugins-identity/*": ["./packages/plugins-identity/src/*"]
+			"@sienar/utils": ["./src/Sienar.Plugins.Mvc/wwwsrc/utils/src/index.ts"],
+			"@utils/*": ["./src/Sienar.Plugins.Mvc/wwwsrc/utils/src/*"],
+			"@sienar/ui": ["./src/Sienar.Plugins.Mvc/wwwsrc/ui/src/index.ts"],
+			"@ui/*": ["./src/Sienar.Plugins.Mvc/wwwsrc/ui/src/*"],
+			"@sienar/plugins-core": ["./src/Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/index.ts"],
+			"@plugins-core/*": ["./src/Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/*"],
+			"@sienar/plugins-identity": ["./src/Sienar.Plugins.Identity/wwwsrc/index.ts"],
+			"@plugins-identity/*": ["./src/Sienar.Plugins.Identity/wwwsrc/*"]
 		}
 	},
 	"include": [
-		"src"
+		"./playground/Template.RazorPages/wwwsrc"
 	]
 }

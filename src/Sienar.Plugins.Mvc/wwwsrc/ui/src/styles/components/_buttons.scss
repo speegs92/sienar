@@ -1,6 +1,6 @@
 ﻿@use 'sass:map';
-@use '@ui/styles/variables';
-@use '@ui/styles/functions';
+@use '../variables';
+@use '../functions';
 
 .button {
 	--button-background-color: var(--color-bold);

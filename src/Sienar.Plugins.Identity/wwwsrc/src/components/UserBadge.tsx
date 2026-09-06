@@ -1,7 +1,7 @@
 ﻿import { useMemo } from 'react';
 import { aggregateLinks, createApiCall, filterLinks, useAuthContext } from '@sienar/utils';
 import { Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
-import { USER_SETTINGS_MENU } from '@plugins-identity/menus.ts';
+import { USER_SETTINGS_MENU } from '../menus.ts';
 
 import type { ReactNode } from 'react';
 import type { InjectionKey, MenuLink, LinkDictionary } from '@sienar/utils';

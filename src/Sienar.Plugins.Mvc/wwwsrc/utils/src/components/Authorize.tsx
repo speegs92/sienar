@@ -1,4 +1,4 @@
-﻿import { useAuthorized } from '@utils/auth.ts';
+﻿import { useAuthorized } from '../auth.ts';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 /**

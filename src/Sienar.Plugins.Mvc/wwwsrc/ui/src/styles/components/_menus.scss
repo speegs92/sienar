@@ -1,6 +1,6 @@
 @use 'sass:map';
-@use '@ui/styles/mixins';
-@use '@ui/styles/variables';
+@use '../mixins';
+@use '../variables';
 
 .menu {
 	--menu-background-color: var(--color-soft);
