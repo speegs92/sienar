@@ -50,6 +50,24 @@ public static class SienarCoreServiceCollectionExtensions
 			=> self.AddScoped<IConfigurer<TOptions>, TConfigurer>();
 
 		/// <summary>
+		/// Adds an <see cref="IBuilderAdapter"/> configurer to the service collection
+		/// </summary>
+		/// <typeparam name="TConfigurer">The type of the builder adapter configurer</typeparam>
+		/// <returns></returns>
+		public IServiceCollection AddBuilderConfigurer<TConfigurer>()
+			where TConfigurer : class, IConfigurer<IBuilderAdapter>
+			=> self.AddConfigurer<TConfigurer, IBuilderAdapter>();
+
+		/// <summary>
+		/// Adds a <see cref="HostAdapter"/> configurer to the service collection
+		/// </summary>
+		/// <typeparam name="TConfigurer">The type of the host configurer</typeparam>
+		/// <returns></returns>
+		public IServiceCollection AddHostConfigurer<TConfigurer>()
+			where TConfigurer : class, IConfigurer<HostAdapter>
+			=> self.AddConfigurer<TConfigurer, HostAdapter>();
+
+		/// <summary>
 		/// Adds an access validator for the given <c>TRequest</c>
 		/// </summary>
 		/// <typeparam name="TValidator">the validator implementation</typeparam>
