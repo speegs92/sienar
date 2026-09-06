@@ -8,25 +8,12 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 	where TUser : class, ISienarIdentityUser<TUser>, new()
 {
 	/// <inheritdoc />
-	public void ConfigureSienar(SienarApplicationBuilder builder)
+	public void Configure(SienarApplicationBuilder builder)
 	{
 		builder.AddPlugin<SienarMvcPlugin>();
 
 		builder.StartupServices
+			.AddBuilderConfigurer<SienarIdentityBuilderConfigurer<TUser>>()
 			.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
 	}
-
-	/// <inheritdoc />
-	public void ConfigureBuilder(
-		IBuilderAdapter adapter,
-		IServiceProvider sp)
-	{
-		adapter.Services
-			.AddSienarIdentity<TUser>(adapter.Configuration);
-	}
-
-	/// <inheritdoc />
-	public void ConfigureApplication(
-		HostAdapter adapter,
-		IServiceProvider sp) {}
 }

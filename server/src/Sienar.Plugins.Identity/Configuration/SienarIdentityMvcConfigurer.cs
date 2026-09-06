@@ -1,11 +1,15 @@
 ﻿namespace Sienar.Configuration;
 
+/// <summary>
+/// Configures the MVC builder to use Sienar controllers
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public class SienarIdentityMvcConfigurer<T> : IConfigurer<IMvcBuilder>
 	where T : class, ISienarIdentityUser<T>, new()
 {
-	public void Configure(IMvcBuilder builder)
+	public void Configure(IMvcBuilder target)
 	{
-		builder.ConfigureApplicationPartManager(o =>
+		target.ConfigureApplicationPartManager(o =>
 		{
 			o.FeatureProviders.Add(new SienarIdentityControllerFeatureProvider<T>());
 		});
