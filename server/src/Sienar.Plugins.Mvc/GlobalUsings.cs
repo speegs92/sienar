@@ -13,4 +13,5 @@ global using Sienar.Data;
 global using Sienar.Email;
 global using Sienar.Extensions;
 global using Sienar.Infrastructure;
+global using Sienar.Plugins;
 global using Sienar.Security;
