@@ -30,12 +30,12 @@
 		"baseUrl": ".",
 		"paths": {
 			"@plugins-identity/*": ["./src/*"],
-			"@sienar/ui": ["../../Sienar.Plugins.Mvc/wwwsrc/ui/src/index.ts"],
-			"@ui/*": ["../../Sienar.Plugins.Mvc/wwwsrc/ui/src/*"],
-			"@sienar/utils": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/index.ts"],
-			"@utils/*": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/*"],
-			"@sienar/plugins-core": ["../../Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/index.ts"],
-			"@plugins-core/*": ["../../Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/*"]
+			"@sienar/ui": ["../../Sienar.React/wwwsrc/ui/src/index.ts"],
+			"@ui/*": ["../../Sienar.React/wwwsrc/ui/src/*"],
+			"@sienar/utils": ["../../Sienar.React/wwwsrc/utils/src/index.ts"],
+			"@utils/*": ["../../Sienar.React/wwwsrc/utils/src/*"],
+			"@sienar/plugins-core": ["../../Sienar.React/wwwsrc/plugins-core/src/index.ts"],
+			"@plugins-core/*": ["../../Sienar.React/wwwsrc/plugins-core/src/*"]
 		}
 	},
 	"include": [

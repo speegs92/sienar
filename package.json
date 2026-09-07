@@ -24,9 +24,9 @@
 		"vite": "^7.2.4"
 	},
 	"workspaces": [
-		"src/Sienar.Plugins.Mvc/wwwsrc/utils",
-		"src/Sienar.Plugins.Mvc/wwwsrc/ui",
-		"src/Sienar.Plugins.Mvc/wwwsrc/plugins-core",
+		"src/Sienar.React/wwwsrc/utils",
+		"src/Sienar.React/wwwsrc/ui",
+		"src/Sienar.React/wwwsrc/plugins-core",
 		"src/Sienar.Plugins.Identity/wwwsrc"
 	]
 }
