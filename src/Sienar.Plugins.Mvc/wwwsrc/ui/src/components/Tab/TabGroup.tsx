@@ -1,6 +1,5 @@
 ﻿import { useState } from 'react';
 import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 import { TabContext } from './utils.ts';
 
 import type { HTMLAttributes } from 'react';
@@ -29,7 +28,7 @@ export interface TabGroupProps extends Omit<HTMLAttributes<HTMLElement>, 'color'
 
 export function TabGroup(props: TabGroupProps) {
 	const {
-		color = 'default',
+		color,
 		tag: Tag = 'div',
 		paneClassName,
 		className,
@@ -42,14 +41,14 @@ export function TabGroup(props: TabGroupProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'tab')
+		'tab'
 	);
 
-	const navClasses = createThemedClassNames(color, undefined, 'tab__nav');
+	const navClasses = 'tab__nav';
 
 	const paneClasses = classNames(
 		paneClassName,
-		createThemedClassNames(color, undefined, 'tab__pane')
+		'tab__pane'
 	);
 
 	const registerTab = (tab: TabData) => {
@@ -81,11 +80,7 @@ export function TabGroup(props: TabGroupProps) {
 			<nav className={navClasses}>
 				{tabList.map(t => {
 					const buttonClasses = classNames(
-						createThemedClassNames(
-							color,
-							undefined,
-							'tab__activator'
-						),
+						'tab__activator',
 						{
 							'tab__activator--active': t.id === activeId
 						}

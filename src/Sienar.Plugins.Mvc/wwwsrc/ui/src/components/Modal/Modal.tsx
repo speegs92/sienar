@@ -1,5 +1,5 @@
 ﻿import { classNames, modalContext } from '@sienar/utils';
-import { Card, CardHeader, Container, DismissButton } from '@ui/components';
+import { Card, CardHeader, Container } from '@ui/components';
 import { useModalDefaultValuesContext } from './utils.ts';
 
 import type { ModalInstance, CloseModalFunction } from '@sienar/utils';
@@ -38,9 +38,8 @@ export function Modal<T>(props: ModalProps<T>) {
 							<h2 className='modal__title'>
 								{data.configuration.title}
 							</h2>
-							<DismissButton
+							<button
 								className='ml-4'
-								color='bold'
 								onClick={() => close('canceled')}
 							/>
 						</CardHeader>

@@ -1,6 +1,5 @@
 import { forwardRef } from 'react';
 import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 
 import type { ForwardedRef, InputHTMLAttributes, PropsWithChildren } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -43,7 +42,7 @@ export const FormCheckRadio = forwardRef(function FormCheckRadio(props: FormChec
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'check-radio')
+		'check-radio'
 	);
 
 	return (

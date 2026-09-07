@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -35,15 +34,11 @@ export function Card(props: CardProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'card'),
+		'card',
 		{
 			[`card--background-${backgroundColor}`]: !!backgroundColor
 		}
 	);
 
-	return (
-		<ThemeContext.Provider value={{ color }}>
-			<Tag className={classes} {...rest} />
-		</ThemeContext.Provider>
-	);
+	return <Tag className={classes} {...rest} />;
 }

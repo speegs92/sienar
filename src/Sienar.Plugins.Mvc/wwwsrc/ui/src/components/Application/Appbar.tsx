@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -28,8 +27,7 @@ export function Appbar(props: AppbarProps) {
 	} = props;
 
 	const classes = classNames(
-		className,
-		createThemedClassNames(color, undefined, 'app__appbar')
+		className
 	);
 
 	return <Tag className={classes} {...rest} />;

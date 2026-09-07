@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -20,18 +19,15 @@ export interface CardActionsProps extends Omit<HTMLAttributes<HTMLElement>, 'col
 }
 
 export function CardActions(props: CardActionsProps) {
-	const themeContext = useThemeContext();
-
 	const {
 		tag: Tag = 'section',
-		color = themeContext.color,
 		className,
 		...rest
 	} = props;
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'card__actions')
+		'card__actions'
 	);
 
 	return (

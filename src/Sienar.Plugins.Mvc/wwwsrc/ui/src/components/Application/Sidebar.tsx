@@ -1,7 +1,6 @@
 ﻿import { useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import { classNames } from '@sienar/utils';
-import { createThemedClassNames, ThemeContext } from '@ui/theme.ts';
 import { CloseableContext } from '@ui/utils.ts';
 import { Backdrop } from '../Backdrop.tsx';
 
@@ -53,7 +52,7 @@ export function Sidebar(props: SidebarProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'app__sidebar'),
+		'app__sidebar',
 		{
 			'app__sidebar--open': open
 		}
@@ -64,13 +63,11 @@ export function Sidebar(props: SidebarProps) {
 			isOpen: open,
 			close: () => setOpen?.(false)
 		}}>
-			<ThemeContext.Provider value={{ color }}>
-				<Backdrop
-					visible={open}
-					onClick={() => setOpen?.(false)}
-				/>
-				<Tag className={classes} {...rest} />
-			</ThemeContext.Provider>
+			<Backdrop
+				visible={open}
+				onClick={() => setOpen?.(false)}
+			/>
+			<Tag className={classes} {...rest} />
 		</CloseableContext.Provider>
 	);
 }

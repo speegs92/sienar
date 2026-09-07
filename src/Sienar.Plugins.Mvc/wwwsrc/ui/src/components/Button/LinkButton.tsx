@@ -21,8 +21,18 @@ export interface LinkButtonProps extends
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(function LinkButton(props: LinkButtonProps, ref: ForwardedRef<HTMLAnchorElement>) {
 	const {
-		color = 'default',
-		variant = 'solid',
+		color,
+		size,
+		responsive,
+		fullwidth,
+		outlined,
+		inverted,
+		rounded,
+		hovered,
+		focused,
+		active,
+		loading,
+		static: staticValue,
 		icon,
 		href,
 		className,
@@ -34,8 +44,17 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(functio
 	const classes = createButtonClasses(
 		className,
 		color,
-		variant,
-		!!icon
+		size,
+		responsive,
+		fullwidth,
+		outlined,
+		inverted,
+		rounded,
+		hovered,
+		focused,
+		active,
+		loading,
+		staticValue
 	);
 
 	// noinspection SuspiciousTypeOfGuard

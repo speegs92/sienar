@@ -8,10 +8,10 @@ export function ConfirmModal(props: ConfirmConfiguration) {
 		question,
 		acceptedText = 'Yes',
 		acceptedColor = 'primary',
-		acceptedVariant = 'solid',
+		acceptedOutlined,
 		rejectedText = 'No',
-		rejectedColor = 'secondary',
-		rejectedVariant = 'outlined'
+		rejectedColor,
+		rejectedOutlined = true
 	} = props;
 
 	const modal = useModalContext<void>();
@@ -24,14 +24,14 @@ export function ConfirmModal(props: ConfirmConfiguration) {
 			<CardActions className='d-flex justify-content-end'>
 				<Button
 					color={rejectedColor}
-					variant={rejectedVariant}
+					outlined={rejectedOutlined}
 					onClick={() => modal.close('rejected')}
 				>
 					{rejectedText}
 				</Button>
 				<Button
 					color={acceptedColor}
-					variant={acceptedVariant}
+					outlined={acceptedOutlined}
 					onClick={() => modal.close('accepted')}
 				>
 					{acceptedText}

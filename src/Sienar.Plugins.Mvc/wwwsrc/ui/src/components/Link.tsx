@@ -1,7 +1,6 @@
 ﻿import { forwardRef } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { classNames, inject } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 
 import type { AnchorHTMLAttributes } from 'react';
 import type { InjectionKey } from '@sienar/utils';
@@ -36,11 +35,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(props
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(
-			color,
-			undefined,
-			'link'
-		)
+		'link'
 	);
 
 	if (href.startsWith('http')) {

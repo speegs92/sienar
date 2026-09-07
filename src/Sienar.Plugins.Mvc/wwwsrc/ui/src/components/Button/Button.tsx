@@ -13,8 +13,18 @@ export interface ButtonProps extends
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) {
 	const {
-		color = 'default',
-		variant = 'solid',
+		color,
+		size,
+		responsive,
+		fullwidth,
+		outlined,
+		inverted,
+		rounded,
+		hovered,
+		focused,
+		active,
+		loading,
+		static: staticValue,
 		icon,
 		className,
 		children,
@@ -24,8 +34,17 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
 	const classes = createButtonClasses(
 		className,
 		color,
-		variant,
-		!!icon
+		size,
+		responsive,
+		fullwidth,
+		outlined,
+		inverted,
+		rounded,
+		hovered,
+		focused,
+		active,
+		loading,
+		staticValue
 	);
 
 	return (

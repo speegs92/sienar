@@ -1,68 +1,26 @@
-﻿import { createContext, useContext } from 'react';
-
-export const ThemeContext = createContext<Themeable>({});
-
-export const useThemeContext = () => useContext(ThemeContext);
-
-/**
- * Creates a string of CSS class names based on the value of theme-based props
- *
- * @param color The selected theme color, if any
- * @param variant The selected variant, if any
- * @param base The base component CSS class name
- *
- * @returns The space-separated CSS class names
- */
-export function createThemedClassNames(
-	color: Color|undefined,
-	variant: Variant|undefined,
-	base: string): string {
-	const classes = [ base ];
-
-	if (color && color !== 'default') classes.push(`${base}--${color}`);
-	if (variant) classes.push(`${base}--${variant}`);
-
-	return classes.join(' ');
-}
-
-
-/**
- * The theme colors supported by Sienar UI
+﻿/**
+ * The theme colors supported by Bulma
  */
 export type Color =
 	| 'primary'
-	| 'secondary'
-	| 'tertiary'
+	| 'link'
 	| 'success'
 	| 'info'
 	| 'warning'
-	| 'error'
-	| 'soft'
-	| 'bold'
-	| 'default';
+	| 'danger'
+	| 'white'
+	| 'black'
+	| 'light'
+	| 'dark';
 
 /**
- * The color solidity variants supported by Sienar UI
+ * The sizes supported by Bulma
  */
-export type Variant =
-	| 'solid'
-	| 'outlined'
-	| 'text';
-
-/**
- * The themeable props
- */
-export type Themeable = {
-	/**
-	 * The themeable color
-	 */
-	color?: Color;
-
-	/**
-	 * The themeable variant
-	 */
-	variant?: Variant;
-}
+export type Size =
+	| 'small'
+	| 'normal'
+	| 'medium'
+	| 'large';
 
 /**
  * Flex <code>justify-content</code> values

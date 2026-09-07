@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 import { ValidationList } from './ValidationList.tsx';
 
 import type { HTMLAttributes, ReactNode } from 'react';
@@ -60,11 +59,7 @@ export function FormField(props: FormFieldProps) {
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(
-			color,
-			undefined,
-			'form-field'
-		),
+		'form-field',
 		{
 			'form-field--valid': validations.filter(v => v.valid).length === validations.length,
 			'form-field--invalid': validations.filter(v => v.valid === false).length > 0

@@ -1,5 +1,4 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
 
@@ -19,18 +18,16 @@ export interface CardHeaderProps extends Omit<HTMLAttributes<HTMLElement>, 'colo
 }
 
 export function CardHeader(props: CardHeaderProps) {
-	const themeContext = useThemeContext();
-
 	const {
 		tag: Tag = 'header',
-		color = themeContext.color,
+		color,
 		className,
 		...rest
 	} = props;
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'card__header')
+		'card__header'
 	);
 
 	return (

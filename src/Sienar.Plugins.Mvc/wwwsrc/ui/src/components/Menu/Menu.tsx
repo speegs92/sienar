@@ -1,5 +1,4 @@
 import { classNames } from '@sienar/utils';
-import { createThemedClassNames, ThemeContext, useThemeContext } from '@ui/theme.ts';
 
 import type { ComponentPropsWithoutRef, ElementType } from 'react';
 import type { Color } from '@ui/theme.ts';
@@ -24,16 +23,10 @@ export function Menu<T extends ElementType = 'ul'>(props: MenuProps<T>) {
 		...rest
 	} = props;
 
-	const parentTheme = useThemeContext();
-
 	const classes = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'menu')
+		'menu'
 	);
 
-	return (
-		<ThemeContext.Provider value={{ color: color ?? parentTheme.color ?? 'bold' }}>
-			<Tag className={classes} {...rest} />
-		</ThemeContext.Provider>
-	);
+	return <Tag className={classes} {...rest} />;
 }

@@ -81,7 +81,7 @@ function Login() {
 					<LinkButton
 						href={urls.account.forgotPassword.index}
 						color='secondary'
-						variant='outlined'
+						outlined
 					>
 						I forgot my password
 					</LinkButton>

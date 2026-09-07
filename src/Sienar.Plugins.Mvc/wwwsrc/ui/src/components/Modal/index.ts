@@ -1,5 +1,5 @@
 ﻿import '@sienar/utils';
-import type { Breakpoint, Color, Variant } from '@ui/theme.ts';
+import type { Breakpoint, Color } from '@ui/theme.ts';
 
 export * from './Modal.tsx';
 export * from './ModalContainer.tsx';
@@ -21,9 +21,9 @@ declare module '@sienar/utils' {
 		acceptedColor?: Color;
 
 		/**
-		 * The variant of the <code>accepted</code> button
+		 * Whether the <code>accepted</code> button should be outlined
 		 */
-		acceptedVariant?: Variant;
+		acceptedOutlined?: boolean;
 
 		/**
 		 * The color of the <code>rejected</code> button
@@ -31,8 +31,8 @@ declare module '@sienar/utils' {
 		rejectedColor?: Color;
 
 		/**
-		 * The variant of the <code>rejected</code> button
+		 * Whether the <code>rejected</code> button should be outlined
 		 */
-		rejectedVariant?: Variant;
+		rejectedOutlined?: boolean;
 	}
 }

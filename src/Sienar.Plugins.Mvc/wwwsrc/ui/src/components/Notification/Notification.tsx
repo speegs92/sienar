@@ -1,7 +1,5 @@
 ﻿import { classNames } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 import { useNotificationContext } from './utils.ts';
-import { DismissButton } from '@ui/components';
 
 import type { HTMLAttributes } from 'react';
 import type { NotificationInstance } from '@sienar/utils';
@@ -24,15 +22,12 @@ export function Notification(props: NotificationProps) {
 	const context = useNotificationContext()!;
 
 	// Sienar names these such that notification types map one-to-one to theme colors
-	const color = data.notification.type as Color;
+	const color = data.notification.type === 'error' ? 'danger' :  data.notification.type as Color;
 
 	const classes = classNames(
 		className,
-		createThemedClassNames(
-			color,
-			undefined,
-			'notifications__notification'
-		)
+		'notifications__notification',
+		`is-${color}`
 	);
 
 	return (
@@ -50,10 +45,7 @@ export function Notification(props: NotificationProps) {
 
 			<div className='notifications__notification-close-button-wrapper'>
 				{data.configuration.dismissButton || (
-					<DismissButton
-						color={color}
-						onClick={data.close}
-					/>
+					<button onClick={data.close} />
 				)}
 			</div>
 

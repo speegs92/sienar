@@ -1,6 +1,5 @@
 ﻿import { useMemo, useState } from 'react';
 import { aggregateLinks, classNames, DRAWER_HEADER_PARTIAL, DRAWER_FOOTER_PARTIAL, filterLinks, inject, useAuthContext, useActiveMenu } from '@sienar/utils';
-import { createThemedClassNames } from '@ui/theme.ts';
 import { useScrollLock } from '@ui/utils.ts';
 import { Button, Container, Icon, Menu, MenuItem, ModalContainer, Notifications } from '@ui/components';
 import { Appbar } from './Appbar.tsx';
@@ -40,7 +39,7 @@ export interface ApplicationProps extends Omit<HTMLAttributes<HTMLElement>, 'col
 export function Application(props: ApplicationProps) {
 	const {
 		tag: Tag = 'div',
-		color = 'bold',
+		color = 'dark',
 		className,
 		appbarProps,
 		sidebarProps,
@@ -60,7 +59,7 @@ export function Application(props: ApplicationProps) {
 
 	const appClasses = classNames(
 		className,
-		createThemedClassNames(color, undefined, 'app'),
+		'app',
 		'd-flex flex-row',
 		{
 			'app--open': open
@@ -98,7 +97,6 @@ export function Application(props: ApplicationProps) {
 						<Button
 							className='d-lg-none'
 							color={color}
-							variant='text'
 							icon={<Icon icon='menu'/>}
 							onClick={() => setOpen(!open)}
 						/>

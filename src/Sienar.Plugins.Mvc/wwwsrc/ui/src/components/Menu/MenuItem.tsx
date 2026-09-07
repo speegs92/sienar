@@ -1,6 +1,5 @@
-import { inject } from '@sienar/utils';
+import { classNames, inject } from '@sienar/utils';
 import { useCloseableContext } from '@ui/utils.ts';
-import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 
 import type { HTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 import type { InjectionKey } from '@sienar/utils';
@@ -38,12 +37,10 @@ export interface MenuItemProps extends
 }
 
 export function MenuItem(props: MenuItemProps) {
-	const themeContext = useThemeContext();
-
 	const {
 		label,
 		icon,
-		color = themeContext.color,
+		color,
 		href,
 		className,
 		children,
@@ -53,9 +50,8 @@ export function MenuItem(props: MenuItemProps) {
 
 	const closeableContext = useCloseableContext();
 
-	const classes = createThemedClassNames(
-		color,
-		undefined,
+	const classes = classNames(
+		className,
 		'menu__item'
 	);
 

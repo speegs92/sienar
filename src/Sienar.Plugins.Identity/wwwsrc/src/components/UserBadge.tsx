@@ -85,9 +85,9 @@ export default function UserBadge(props: UserBadgeProps) {
 				<p>{username}</p>
 			</div>
 			<Dropdown
-				buttonVariant='text'
 				icon={<Icon icon='cog'/>}
 				direction='up'
+				buttonOutlined
 			>
 				<Menu>
 					{settingsMenuContent}

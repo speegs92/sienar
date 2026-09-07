@@ -1,5 +1,4 @@
 import { classNames } from '@sienar/utils';
-import { createThemedClassNames, useThemeContext } from '@ui/theme.ts';
 import type { HTMLAttributes } from 'react';
 import type { Color } from '@ui/theme.ts';
 
@@ -14,10 +13,8 @@ export interface MenuDividerProps extends Omit<HTMLAttributes<HTMLLIElement>, 'c
 }
 
 export function MenuDivider(props: MenuDividerProps) {
-	const themeContext = useThemeContext();
-
 	const {
-		color = themeContext.color,
+		color,
 		className,
 		...rest
 	} = props;
@@ -25,7 +22,7 @@ export function MenuDivider(props: MenuDividerProps) {
 	const classes = classNames(
 		className,
 		'menu__item--divider',
-		createThemedClassNames(color, undefined, 'menu__item')
+		'menu__item'
 	);
 
 	return (
