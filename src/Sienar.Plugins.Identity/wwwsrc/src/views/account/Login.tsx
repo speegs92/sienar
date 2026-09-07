@@ -67,7 +67,7 @@ function Login() {
 							hideNonErrors: true
 						}}
 					/>
-					<StandaloneCheckbox name='rememberMe' color='secondary'>
+					<StandaloneCheckbox name='rememberMe' color='primary'>
 						Remember me
 					</StandaloneCheckbox>
 
@@ -80,7 +80,7 @@ function Login() {
 
 					<LinkButton
 						href={urls.account.forgotPassword.index}
-						color='secondary'
+						color='link'
 						outlined
 					>
 						I forgot my password

@@ -11,7 +11,7 @@ export default function DrawerFooter(props: UserBadgeProps) {
 			<>
 				<LinkButton
 					className='d-block mb-2'
-					color='secondary'
+					color='primary'
 					href={urls.account.register.index}
 					outlined
 				>
