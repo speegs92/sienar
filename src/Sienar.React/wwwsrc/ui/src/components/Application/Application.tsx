@@ -113,7 +113,7 @@ export function Application(props: ApplicationProps) {
 				</div>
 			</Tag>
 			<Notifications/>
-			<ModalContainer maxWidth='md'/>
+			<ModalContainer maxWidth='tablet'/>
 		</>
 	);
 }

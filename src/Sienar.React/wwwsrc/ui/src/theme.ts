@@ -84,11 +84,11 @@ export type TextAlignment = HorizontalAlignment | 'justify';
  * Width breakpoints
  */
 export type Breakpoint =
-	| 'sm'
-	| 'md'
-	| 'lg'
-	| 'xl'
-	| 'xxl';
+	| 'mobile'
+	| 'tablet'
+	| 'desktop'
+	| 'widescreen'
+	| 'fullhd';
 
 /**
  * The available column sizes in the Sienar grid system

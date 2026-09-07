@@ -1,18 +1,18 @@
 ﻿import { classNames } from '@sienar/utils';
 
 import type { HTMLAttributes } from 'react';
-import type { HorizontalAlignment, Breakpoint } from '@ui/theme.ts';
+import type { Breakpoint } from '@ui/theme.ts';
 
 export interface ContainerProps extends HTMLAttributes<HTMLElement> {
 	/**
-	 * The horizontal alignment of the container
+	 * The breakpoint at which the container stops being fullwidth
 	 */
-	alignment?: HorizontalAlignment;
+	fullwidthUntil?: Extract<Breakpoint, 'widescreen'|'fullhd'>;
 
 	/**
 	 * The maximum width of the container
 	 */
-	maxWidth?: Breakpoint;
+	maxWidth?: Extract<Breakpoint, 'tablet'|'desktop'|'widescreen'>;
 
 	/**
 	 * Whether the container should be full-width between breakpoints
@@ -27,7 +27,7 @@ export interface ContainerProps extends HTMLAttributes<HTMLElement> {
 
 export function Container(props: ContainerProps) {
 	const {
-		alignment = 'center',
+		fullwidthUntil,
 		maxWidth,
 		fluid,
 		tag: Tag = 'div',
@@ -39,9 +39,9 @@ export function Container(props: ContainerProps) {
 		className,
 		'container',
 		{
-			'container--fluid': !!fluid,
-			[`container--${alignment}`]: !!alignment,
-			[`container--${maxWidth}`]: !!maxWidth
+			'is-fluid': !!fluid,
+			[`is-${fullwidthUntil}`]: !!fullwidthUntil,
+			[`is-max-${maxWidth}`]: !!maxWidth
 		}
 	);
 

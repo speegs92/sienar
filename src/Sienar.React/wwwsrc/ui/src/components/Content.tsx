@@ -63,7 +63,7 @@ export function Content(props: ContentProps) {
 		titleTag: TitleTag = 'h1',
 		subtitle,
 		subtitleTag: SubtitleTag = 'h2',
-		maxWidth = 'sm',
+		maxWidth = 'tablet',
 		bgColor = 'soft',
 		fgColor = 'bold',
 		padding = 8,
@@ -101,9 +101,7 @@ export function Content(props: ContentProps) {
 
 	return (
 		<Tag className={classes}>
-			<Container
-				maxWidth={maxWidth}
-			>
+			<Container maxWidth={maxWidth}>
 				{!insetHeader && headerContent}
 
 				<div className={contentClasses}>
