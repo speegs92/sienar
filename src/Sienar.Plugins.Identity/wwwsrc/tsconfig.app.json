@@ -31,7 +31,7 @@
 		"paths": {
 			"@plugins-identity/*": ["./src/*"],
 			"@sienar/ui": ["../../Sienar.Plugins.Mvc/wwwsrc/ui/src/index.ts"],
-			"@ui/*": ["../../Sienar.Plugins.Mvc/wwsrc/ui/src/*"],
+			"@ui/*": ["../../Sienar.Plugins.Mvc/wwwsrc/ui/src/*"],
 			"@sienar/utils": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/index.ts"],
 			"@utils/*": ["../../Sienar.Plugins.Mvc/wwwsrc/utils/src/*"],
 			"@sienar/plugins-core": ["../../Sienar.Plugins.Mvc/wwwsrc/plugins-core/src/index.ts"],
