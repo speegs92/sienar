@@ -15,3 +15,8 @@ export * from './Notification/index.ts';
 export * from './Stack.tsx';
 export * from './Tab/index.ts';
 export * from './Table/index.ts';
+
+import type { DynamicComponentProps} from '@ui/components/DynamicComponent.tsx';
+
+type Test = DynamicComponentProps<'a'>;
+type Test2 = Test['href'];
