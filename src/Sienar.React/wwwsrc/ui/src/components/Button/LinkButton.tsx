@@ -57,10 +57,9 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(functio
 		staticValue
 	);
 
-	// noinspection SuspiciousTypeOfGuard
-	const destination = typeof href === 'symbol'
-		? inject(href)
-		: href;
+	const destination = typeof href === 'string'
+		? href
+		: inject(href);
 
 	if (destination.startsWith('http')) {
 		return (
