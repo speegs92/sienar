@@ -2,9 +2,10 @@
 import type { HTMLAttributes } from 'react';
 
 /**
- * The props for the icon component
+ * The props for the MDI icon component
  */
-export interface IconProps extends HTMLAttributes<HTMLSpanElement> {
+export interface MdiIconProps
+	extends HTMLAttributes<HTMLSpanElement> {
 	/**
 	 * The rotation to apply to the icon
 	 */
@@ -41,7 +42,7 @@ export type IconFlip =
 	| 'vertical'
 	| 'both';
 
-export function Icon(props: IconProps) {
+export function MdiIcon(props: MdiIconProps) {
 	const {
 		rotation,
 		flip,

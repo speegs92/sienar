@@ -6,6 +6,7 @@ export * from './DynamicComponent.tsx';
 export * from './Form/index.ts';
 export * from './Grid/index.ts';
 export * from './Icon.tsx';
+export * from './MdiIcon.tsx';
 export * from './Modal/index.ts';
 export * from './Notification/index.ts';
 export * from './Tab/index.ts';

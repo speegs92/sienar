@@ -1,6 +1,6 @@
 ﻿import { useMemo } from 'react';
 import { aggregateLinks, createApiCall, filterLinks, useAuthContext } from '@sienar/utils';
-import { Dropdown, Icon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
+import { Dropdown, MdiIcon, Menu, MenuDivider, MenuItem, Stack } from '@sienar/ui';
 import { USER_SETTINGS_MENU } from '../menus.ts';
 
 import type { ReactNode } from 'react';
@@ -85,14 +85,14 @@ export default function UserBadge(props: UserBadgeProps) {
 				<p>{username}</p>
 			</div>
 			<Dropdown
-				icon={<Icon icon='cog'/>}
+				icon={<MdiIcon icon='cog'/>}
 				direction='up'
 				buttonOutlined
 			>
 				<Menu>
 					{settingsMenuContent}
 					<MenuItem
-						icon={<Icon icon='logout'/>}
+						icon={<MdiIcon icon='logout'/>}
 						onClick={logoutCall}
 					>
 						Log out

@@ -1,4 +1,4 @@
-﻿import { Icon, Stack, Table } from '@sienar/ui';
+﻿import { MdiIcon, Stack, Table } from '@sienar/ui';
 import { AuthorizeRoute, useDocumentTitle } from '@sienar/utils';
 
 import type { User } from '@plugins-identity/types.ts';
@@ -83,8 +83,8 @@ function Index() {
 						sortable: false,
 						renderer: (user: User) => (
 							<Stack direction='horizontal' justify='center'>
-								{!!user.lockoutEnd && <Icon icon='checkbox-outline'/>}
-								{!user.lockoutEnd && <Icon icon='checkbox-blank-outline'/>}
+								{!!user.lockoutEnd && <MdiIcon icon='checkbox-outline'/>}
+								{!user.lockoutEnd && <MdiIcon icon='checkbox-blank-outline'/>}
 							</Stack>
 						)
 					}

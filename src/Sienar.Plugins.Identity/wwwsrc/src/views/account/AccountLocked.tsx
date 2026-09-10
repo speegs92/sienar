@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { AuthorizeRoute, getDateString, inject } from '@sienar/utils';
-import { Icon } from '@sienar/ui';
+import { MdiIcon } from '@sienar/ui';
 import { GET_LOCKOUT_REASONS_SERVICE } from '@plugins-identity/services.ts';
 import { ACCOUNT_LOCKED_LAYOUT } from '@plugins-identity/layouts.ts';
 import { urls } from '@plugins-identity/constants.ts';
@@ -63,7 +63,7 @@ function AccountLocked() {
 			<ul>
 				{lockResult.lockoutReasons.map(r => (
 					<li key={r.id}>
-						<Icon icon='label'/>
+						<MdiIcon icon='label'/>
 						{r.reason}
 					</li>
 				))}

@@ -1,4 +1,4 @@
-import { Column, Icon, Row, Stack } from '@sienar/ui';
+import { Column, MdiIcon, Row, Stack } from '@sienar/ui';
 import { ABOUT_URL } from '@plugins-identity/urls.ts';
 
 import type { ReactNode } from 'react';
@@ -18,7 +18,7 @@ type Technology = {
 }
 
 const iconDimensions = { width: 48, height: 48 };
-const UnknownIcon = () => <Icon icon='info'/>;
+const UnknownIcon = () => <MdiIcon icon='info'/>;
 
 const technologies: Technology[] = [
 	{

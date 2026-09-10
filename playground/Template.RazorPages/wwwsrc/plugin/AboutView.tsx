@@ -1,4 +1,4 @@
-﻿import { Icon } from '@sienar/ui';
+﻿import { MdiIcon } from '@sienar/ui';
 import { MAIN_MENU } from '@sienar/plugins-core';
 import { ALT_MENU } from './utils.ts';
 
@@ -14,7 +14,7 @@ const module: ViewModule = {
 	menu: {
 		text: 'About',
 		href: '/about',
-		icon: <Icon icon='home'/>
+		icon: <MdiIcon icon='home'/>
 	},
 	menuKey: MAIN_MENU,
 	layoutMenu: ALT_MENU

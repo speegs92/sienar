@@ -1,5 +1,5 @@
 ﻿import { useSearchParams } from 'react-router-dom';
-import { Button, Content, Icon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
+import { Button, Content, MdiIcon, LinkButton, Form, StandaloneCheckbox, Textbox } from '@sienar/ui';
 import { AuthorizeRoute, required, useNavigate, useAuthContext, useDocumentTitle } from '@sienar/utils';
 import { MAIN_URL } from '@sienar/plugins-core';
 import { LOGIN_LAYOUT } from '@plugins-identity/layouts.ts';
@@ -51,7 +51,7 @@ function Login() {
 					<Textbox
 						name='accountName'
 						displayName='Username or email address'
-						leftIcon={<Icon icon='account'/>}
+						leftIcon={<MdiIcon icon='account'/>}
 						validators={[required()]}
 						validationListProps={{
 							hideNonErrors: true
@@ -61,7 +61,7 @@ function Login() {
 						name='password'
 						displayName='Password'
 						type='password'
-						leftIcon={<Icon icon='lock'/>}
+						leftIcon={<MdiIcon icon='lock'/>}
 						validators={[required()]}
 						validationListProps={{
 							hideNonErrors: true

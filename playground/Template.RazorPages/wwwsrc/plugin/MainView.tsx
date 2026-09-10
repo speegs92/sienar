@@ -1,6 +1,6 @@
 ﻿import { useState } from 'react';
 import { confirm, notify, showModal, useModalContext } from '@sienar/utils';
-import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, Icon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
+import { Button, Card, CardHeader, CardContent, CardActions, Dropdown, MdiIcon, MenuDivider, Menu, MenuItem, TabGroup, TabPane } from '@sienar/ui';
 import { MAIN_MENU, MAIN_URL, MAIN_VIEW } from '@sienar/plugins-core';
 import { ALT_MENU } from './utils.ts';
 
@@ -166,7 +166,7 @@ const module: ViewModule = {
 	menu: {
 		text: 'Home',
 		href: MAIN_URL,
-		icon: <Icon icon='home'/>
+		icon: <MdiIcon icon='home'/>
 	},
 	menuKey: ALT_MENU,
 	layoutMenu: MAIN_MENU
