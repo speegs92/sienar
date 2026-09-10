@@ -1,6 +1,6 @@
 ﻿import { classNames } from '@sienar/utils';
 
-import type { ComponentPropsWithRef, ElementType } from 'react';
+import type { ComponentPropsWithRef, ElementType, ReactElement } from 'react';
 
 /**
  * Dynamically-typed props with support for additional classes
@@ -21,6 +21,14 @@ export type DynamicComponentPropsWithAdditionalClasses<T extends ElementType = '
 	 */
 	additionalClasses?: (string | Record<string, boolean> | null | undefined)[];
 } & DynamicComponentProps<T>;
+
+export function DynamicComponent<T extends ElementType>(
+	props: DynamicComponentPropsWithAdditionalClasses<T> & { tag: T }
+): ReactElement;
+
+export function DynamicComponent(
+	props: DynamicComponentPropsWithAdditionalClasses & { tag?: undefined }
+): ReactElement;
 
 export function DynamicComponent<T extends ElementType = 'div'>(props: DynamicComponentPropsWithAdditionalClasses<T>) {
 	const {
