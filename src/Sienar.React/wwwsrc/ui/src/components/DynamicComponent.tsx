@@ -5,26 +5,26 @@ import type { ComponentPropsWithRef, ElementType } from 'react';
 /**
  * Dynamically-typed props with support for additional classes
  */
-export type DynamicComponentProps<T extends ElementType> = {
+export type DynamicComponentProps<T extends ElementType = 'div'> = {
 	/**
 	 * The HTML tag or React component with which to render the component
 	 */
-	tag: T;
+	tag?: T;
 } & ComponentPropsWithRef<T>;
 
 /**
  * Dynamically-typed props without support for additional classes. Used to type comopnents which wrap around &lt;DynamicElement&gt;
  */
-export type DynamicComponentPropsWithAdditionalClasses<T extends ElementType> = {
+export type DynamicComponentPropsWithAdditionalClasses<T extends ElementType = 'div'> = {
 	/**
 	 * The additional classes to supply to the underlying HTML tag or React component
 	 */
 	additionalClasses?: (string | Record<string, boolean> | null | undefined)[];
 } & DynamicComponentProps<T>;
 
-export function DynamicComponent<T extends ElementType>(props: DynamicComponentPropsWithAdditionalClasses<T>) {
+export function DynamicComponent<T extends ElementType = 'div'>(props: DynamicComponentPropsWithAdditionalClasses<T>) {
 	const {
-		tag: Tag,
+		tag: Tag = 'div',
 		additionalClasses,
 		className,
 		...rest
