@@ -7,7 +7,7 @@ import type { Color, Size } from '@ui/theme.ts';
 /**
  * The props for the hero component
  */
-export type HeroProps<T extends ElementType> = {
+export type HeroProps<T extends ElementType = 'div'> = {
 	/**
 	 * The color of the hero
 	 */
@@ -22,9 +22,9 @@ export type HeroProps<T extends ElementType> = {
 		| 'fullheight'
 		| 'fullheight-with-navbar';
 	
-} & Omit<DynamicComponentProps<T>, 'color'>;
+} & DynamicComponentProps<T>;
 
-export function Hero<T extends ElementType>(props: HeroProps<T>) {
+export function Hero<T extends ElementType = 'div'>(props: HeroProps<T>) {
 	const {
 		color,
 		size,
@@ -33,10 +33,13 @@ export function Hero<T extends ElementType>(props: HeroProps<T>) {
 
 	return (
 		<DynamicComponent
-			tag='a'
-			additionalClasses={[]}
-			href='http://google.com'
-			target='_blank'
+			additionalClasses={[
+				'hero',
+				{
+					[`is-${color}`]: !!color,
+					[`is-${size}`]: !!size
+				}
+			]}
 			{...rest as DynamicComponentProps<T>}
 		/>
 	);
