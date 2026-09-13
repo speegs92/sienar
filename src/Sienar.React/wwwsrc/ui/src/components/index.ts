@@ -1,5 +1,6 @@
 ﻿export * from './Block.tsx';
 export * from './Box.tsx';
+export * from './Breadcrumb.tsx';
 export * from './Button/index.ts';
 export * from './Column/index.ts';
 export * from './Container.tsx';

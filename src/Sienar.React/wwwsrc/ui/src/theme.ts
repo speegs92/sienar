@@ -65,7 +65,7 @@ export type Direction =
 export type HorizontalAlignment =
 	| 'left'
 	| 'right'
-	| 'center';
+	| 'centered';
 
 /**
  * Vertical alignment
