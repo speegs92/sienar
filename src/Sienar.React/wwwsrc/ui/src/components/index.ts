@@ -13,3 +13,4 @@ export * from './Level/index.ts';
 export * from './MdiIcon.tsx';
 export * from './Progress.tsx';
 export * from './Section.tsx';
+export * from './Tag/index.ts';
