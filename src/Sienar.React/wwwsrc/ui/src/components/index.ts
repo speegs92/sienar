@@ -3,6 +3,7 @@ export * from './Box.tsx';
 export * from './Button/index.ts';
 export * from './Column/index.ts';
 export * from './Container.tsx';
+export * from './Content.tsx';
 export * from './DynamicComponent.tsx';
 export * from './Footer.tsx';
 export * from './Hero/index.ts';
