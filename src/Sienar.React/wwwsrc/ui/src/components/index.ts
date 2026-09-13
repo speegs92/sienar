@@ -7,6 +7,7 @@ export * from './Content.tsx';
 export * from './DynamicComponent.tsx';
 export * from './Footer.tsx';
 export * from './Hero/index.ts';
+export * from './Image.tsx';
 export * from './Level/index.ts';
 export * from './MdiIcon.tsx';
 export * from './Section.tsx';
