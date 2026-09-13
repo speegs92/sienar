@@ -6,17 +6,17 @@ import type { DynamicComponentProps } from '@ui/components/DynamicComponent.tsx'
 /**
  * The props for the box component
  */
-export type HeroHeadProps<T extends ElementType = 'div'> = {} & DynamicComponentProps<T>;
+export type BoxProps<T extends ElementType = 'div'> = {} & DynamicComponentProps<T>;
 
 export function Box<T extends ElementType>(
-	props: HeroHeadProps<T> & { tag: T }
+	props: BoxProps<T> & { tag: T }
 ): ReactElement;
 
 export function Box(
-	props: HeroHeadProps & { tag?: undefined }
+	props: BoxProps & { tag?: undefined }
 ): ReactElement;
 
-export function Box<T extends ElementType = 'div'>(props: HeroHeadProps<T>) {
+export function Box<T extends ElementType = 'div'>(props: BoxProps<T>) {
 	return (
 		<DynamicComponent
 			additionalClasses={['box']}

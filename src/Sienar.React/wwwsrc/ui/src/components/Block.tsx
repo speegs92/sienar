@@ -6,17 +6,17 @@ import type { DynamicComponentProps } from '@ui/components/DynamicComponent.tsx'
 /**
  * The props for the block component
  */
-export type HeroHeadProps<T extends ElementType = 'div'> = {} & DynamicComponentProps<T>;
+export type BlockProps<T extends ElementType = 'div'> = {} & DynamicComponentProps<T>;
 
 export function Block<T extends ElementType>(
-	props: HeroHeadProps<T> & { tag: T }
+	props: BlockProps<T> & { tag: T }
 ): ReactElement;
 
 export function Block(
-	props: HeroHeadProps & { tag?: undefined }
+	props: BlockProps & { tag?: undefined }
 ): ReactElement;
 
-export function Block<T extends ElementType = 'div'>(props: HeroHeadProps<T>) {
+export function Block<T extends ElementType = 'div'>(props: BlockProps<T>) {
 	return (
 		<DynamicComponent
 			additionalClasses={['block']}
