@@ -1,4 +1,5 @@
-﻿export * from './Button/index.ts';
+﻿export * from './Block.tsx';
+export * from './Button/index.ts';
 export * from './Column/index.ts';
 export * from './Container.tsx';
 export * from './DynamicComponent.tsx';
