@@ -11,4 +11,5 @@ export * from './Hero/index.ts';
 export * from './Image.tsx';
 export * from './Level/index.ts';
 export * from './MdiIcon.tsx';
+export * from './Progress.tsx';
 export * from './Section.tsx';
