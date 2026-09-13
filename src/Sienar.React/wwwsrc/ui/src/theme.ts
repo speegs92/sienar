@@ -91,6 +91,19 @@ export type Breakpoint =
 	| 'fullhd';
 
 /**
+ * A dictionary with width breakpoints as the keys and <code>T</code> as the values
+ * 
+ * NOTE: This type is an explicitly-keyed dictionary because Typescript v6.0 changed the way partial record keys are type-inferred, and this change broke a naive <code>Partial<Record<Breakpoint, T>></code>-type implementation. The only way to preserve intellisense in TSX files, as far as I can tell, is explicitly defining the keys here.
+ */
+export interface BreakpointDictionary<T> {
+	mobile?: T;
+	tablet?: T;
+	desktop?: T;
+	widescreen?: T;
+	fullhd?: T;
+}
+
+/**
  * The available column sizes in the Sienar grid system
  */
 export type ColumnSize =
