@@ -8,6 +8,7 @@ export * from './Content.tsx';
 export * from './Delete.tsx';
 export * from './DynamicComponent.tsx';
 export * from './Footer.tsx';
+export * from './Grid/index.ts';
 export * from './Hero/index.ts';
 export * from './Icon/index.ts';
 export * from './Image.tsx';
