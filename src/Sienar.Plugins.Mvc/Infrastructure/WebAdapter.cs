@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Diagnostics.Metrics;
 
 namespace Sienar.Infrastructure;
 
@@ -19,18 +18,6 @@ public class WebAdapter : IBuilderAdapter
 		=> _builder.Environment;
 
 	/// <inheritdoc />
-	public ILoggingBuilder Logging
-		=> _builder.Logging;
-
-	/// <inheritdoc />
-	public IMetricsBuilder Metrics
-		=> _builder.Metrics;
-
-	/// <inheritdoc />
-	public IDictionary<object, object> Properties
-		=> (_builder as IHostApplicationBuilder).Properties;
-
-	/// <inheritdoc />
 	public IServiceCollection Services
 		=> _builder.Services;
 
@@ -38,6 +25,15 @@ public class WebAdapter : IBuilderAdapter
 	public void Create(string[] args, IServiceCollection startupServices)
 	{
 		_builder = WebApplication.CreateBuilder(args);
+
+		startupServices
+			.AddSingleton(_builder)
+			.AddSingleton(_builder.Configuration)
+			.AddSingleton(_builder.Environment)
+			.AddSingleton(_builder.Host)
+			.AddSingleton(_builder.Logging)
+			.AddSingleton(_builder.Metrics)
+			.AddSingleton(_builder.WebHost);
 	}
 
 	/// <inheritdoc />
@@ -50,14 +46,5 @@ public class WebAdapter : IBuilderAdapter
 			Host = app,
 			Services = app.Services
 		};
-	}
-
-	/// <inheritdoc />
-	public void ConfigureContainer<TContainerBuilder>(
-		IServiceProviderFactory<TContainerBuilder> factory,
-		Action<TContainerBuilder>? configure = null)
-		where TContainerBuilder : notnull
-	{
-		(_builder as IHostApplicationBuilder).ConfigureContainer(factory, configure);
 	}
 }

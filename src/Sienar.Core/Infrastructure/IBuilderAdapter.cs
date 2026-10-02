@@ -1,11 +1,12 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 
 namespace Sienar.Infrastructure;
 
 /// <summary>
 /// Abstracts various .NET application builders
 /// </summary>
-public interface IBuilderAdapter : IHostApplicationBuilder
+public interface IBuilderAdapter
 {
 	/// <summary>
 	/// Calls the underlying app builder's <c>Create()</c> method
@@ -20,4 +21,19 @@ public interface IBuilderAdapter : IHostApplicationBuilder
 	/// <param name="startupServiceProvider">The application startup service container</param>
 	/// <returns>The built application</returns>
 	HostAdapter Build(IServiceProvider startupServiceProvider);
+
+	/// <summary>
+	/// The underlying builder's configuration properties
+	/// </summary>
+	IConfigurationManager Configuration { get; }
+
+	/// <summary>
+	/// The underlying builder's host environment
+	/// </summary>
+	IHostEnvironment Environment { get; }
+
+	/// <summary>
+	/// The underlying builder's service collection
+	/// </summary>
+	IServiceCollection Services { get; }
 }
