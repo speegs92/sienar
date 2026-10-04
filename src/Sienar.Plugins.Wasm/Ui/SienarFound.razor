@@ -1,0 +1,13 @@
+@namespace Sienar.Ui
+
+<CascadingValue
+	Value="@_layout"
+	Name="@CascadingLayoutName">
+	<AuthorizeRouteView
+		RouteData="RouteData"
+		DefaultLayout="_layout">
+		<NotAuthorized>
+			<DynamicComponent Type="App.UnauthorizedView"/>
+		</NotAuthorized>
+	</AuthorizeRouteView>
+</CascadingValue>

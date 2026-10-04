@@ -1,0 +1,28 @@
+@namespace Sienar.Ui
+
+@* ReSharper disable once CollectionNeverUpdated.Local *@
+@inject AppProvider AppProvider
+
+@{
+	var app = AppProvider[App];
+}
+
+<CascadingAuthenticationState>
+	@foreach (var c in app.RouterAdjacentComponents)
+	{
+		<DynamicComponent Type="c"/>
+	}
+
+	<Router
+		AppAssembly="_rootAssembly"
+		AdditionalAssemblies="_routableAssemblies"
+		NotFoundPage="app.NotFoundView">
+		<Found Context="routeData">
+			<CascadingValue Value="@routeData">
+				<CascadingValue Value="@app">
+					<SienarFound/>
+				</CascadingValue>
+			</CascadingValue>
+		</Found>
+	</Router>
+</CascadingAuthenticationState>

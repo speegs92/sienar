@@ -1,0 +1,58 @@
+@namespace Sienar.Ui
+
+@* ReSharper disable once CollectionNeverUpdated.Local *@
+@inject AppProvider AppProvider
+
+@{
+	var app = AppProvider[App];
+}
+
+<!DOCTYPE html>
+<html lang="@app.Language">
+
+<head>
+<meta charset="@app.Charset"/>
+
+@foreach (var meta in app.MetaProvider.AggregatePrioritized())
+{
+	<meta
+		name="@meta.Name"
+		content="@meta.Content"/>
+}
+
+@foreach (var stylesheet in app.StyleProvider.AggregatePrioritized())
+{
+	<link
+		href="@stylesheet.Href"
+		crossorigin="@stylesheet.CrossOriginMode.GetHtmlValue()"
+		referrerpolicy="@stylesheet.ReferrerPolicy.GetHtmlValue()"
+		integrity="@stylesheet.Integrity"
+		rel="stylesheet"/>
+}
+
+@foreach (var script in app.ScriptProvider.AggregatePrioritized())
+{
+	<script
+		type="@script.GetScriptType()"
+		src="@script.Src"
+		crossorigin="@script.CrossOriginMode.GetHtmlValue()"
+		referrerpolicy="@script.ReferrerPolicy.GetHtmlValue()"
+		integrity="@script.Integrity"
+		async="@script.IsAsync"
+		defer="@script.ShouldDefer"></script>
+}
+
+<HeadOutlet @rendermode="app.HeadRenderMode"/>
+
+</head>
+
+<body>
+
+<SienarRoutes
+	@rendermode="app.BodyRenderMode"
+	App="@App"/>
+
+<script src="/_framework/blazor.web.js"/>
+</body>
+
+</html>
