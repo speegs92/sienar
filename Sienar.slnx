@@ -1,7 +1,7 @@
 <Solution>
 	<Folder Name="/playground/">
 		<Project Path="playground/Template.Data/Template.Data.csproj" />
-		<Project Path="playground/Template.RazorPages/Template.RazorPages.csproj" />
+		<Project Path="playground/Template.Server/Template.Server.csproj" />
 	</Folder>
 	<Folder Name="/src/">
 		<Project Path="src/Sienar.Core/Sienar.Core.csproj" />
