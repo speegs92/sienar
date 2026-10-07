@@ -1,14 +1,14 @@
 ﻿using Sienar.Extensions;
-using Sienar.Plugins;
-using Template.RazorPages.Configuration;
 
-namespace Template.RazorPages;
+namespace Template;
 
-public class TemplatePlugin : IPlugin
+public class TemplateServerPlugin : IPlugin
 {
 	/// <inheritdoc />
 	public void Configure(SienarApplicationBuilder builder)
 	{
+		builder.AddPlugin<SienarBlazorWasmPlugin>();
+
 		builder.StartupServices.AddBuilderConfigurer<BuilderConfigurer>();
 	}
 }

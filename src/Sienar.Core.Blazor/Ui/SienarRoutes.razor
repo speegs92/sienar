@@ -1,14 +1,10 @@
 @namespace Sienar.Ui
 
-@* ReSharper disable once CollectionNeverUpdated.Local *@
-@inject AppProvider AppProvider
-
-@{
-	var app = AppProvider[App];
-}
+@typeparam T where T : BlazorApp
+@inject T App
 
 <CascadingAuthenticationState>
-	@foreach (var c in app.RouterAdjacentComponents)
+	@foreach (var c in App.RouterAdjacentComponents)
 	{
 		<DynamicComponent Type="c"/>
 	}
@@ -16,10 +12,10 @@
 	<Router
 		AppAssembly="_rootAssembly"
 		AdditionalAssemblies="_routableAssemblies"
-		NotFoundPage="app.NotFoundView">
+		NotFoundPage="App.NotFoundView">
 		<Found Context="routeData">
 			<CascadingValue Value="@routeData">
-				<CascadingValue Value="@app">
+				<CascadingValue Value="@App">
 					<SienarFound/>
 				</CascadingValue>
 			</CascadingValue>

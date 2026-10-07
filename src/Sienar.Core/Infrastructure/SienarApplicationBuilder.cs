@@ -76,10 +76,21 @@ public class SienarApplicationBuilder
 	/// Sets the application adapter
 	/// </summary>
 	/// <param name="adapter">The application adapter</param>
+	/// <param name="overrideExistingAdapter">Whether to override an existing adapter with the provided adapter. If <see langword="false"/>, the adapter is only set if the application adapter is currently <see langword="null"/></param>
 	/// <returns>The Sienar app builder</returns>
-	public SienarApplicationBuilder SetApplicationAdapter(IBuilderAdapter adapter)
+	public SienarApplicationBuilder SetApplicationAdapter(
+		IBuilderAdapter adapter,
+		bool overrideExistingAdapter = false)
 	{
-		_adapter = adapter;
+		if (overrideExistingAdapter)
+		{
+			_adapter = adapter;
+		}
+		else
+		{
+			_adapter ??= adapter;
+		}
+
 		return this;
 	}
 

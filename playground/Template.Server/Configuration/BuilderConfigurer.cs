@@ -1,8 +1,7 @@
 ﻿using Sienar.Configuration;
 using Sienar.Extensions;
-using Template.Data;
 
-namespace Template.RazorPages.Configuration;
+namespace Template.Configuration;
 
 public class BuilderConfigurer : IConfigurer<IBuilderAdapter>
 {

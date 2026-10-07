@@ -1,26 +1,22 @@
 @namespace Sienar.Ui
 
-@* ReSharper disable once CollectionNeverUpdated.Local *@
-@inject AppProvider AppProvider
-
-@{
-	var app = AppProvider[App];
-}
+@typeparam T where T : BlazorApp
+@inject T App
 
 <!DOCTYPE html>
-<html lang="@app.Language">
+<html lang="@App.Language">
 
 <head>
-<meta charset="@app.Charset"/>
+<meta charset="@App.Charset"/>
 
-@foreach (var meta in app.MetaProvider.AggregatePrioritized())
+@foreach (var meta in App.MetaProvider.AggregatePrioritized())
 {
 	<meta
 		name="@meta.Name"
 		content="@meta.Content"/>
 }
 
-@foreach (var stylesheet in app.StyleProvider.AggregatePrioritized())
+@foreach (var stylesheet in App.StyleProvider.AggregatePrioritized())
 {
 	<link
 		href="@stylesheet.Href"
@@ -30,7 +26,7 @@
 		rel="stylesheet"/>
 }
 
-@foreach (var script in app.ScriptProvider.AggregatePrioritized())
+@foreach (var script in App.ScriptProvider.AggregatePrioritized())
 {
 	<script
 		type="@script.GetScriptType()"
@@ -42,15 +38,15 @@
 		defer="@script.ShouldDefer"></script>
 }
 
-<HeadOutlet @rendermode="app.HeadRenderMode"/>
+<HeadOutlet @rendermode="App.HeadRenderMode"/>
 
 </head>
 
 <body>
 
 <SienarRoutes
-	@rendermode="app.BodyRenderMode"
-	App="@App"/>
+	T="@T"
+	@rendermode="App.BodyRenderMode"/>
 
 <script src="/_framework/blazor.web.js"/>
 </body>

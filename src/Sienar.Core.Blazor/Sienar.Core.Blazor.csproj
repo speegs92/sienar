@@ -6,20 +6,24 @@
 		<RootNamespace>Sienar</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
-		<PackageId>Sienar.Plugins.Wasm</PackageId>
-		<Title>Sienar.Plugins.Wasm</Title>
+		<PackageId>Sienar.Core.Blazor</PackageId>
+		<Title>Sienar.Core.Blazor</Title>
 		<PackageVersion>0.1.0</PackageVersion>
 		<PackageReleaseNotes>Initial release</PackageReleaseNotes>
 		<Authors>Christian LeVesque</Authors>
-		<Description>Contains the code infrastructure needed to create a Sienar Blazor WASM plugin</Description>
+		<Description>Contains the Sienar framework utilities for Blazor applications</Description>
 		<Copyright>Copyright 2024 Christian LeVesque</Copyright>
 		<PackageProjectUrl>https://sienar.levesque.dev</PackageProjectUrl>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryUrl>https://github.com/speegs92/sienar</RepositoryUrl>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>sienar framework utilities blazor plugin</PackageTags>
+		<PackageTags>sienar framework utilities blazor</PackageTags>
 		<PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="./README.md" Pack="true" PackagePath="/"/>
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="10.0.10"/>
@@ -32,5 +36,11 @@
 			Condition=" '$(Configuration)' == 'Release' "
 			Include="Sienar.Core" Version="0.1.0"/>
 	</ItemGroup>
+
+  <ItemGroup>
+    <Content Update="_Imports.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+  </ItemGroup>
 
 </Project>

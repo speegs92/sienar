@@ -7,3 +7,7 @@ global using Sienar.Data;
 global using Sienar.Identity;
 global using Sienar.Identity.Requests;
 global using Sienar.Infrastructure;
+global using Sienar.Plugins;
+global using Template;
+global using Template.Data;
+global using Template.Configuration;
