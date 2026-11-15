@@ -3,9 +3,9 @@
 namespace Sienar.Extensions;
 
 /// <summary>
-/// Contains <see cref="IServiceCollection"/> extension methods used by Sienar applications
+/// Contains extension methods for the <c>Sienar.EntityFramework</c> assembly
 /// </summary>
-public static class SienarEntityFrameworkServiceCollectionExtensions
+public static class SienarEntityFrameworkExtensions
 {
 	/// <param name="self">The service collection</param>
 	extension(IServiceCollection self)

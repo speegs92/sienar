@@ -1,14 +1,14 @@
-﻿namespace Sienar.Extensions;
+using System.Reflection;
+
+namespace Sienar.Extensions;
 
 /// <summary>
-/// Contains <see cref="IServiceCollection"/> exftension methods used by Sienar applications
+/// Contains extension methods for the <c>Sienar.Core</c> assembly
 /// </summary>
-public static class SienarCoreServiceCollectionExtensions
+public static class SienarCoreExtensions
 {
-	private static bool _initialized;
-
-	/// <param name="self">The service collection</param>
-	extension(IServiceCollection self)
+	/// <param name="sc">The service collection</param>
+	extension(IServiceCollection sc)
 	{
 		/// <summary>
 		/// Adds universal Sienar utilities to the DI container
@@ -17,14 +17,7 @@ public static class SienarCoreServiceCollectionExtensions
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddSienarCore()
 		{
-			if (_initialized)
-			{
-				return self;
-			}
-
-			_initialized = true;
-
-			return self
+			return sc
 				.AddScoped<INotifier, DefaultNotifier>()
 				.AddScoped(typeof(IStatusActor<>), typeof(DefaultStatusActor<>))
 				.AddScoped(typeof(IGeneralActor<,>), typeof(DefaultGeneralActor<,>))
@@ -47,7 +40,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddConfigurer<TConfigurer, TOptions>()
 			where TConfigurer : class, IConfigurer<TOptions>
 			where TOptions : class
-			=> self.AddScoped<IConfigurer<TOptions>, TConfigurer>();
+			=> sc.AddScoped<IConfigurer<TOptions>, TConfigurer>();
 
 		/// <summary>
 		/// Adds an access validator for the given <c>TRequest</c>
@@ -58,7 +51,7 @@ public static class SienarCoreServiceCollectionExtensions
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddAccessValidator<TValidator, TRequest>()
 			where TValidator : class, IAccessValidator<TRequest>
-			=> self.AddScoped<IAccessValidator<TRequest>, TValidator>();
+			=> sc.AddScoped<IAccessValidator<TRequest>, TValidator>();
 
 		/// <summary>
 		/// Adds a state validator for the given <c>TRequest</c>
@@ -69,7 +62,7 @@ public static class SienarCoreServiceCollectionExtensions
 		[ExcludeFromCodeCoverage]
 		public IServiceCollection AddStateValidator<TValidator, TRequest>()
 			where TValidator : class, IStateValidator<TRequest>
-			=> self.AddScoped<IStateValidator<TRequest>, TValidator>();
+			=> sc.AddScoped<IStateValidator<TRequest>, TValidator>();
 
 		/// <summary>
 		/// Adds an before-create hook for the given <c>TEntity</c>
@@ -81,7 +74,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddBeforeCreateActionHook<THook, TEntity>()
 			where THook : class, IBeforeCreateAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IBeforeCreateAction<TEntity>, THook>();
+			=> sc.AddScoped<IBeforeCreateAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an before-update hook for the given <c>TEntity</c>
@@ -93,7 +86,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddBeforeUpdateActionHook<THook, TEntity>()
 			where THook : class, IBeforeUpdateAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IBeforeUpdateAction<TEntity>, THook>();
+			=> sc.AddScoped<IBeforeUpdateAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an before-delete hook for the given <c>TEntity</c>
@@ -105,7 +98,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddBeforeDeleteActionHook<THook, TEntity>()
 			where THook : class, IBeforeDeleteAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IBeforeDeleteAction<TEntity>, THook>();
+			=> sc.AddScoped<IBeforeDeleteAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an before general action hook for the given <c>TRequest</c>
@@ -117,7 +110,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddBeforeGeneralActionHook<THook, TRequest>()
 			where THook : class, IBeforeGeneralAction<TRequest>
 			where TRequest : IRequest
-			=> self.AddScoped<IBeforeGeneralAction<TRequest>, THook>();
+			=> sc.AddScoped<IBeforeGeneralAction<TRequest>, THook>();
 
 		/// <summary>
 		/// Adds an before status action hook for the given <c>TRequest</c>
@@ -129,7 +122,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddBeforeStatusActionHook<THook, TRequest>()
 			where THook : class, IBeforeStatusAction<TRequest>
 			where TRequest : IRequest
-			=> self.AddScoped<IBeforeStatusAction<TRequest>, THook>();
+			=> sc.AddScoped<IBeforeStatusAction<TRequest>, THook>();
 
 		/// <summary>
 		/// Adds an after-read hook for the given <c>TEntity</c>
@@ -141,7 +134,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterReadActionHook<THook, TEntity>()
 			where THook : class, IAfterReadAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IAfterReadAction<TEntity>, THook>();
+			=> sc.AddScoped<IAfterReadAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an after-read-all hook for the given <c>TEntity</c>
@@ -153,7 +146,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterReadAllActionHook<THook, TEntity>()
 			where THook : class, IAfterReadAllAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IAfterReadAllAction<TEntity>, THook>();
+			=> sc.AddScoped<IAfterReadAllAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an after-create hook for the given <c>TEntity</c>
@@ -165,7 +158,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterCreateActionHook<THook, TEntity>()
 			where THook : class, IAfterCreateAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IAfterCreateAction<TEntity>, THook>();
+			=> sc.AddScoped<IAfterCreateAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an after-update hook for the given <c>TEntity</c>
@@ -177,7 +170,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterUpdateActionHook<THook, TEntity>()
 			where THook : class, IAfterUpdateAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IAfterUpdateAction<TEntity>, THook>();
+			=> sc.AddScoped<IAfterUpdateAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an after-delete hook for the given <c>TEntity</c>
@@ -189,7 +182,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterDeleteActionHook<THook, TEntity>()
 			where THook : class, IAfterDeleteAction<TEntity>
 			where TEntity : IEntity
-			=> self.AddScoped<IAfterDeleteAction<TEntity>, THook>();
+			=> sc.AddScoped<IAfterDeleteAction<TEntity>, THook>();
 
 		/// <summary>
 		/// Adds an after general action hook for the given <c>TRequest</c>
@@ -201,7 +194,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterGeneralActionHook<THook, TRequest>()
 			where THook : class, IAfterGeneralAction<TRequest>
 			where TRequest : IRequest
-			=> self.AddScoped<IAfterGeneralAction<TRequest>, THook>();
+			=> sc.AddScoped<IAfterGeneralAction<TRequest>, THook>();
 
 		/// <summary>
 		/// Adds an after status action hook for the given <c>TRequest</c>
@@ -213,7 +206,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterStatusActionHook<THook, TRequest>()
 			where THook : class, IAfterStatusAction<TRequest>
 			where TRequest : IRequest
-			=> self.AddScoped<IAfterStatusAction<TRequest>, THook>();
+			=> sc.AddScoped<IAfterStatusAction<TRequest>, THook>();
 
 		/// <summary>
 		/// Adds an after result action hook for the given <c>TResult</c>
@@ -225,7 +218,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddAfterResultActionHook<THook, TResult>()
 			where THook : class, IAfterResultAction<TResult>
 			where TResult : IResult
-			=> self.AddScoped<IAfterResultAction<TResult>, THook>();
+			=> sc.AddScoped<IAfterResultAction<TResult>, THook>();
 
 		/// <summary>
 		/// Adds a general processor
@@ -239,7 +232,7 @@ public static class SienarCoreServiceCollectionExtensions
 			where TProcessor : class, IGeneralProcessor<TRequest, TResult>
 			where TRequest : IRequest
 			where TResult : IResult
-			=> self.AddScoped<IGeneralProcessor<TRequest, TResult>, TProcessor>();
+			=> sc.AddScoped<IGeneralProcessor<TRequest, TResult>, TProcessor>();
 
 		/// <summary>
 		/// Adds a status processor (<c>IProcessor&lt;TRequest, bool&gt;</c>
@@ -251,7 +244,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddStatusProcessor<TProcessor, TRequest>()
 			where TProcessor : class, IStatusProcessor<TRequest>
 			where TRequest : IRequest
-			=> self.AddScoped<IStatusProcessor<TRequest>, TProcessor>();
+			=> sc.AddScoped<IStatusProcessor<TRequest>, TProcessor>();
 
 		/// <summary>
 		/// Adds a result processor (<c>IProcessor&lt;TRequest&gt;</c>)
@@ -263,7 +256,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddResultProcessor<TProcessor, TResult>()
 			where TProcessor : class, IResultProcessor<TResult>
 			where TResult : IResult
-			=> self.AddScoped<IResultProcessor<TResult>, TProcessor>();
+			=> sc.AddScoped<IResultProcessor<TResult>, TProcessor>();
 
 		/// <summary>
 		/// Adds the necessary services to use an entity with default API-layter entity-to-DTO and DTO-to-entity mapping
@@ -278,7 +271,7 @@ public static class SienarCoreServiceCollectionExtensions
 		public IServiceCollection AddEntityApiMapping<TDto, TEntity>()
 			where TDto : class, new()
 			where TEntity : class, IEntity, new()
-			=> self.AddEntityApiMapping<TDto, DefaultMapper<TDto, TEntity>, DefaultMapper<TEntity, TDto>, TEntity>();
+			=> sc.AddEntityApiMapping<TDto, DefaultMapper<TDto, TEntity>, DefaultMapper<TEntity, TDto>, TEntity>();
 
 		/// <summary>
 		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
@@ -301,7 +294,7 @@ public static class SienarCoreServiceCollectionExtensions
 			where TDtoToEntityMapper : class, IMapper<TDto, TEntity>
 			where TEntityToDtoMapper : class, IMapper<TEntity, TDto>
 			where TEntity : class, IEntity, new()
-			=> self.AddEntityApiMapping<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity>();
+			=> sc.AddEntityApiMapping<TDto, TEntityToDtoMapper, TDto, TDtoToEntityMapper, TDto, TDtoToEntityMapper, TEntity>();
 
 		/// <summary>
 		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
@@ -324,7 +317,7 @@ public static class SienarCoreServiceCollectionExtensions
 			where TUpsertDto : class, new()
 			where TUpsertDtoToEntityMapper : class, IMapper<TUpsertDto, TEntity>
 			where TEntity : class, IEntity, new()
-			=> self.AddEntityApiMapping<TViewDto, TEntityToViewDtoMapper, TUpsertDto, TUpsertDtoToEntityMapper, TUpsertDto, TUpsertDtoToEntityMapper, TEntity>();
+			=> sc.AddEntityApiMapping<TViewDto, TEntityToViewDtoMapper, TUpsertDto, TUpsertDtoToEntityMapper, TUpsertDto, TUpsertDtoToEntityMapper, TEntity>();
 
 		/// <summary>
 		/// Adds the necessary services to use an entity with API-layter entity-to-DTO and DTO-to-entity mapping
@@ -353,16 +346,77 @@ public static class SienarCoreServiceCollectionExtensions
 			where TEditDto : class, new()
 			where TEditDtoToEntityMapper : class, IMapper<TEditDto, TEntity>
 		{
-			self
+			sc
 				.AddScoped<IMapper<TEntity, TViewDto>, TEntityToViewDtoMapper>()
 				.AddScoped<IMapper<TAddDto, TEntity>, TAddDtoToEntityMapper>();
 
 			if (typeof(TEditDtoToEntityMapper) != typeof(TAddDtoToEntityMapper))
 			{
-				self.AddScoped<IMapper<TEditDto, TEntity>, TEditDtoToEntityMapper>();
+				sc.AddScoped<IMapper<TEditDto, TEntity>, TEditDtoToEntityMapper>();
 			}
 				
-			return self;
+			return sc;
 		}
+	}
+
+	/// <param name="entity">The entity</param>
+	extension(IEntity entity)
+	{
+		/// <summary>
+		/// Returns the human-friendly singular name of the entity
+		/// </summary>
+		/// <returns>the entity's name</returns>
+		public string GetEntityName()
+			=> GetEntityName(entity.GetType());
+
+		/// <summary>
+		/// Returns the human-friendly plural name of the entity
+		/// </summary>
+		/// <returns>the entity's plural name</returns>
+		public string GetEntityPluralName()
+			=> GetEntityPluralName(entity.GetType());
+	}
+
+	/// <param name="type">The type</param>
+	extension(Type type)
+	{
+		/// <summary>
+		/// Returns the human-friendly singular name of the entity
+		/// </summary>
+		/// <returns>the entity's name</returns>
+		/// <remarks>
+		/// If the specified <see cref="Type"/> does not have an <see cref="EntityNameAttribute"/> defined, then this method will return <c>Type.Name</c>. This behavior may be acceptable in some circumstances, but if it is not, be sure to only use entities with a defined <see cref="EntityNameAttribute"/>.
+		/// </remarks>
+		public string GetEntityName()
+		{
+			var attribute = type.GetCustomAttribute<EntityNameAttribute>();
+			return attribute?.Singular ?? type.Name;
+		}
+
+		/// <summary>
+		/// Returns the human-friendly plural name of the entity
+		/// </summary>
+		/// <returns>the entity's plural name</returns>
+		/// <exception cref="InvalidOperationException">if no <see cref="EntityNameAttribute"/> is defined, or if no <c>EntityNameAttribute.Plural</c> value is provided</exception>
+		public string GetEntityPluralName()
+		{
+			var attribute = type.GetCustomAttribute<EntityNameAttribute>();
+			return attribute?.Plural
+				?? throw new InvalidOperationException(
+					$"Unable to determine plural entity name {type.Name}. "
+					+ $"Please ensure you set the entity name with {nameof(EntityNameAttribute)}.");
+		}
+	}
+
+	/// <param name="input">The string</param>
+	extension(string input)
+	{
+		/// <summary>
+		/// Converts a string to all caps. For use in searching and filtering
+		/// </summary>
+		/// <param name="input">The string to normalize</param>
+		/// <returns>The normalized string</returns>
+		public string ToNormalized()
+			=> input.ToUpperInvariant();
 	}
 }
