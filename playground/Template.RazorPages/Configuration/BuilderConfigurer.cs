@@ -1,14 +1,15 @@
-﻿using Sienar.Configuration;
+﻿using Microsoft.AspNetCore.Builder;
+using Sienar.Configuration;
 using Sienar.Extensions;
 using Template.Data;
 
 namespace Template.RazorPages.Configuration;
 
-public class BuilderConfigurer : IConfigurer<IBuilderAdapter>
+public class BuilderConfigurer : IConfigurer<WebApplicationBuilder>
 {
 	/// <inheritdoc />
-	public void Configure(IBuilderAdapter adapter)
+	public void Configure(WebApplicationBuilder builder)
 	{
-		adapter.Services.AddSienarDbContext<AppDbContext>(o => o.UseAppDb());
+		builder.Services.AddSienarDbContext<AppDbContext>(o => o.UseAppDb());
 	}
 }

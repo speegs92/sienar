@@ -4,6 +4,7 @@ global using System;
 global using System.Threading.Tasks;
 global using Sienar;
 global using Sienar.Data;
+global using Sienar.Extensions;
 global using Sienar.Identity;
 global using Sienar.Identity.Requests;
 global using Sienar.Infrastructure;

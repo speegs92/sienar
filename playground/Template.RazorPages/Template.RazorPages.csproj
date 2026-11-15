@@ -7,6 +7,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\src\Sienar.Core\Sienar.Core.csproj" />
+		<ProjectReference Include="..\..\src\Sienar.Core.Server\Sienar.Core.Server.csproj" />
 		<ProjectReference Include="..\..\src\Sienar.Plugins.Identity\Sienar.Plugins.Identity.csproj" />
 		<ProjectReference Include="..\Template.Data\Template.Data.csproj" />
 	</ItemGroup>

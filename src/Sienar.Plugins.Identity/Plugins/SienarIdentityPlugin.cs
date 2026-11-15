@@ -13,7 +13,7 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 		builder.AddPlugin<SienarMvcPlugin>();
 
 		builder.StartupServices
-			.AddBuilderConfigurer<SienarIdentityBuilderConfigurer<TUser>>()
+			.AddWebBuilderConfigurer<SienarIdentityBuilderConfigurer<TUser>>()
 			.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
 	}
 }

@@ -9,6 +9,6 @@ public class TemplatePlugin : IPlugin
 	/// <inheritdoc />
 	public void Configure(SienarApplicationBuilder builder)
 	{
-		builder.StartupServices.AddBuilderConfigurer<BuilderConfigurer>();
+		builder.StartupServices.AddWebBuilderConfigurer<BuilderConfigurer>();
 	}
 }

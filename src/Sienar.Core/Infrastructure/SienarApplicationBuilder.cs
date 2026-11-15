@@ -1,12 +1,13 @@
-﻿namespace Sienar.Infrastructure;
+﻿using System.Reflection;
+
+namespace Sienar.Infrastructure;
 
 /// <summary>
 /// The Sienar app builder, which is used to create Sienar applications
 /// </summary>
 public class SienarApplicationBuilder
 {
-	private IBuilderAdapter? _adapter;
-	private readonly string[] _startupArgs;
+	public readonly string[] StartupArgs;
 	private readonly HashSet<Type> _pluginTypes = [];
 
 	/// <summary>
@@ -20,11 +21,8 @@ public class SienarApplicationBuilder
 	/// <param name="args">The runtime arguments supplied to <c>Program.Main()</c></param>
 	private SienarApplicationBuilder(string[]? args)
 	{
+		StartupArgs = args ?? [];
 		StartupServices = new ServiceCollection();
-		_startupArgs = args ?? [];
-
-		StartupServices
-			.AddSingleton<MiddlewareProvider>();
 	}
 
 	/// <summary>
@@ -71,64 +69,4 @@ public class SienarApplicationBuilder
 	public bool PluginIsRegistered<T>()
 		where T : IPlugin
 		=> _pluginTypes.Contains(typeof(T));
-
-	/// <summary>
-	/// Sets the application adapter
-	/// </summary>
-	/// <param name="adapter">The application adapter</param>
-	/// <returns>The Sienar app builder</returns>
-	public SienarApplicationBuilder SetApplicationAdapter(IBuilderAdapter adapter)
-	{
-		_adapter = adapter;
-		return this;
-	}
-
-	/// <summary>
-	/// Builds the final application and returns it
-	/// </summary>
-	/// <remarks>
-	/// This method is generic because different types of applications have different CLR types representing those applications. The CLR type of the final application should be provided as the generic argument.
-	/// </remarks>
-	/// <returns>the new application</returns>
-	/// <typeparam name="T">The type of the final application</typeparam>
-	public T Build<T>()
-		where T : class
-	{
-		if (_adapter is null)
-		{
-			throw new InvalidOperationException($"You must register an {nameof(IBuilderAdapter)} before calling {nameof(Build)}");
-		}
-
-		_adapter.Create(_startupArgs, StartupServices);
-
-		var container = StartupServices.BuildServiceProvider();
-		var scope = container.CreateScope();
-		var sp = scope.ServiceProvider;
-
-		_adapter.Services
-			.AddSingleton(sp.GetRequiredService<MiddlewareProvider>());
-
-		var builderConfigurers = sp.GetServices<IConfigurer<IBuilderAdapter>>();
-		foreach (var configurer in builderConfigurers)
-		{
-			configurer.Configure(_adapter);
-		}
-
-		var appAdapter = _adapter.Build(sp);
-
-		var hostConfigurers = sp.GetServices<IConfigurer<HostAdapter>>();
-		foreach (var configurer in hostConfigurers)
-		{
-			configurer.Configure(appAdapter);
-		}
-
-		var middlewares = appAdapter.Services.GetRequiredService<MiddlewareProvider>();
-
-		foreach (var middleware in middlewares.AggregatePrioritized())
-		{
-			middleware();
-		}
-
-		return (T)appAdapter.Host;
-	}
 }

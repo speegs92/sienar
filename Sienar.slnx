@@ -4,10 +4,11 @@
 		<Project Path="playground/Template.RazorPages/Template.RazorPages.csproj" />
 	</Folder>
 	<Folder Name="/src/">
+		<Project Path="src/Sienar.Core.Server/Sienar.Core.Server.csproj" />
 		<Project Path="src/Sienar.Core/Sienar.Core.csproj" />
+		<Project Path="src/Sienar.Plugins.AspNet/Sienar.Plugins.AspNet.csproj" />
 		<Project Path="src/Sienar.Plugins.Identity/Sienar.Plugins.Identity.csproj" />
 		<Project Path="src/Sienar.EntityFramework/Sienar.EntityFramework.csproj" />
-		<Project Path="src/Sienar.Plugins.Mvc/Sienar.Plugins.Mvc.csproj" />
 		<Project Path="src/Sienar.React/Sienar.React.csproj" />
 	</Folder>
 </Solution>
