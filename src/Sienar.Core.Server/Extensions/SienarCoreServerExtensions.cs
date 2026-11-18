@@ -35,7 +35,7 @@ public static class SienarCoreServerExtensions
 				configurer.Configure(app);
 			}
 
-			var prioritizedMiddlewares = new PrioritizedDictionaryOfLists<IConfigurer<WebApplication>>();
+			var prioritizedMiddlewares = new OrderedDictionaryOfLists<IConfigurer<WebApplication>>();
 			var appConfigurers = app.Services.GetRequiredService<IEnumerable<IConfigurer<WebApplication>>>();
 
 			foreach (var configurer in appConfigurers)
@@ -44,12 +44,12 @@ public static class SienarCoreServerExtensions
 					.GetType()
 					.GetCustomAttribute<OrderAttribute>()?
 					.Order ?? 0;
-				prioritizedMiddlewares.AddWithPriority(
+				prioritizedMiddlewares.Add(
 					priority,
 					configurer);
 			}
 
-			foreach (var middleware in prioritizedMiddlewares.AggregatePrioritized())
+			foreach (var middleware in prioritizedMiddlewares.AggregateOrdered())
 			{
 				middleware.Configure(app);
 			}
