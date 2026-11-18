@@ -9,6 +9,5 @@
 		<Project Path="src/Sienar.Plugins.AspNet/Sienar.Plugins.AspNet.csproj" />
 		<Project Path="src/Sienar.Plugins.Identity/Sienar.Plugins.Identity.csproj" />
 		<Project Path="src/Sienar.EntityFramework/Sienar.EntityFramework.csproj" />
-		<Project Path="src/Sienar.React/Sienar.React.csproj" />
 	</Folder>
 </Solution>
