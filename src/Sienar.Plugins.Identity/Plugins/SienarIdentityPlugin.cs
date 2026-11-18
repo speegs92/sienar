@@ -10,8 +10,6 @@ public class SienarIdentityPlugin<TUser> : IPlugin
 	/// <inheritdoc />
 	public void Configure(SienarApplicationBuilder builder)
 	{
-		builder.AddPlugin<SienarMvcPlugin>();
-
 		builder.StartupServices
 			.AddWebBuilderConfigurer<SienarIdentityBuilderConfigurer<TUser>>()
 			.AddConfigurer<SienarIdentityMvcConfigurer<TUser>, IMvcBuilder>();
