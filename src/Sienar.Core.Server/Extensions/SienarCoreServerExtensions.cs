@@ -20,6 +20,9 @@ public static class SienarCoreServerExtensions
 			var sp = scope.ServiceProvider;
 
 			var webAppBuilder = WebApplication.CreateBuilder(builder.StartupArgs);
+			webAppBuilder.Services
+				.AddSienarCore()
+				.AddSienarAspNet();
 
 			var builderConfigurers = sp.GetServices<IConfigurer<WebApplicationBuilder>>();
 			foreach (var configurer in builderConfigurers)
